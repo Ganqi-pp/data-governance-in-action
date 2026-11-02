@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+
+# 运行时数据库（由 run_demo.py 生成）
+data/*.db
+data/*.db-journal
+data/*.db-wal
+
+# 临时文件
+*.log
+.DS_Store
+docs/images/_bottom.png

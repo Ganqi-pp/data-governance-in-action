@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0",
+  "owner": "数据治理小组",
+  "assets": [
+    {"table": "ods_order", "name": "订单贴源数据", "domain": "交易", "level": "L3", "scene": "交易分析、订单履约追踪", "update_frequency": "每小时", "sla": "T+1 09:00 前可用", "consumer": "数据分析组、财务"},
+    {"table": "ods_user", "name": "用户贴源数据", "domain": "用户", "level": "L4", "scene": "用户增长、会员运营", "update_frequency": "每日", "sla": "T+1 08:00 前可用", "consumer": "用户运营组"},
+    {"table": "ods_product", "name": "商品贴源数据", "domain": "商品", "level": "L2", "scene": "商品分析、类目管理", "update_frequency": "每小时", "sla": "T+1 09:00 前可用", "consumer": "商品运营组"},
+    {"table": "ods_channel", "name": "渠道标准码表", "domain": "渠道", "level": "L1", "scene": "渠道口径统一、码值映射", "update_frequency": "每周", "sla": "变更后 1 个工作日内生效", "consumer": "全体分析师"},
+    {"table": "ods_logistics", "name": "物流履约数据", "domain": "履约", "level": "L3", "scene": "履约时效分析、异常订单定位", "update_frequency": "每小时", "sla": "T+1 10:00 前可用", "consumer": "履约组、客服"},
+    {"table": "ods_campaign", "name": "营销活动数据", "domain": "营销", "level": "L2", "scene": "投放复盘、ROI 评估", "update_frequency": "每日", "sla": "T+1 10:00 前可用", "consumer": "市场营销组"},
+    {"table": "dwd_order_detail", "name": "订单明细数据", "domain": "交易", "level": "L4", "scene": "GMV 核算、漏斗分析、渠道日报", "update_frequency": "每小时", "sla": "T+1 09:00 前可用", "consumer": "数据分析组、经营分析"},
+    {"table": "dwd_user_profile", "name": "用户画像数据", "domain": "用户", "level": "L4", "scene": "用户分层、精准营销", "update_frequency": "每日", "sla": "T+1 08:00 前可用", "consumer": "用户运营组"},
+    {"table": "dwd_product_dim", "name": "商品维度数据", "domain": "商品", "level": "L2", "scene": "类目分析、商品结构诊断", "update_frequency": "每日", "sla": "T+1 09:00 前可用", "consumer": "商品运营组"},
+    {"table": "dws_channel_daily", "name": "渠道日汇总", "domain": "交易", "level": "L2", "scene": "渠道经营日报、投放决策", "update_frequency": "每日", "sla": "T+1 09:30 前可用", "consumer": "管理层、渠道运营"},
+    {"table": "dws_category_daily", "name": "类目日汇总", "domain": "商品", "level": "L2", "scene": "类目趋势、供给优化", "update_frequency": "每日", "sla": "T+1 09:30 前可用", "consumer": "商品运营组"},
+    {"table": "dws_campaign_daily", "name": "活动日汇总", "domain": "营销", "level": "L2", "scene": "活动 ROI 复盘", "update_frequency": "每日", "sla": "T+1 10:00 前可用", "consumer": "市场营销组"}
+  ]
+}

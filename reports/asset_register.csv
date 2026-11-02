@@ -1,0 +1,13 @@
+﻿table,name,domain,layer,level,owner,row_count,column_count,quality_score,update_frequency,sla,scene,consumer
+ods_order,订单贴源数据,交易,ODS,L3,订单域数据 Owner,60600,15,99.32,每小时,T+1 09:00 前可用,交易分析、订单履约追踪,数据分析组、财务
+ods_user,用户贴源数据,用户,ODS,L4,用户域数据 Owner,8000,10,100.0,每日,T+1 08:00 前可用,用户增长、会员运营,用户运营组
+ods_product,商品贴源数据,商品,ODS,L2,商品域数据 Owner,120,8,100.0,每小时,T+1 09:00 前可用,商品分析、类目管理,商品运营组
+ods_channel,渠道标准码表,渠道,ODS,L1,渠道域数据 Owner,6,4,,每周,变更后 1 个工作日内生效,渠道口径统一、码值映射,全体分析师
+ods_logistics,物流履约数据,履约,ODS,L3,履约域数据 Owner,38764,6,,每小时,T+1 10:00 前可用,履约时效分析、异常订单定位,履约组、客服
+ods_campaign,营销活动数据,营销,ODS,L2,营销域数据 Owner,8,6,,每日,T+1 10:00 前可用,投放复盘、ROI 评估,市场营销组
+dwd_order_detail,订单明细数据,交易,DWD,L4,订单域数据 Owner,59601,15,99.32,每小时,T+1 09:00 前可用,GMV 核算、漏斗分析、渠道日报,数据分析组、经营分析
+dwd_user_profile,用户画像数据,用户,DWD,L4,用户域数据 Owner,8000,8,100.0,每日,T+1 08:00 前可用,用户分层、精准营销,用户运营组
+dwd_product_dim,商品维度数据,商品,DWD,L2,商品域数据 Owner,120,7,100.0,每日,T+1 09:00 前可用,类目分析、商品结构诊断,商品运营组
+dws_channel_daily,渠道日汇总,交易,DWS,L2,数据分析组,625,7,,每日,T+1 09:30 前可用,渠道经营日报、投放决策,管理层、渠道运营
+dws_category_daily,类目日汇总,商品,DWS,L2,数据分析组,540,5,,每日,T+1 09:30 前可用,类目趋势、供给优化,商品运营组
+dws_campaign_daily,活动日汇总,营销,DWS,L2,营销域数据 Owner,720,5,,每日,T+1 10:00 前可用,活动 ROI 复盘,市场营销组

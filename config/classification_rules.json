@@ -1,0 +1,18 @@
+{
+  "version": "1.0.0",
+  "levels": {
+    "L1": {"name": "公开", "description": "可对外公开或用于对外披露的数据", "control": "无额外管控"},
+    "L2": {"name": "内部", "description": "仅限内部使用的经营与统计数据", "control": "内部账号可访问，禁止外发"},
+    "L3": {"name": "敏感", "description": "涉及用户标识、联系方式等个人一般信息", "control": "按角色授权，展示需脱敏"},
+    "L4": {"name": "核心", "description": "个人敏感信息、重要数据，泄露可能造成严重后果", "control": "最小权限 + 脱敏 + 访问审批 + 审计留痕"}
+  },
+  "rules": [
+    {"match": "(^|_)phone($|_)", "level": "L4", "category": "个人敏感信息", "mask": "保留前 3 位与后 4 位，如 138****1234"},
+    {"match": "(^|_)id_card($|_)", "level": "L4", "category": "个人敏感信息", "mask": "保留前 6 位与后 4 位"},
+    {"match": "(^|_)address($|_)", "level": "L3", "category": "个人一般信息", "mask": "仅保留省/市，详细地址以 *** 代替"},
+    {"match": "(^|_)email($|_)", "level": "L3", "category": "个人一般信息", "mask": "保留邮箱首字母与域名"},
+    {"match": "(^|_)user_name($|_)", "level": "L3", "category": "个人一般信息", "mask": "保留姓氏，其余以 * 代替"},
+    {"match": "(amount|gmv|budget|price|coupon|roi)", "level": "L2", "category": "经营数据", "mask": "无需脱敏，禁止外发"},
+    {"match": ".*", "level": "L1", "category": "公开数据", "mask": "无需脱敏"}
+  ]
+}

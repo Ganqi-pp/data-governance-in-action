@@ -1,0 +1,197 @@
+{
+  "version": "1.0.0",
+  "tables": {
+    "ods_order": {
+      "domain": "交易",
+      "owner": "订单域数据 Owner",
+      "description": "订单贴源表，来自交易系统订单库，保留原始字段与异常值",
+      "update_frequency": "每小时",
+      "columns": {
+        "order_id": "订单号",
+        "user_id": "用户 ID",
+        "product_id": "商品 ID",
+        "channel_code": "渠道编码",
+        "order_amount": "订单金额（元）",
+        "pay_amount": "实付金额（元）",
+        "coupon_amount": "优惠金额（元）",
+        "order_status": "订单状态",
+        "province": "收货省份",
+        "city": "收货城市",
+        "phone": "收货手机号",
+        "address": "收货详细地址",
+        "create_time": "下单时间",
+        "pay_time": "支付时间",
+        "source": "订单来源系统"
+      }
+    },
+    "ods_user": {
+      "domain": "用户",
+      "owner": "用户域数据 Owner",
+      "description": "用户贴源表，来自会员系统，含个人身份与联系方式字段",
+      "update_frequency": "每日",
+      "columns": {
+        "user_id": "用户 ID",
+        "user_name": "用户姓名",
+        "phone": "注册手机号",
+        "email": "注册邮箱",
+        "id_card": "证件号码",
+        "register_time": "注册时间",
+        "city": "常住城市",
+        "member_level": "会员等级",
+        "age": "年龄",
+        "gender": "性别"
+      }
+    },
+    "ods_product": {
+      "domain": "商品",
+      "owner": "商品域数据 Owner",
+      "description": "商品贴源表，来自商品中心",
+      "update_frequency": "每小时",
+      "columns": {
+        "product_id": "商品 ID",
+        "product_name": "商品名称",
+        "category_code": "类目编码",
+        "category_name": "类目名称",
+        "price": "商品价格（元）",
+        "status": "商品状态",
+        "brand": "品牌",
+        "supplier": "供应商"
+      }
+    },
+    "ods_channel": {
+      "domain": "渠道",
+      "owner": "渠道域数据 Owner",
+      "description": "渠道维表，定义线上/线下渠道标准码值",
+      "update_frequency": "每周",
+      "columns": {
+        "channel_code": "渠道编码",
+        "channel_name": "渠道名称",
+        "channel_type": "渠道类型",
+        "online_flag": "是否线上渠道"
+      }
+    },
+    "ods_logistics": {
+      "domain": "履约",
+      "owner": "履约域数据 Owner",
+      "description": "物流贴源表，来自履约系统",
+      "update_frequency": "每小时",
+      "columns": {
+        "logistics_id": "物流单号",
+        "order_id": "订单号",
+        "carrier": "承运商",
+        "status": "物流状态",
+        "ship_time": "发货时间",
+        "receive_time": "签收时间"
+      }
+    },
+    "ods_campaign": {
+      "domain": "营销",
+      "owner": "营销域数据 Owner",
+      "description": "营销活动贴源表（历史遗留字段命名，作为标准整改样例）",
+      "update_frequency": "每日",
+      "columns": {
+        "campaign_id": "活动 ID",
+        "campaignName": "活动名称（历史驼峰命名）",
+        "channel_code": "投放渠道编码",
+        "budget": "活动预算（元）",
+        "startTime": "活动开始时间（历史驼峰命名）",
+        "endTime": "活动结束时间"
+      }
+    },
+    "dwd_order_detail": {
+      "domain": "交易",
+      "owner": "订单域数据 Owner",
+      "description": "订单明细层，完成去重、标准码值转换、时序校验与敏感字段脱敏",
+      "update_frequency": "每小时",
+      "columns": {
+        "order_id": "订单号",
+        "user_id": "用户 ID",
+        "product_id": "商品 ID",
+        "channel_code": "渠道编码（标准码值）",
+        "order_amount": "订单金额（元）",
+        "pay_amount": "实付金额（元）",
+        "order_status": "订单状态（标准码值）",
+        "province": "收货省份",
+        "city": "收货城市",
+        "phone": "收货手机号（标准化）",
+        "address_masked": "收货地址（脱敏）",
+        "create_time": "下单时间",
+        "pay_time": "支付时间",
+        "order_date": "下单日期分区",
+        "is_valid": "是否通过治理校验"
+      }
+    },
+    "dwd_user_profile": {
+      "domain": "用户",
+      "owner": "用户域数据 Owner",
+      "description": "用户画像明细层，手机号/姓名/邮箱按分类分级要求脱敏",
+      "update_frequency": "每日",
+      "columns": {
+        "user_id": "用户 ID",
+        "user_name": "用户姓名（脱敏）",
+        "phone": "手机号（标准化）",
+        "email": "邮箱（脱敏）",
+        "city": "常住城市",
+        "member_level": "会员等级",
+        "register_time": "注册时间",
+        "user_level": "用户价值分层"
+      }
+    },
+    "dwd_product_dim": {
+      "domain": "商品",
+      "owner": "商品域数据 Owner",
+      "description": "商品维度层，补齐类目与价格校验",
+      "update_frequency": "每日",
+      "columns": {
+        "product_id": "商品 ID",
+        "product_name": "商品名称",
+        "category_code": "类目编码",
+        "category_name": "类目名称",
+        "price": "商品价格（元）",
+        "status": "商品状态",
+        "brand": "品牌"
+      }
+    },
+    "dws_channel_daily": {
+      "domain": "交易",
+      "owner": "数据分析组",
+      "description": "渠道日汇总，统一 GMV、支付订单数等指标口径",
+      "update_frequency": "每日",
+      "columns": {
+        "stat_date": "统计日期",
+        "channel_code": "渠道编码",
+        "order_cnt": "订单数",
+        "pay_cnt": "支付订单数",
+        "gmv": "成交金额（元）",
+        "refund_cnt": "退款订单数",
+        "avg_order_amount": "平均客单价（元）"
+      }
+    },
+    "dws_category_daily": {
+      "domain": "商品",
+      "owner": "数据分析组",
+      "description": "类目日汇总",
+      "update_frequency": "每日",
+      "columns": {
+        "stat_date": "统计日期",
+        "category_code": "类目编码",
+        "order_cnt": "订单数",
+        "gmv": "成交金额（元）",
+        "buyer_cnt": "购买用户数"
+      }
+    },
+    "dws_campaign_daily": {
+      "domain": "营销",
+      "owner": "营销域数据 Owner",
+      "description": "活动日汇总，用于投放 ROI 复盘",
+      "update_frequency": "每日",
+      "columns": {
+        "stat_date": "统计日期",
+        "campaign_id": "活动 ID",
+        "order_cnt": "订单数",
+        "gmv": "成交金额（元）",
+        "roi": "投入产出比"
+      }
+    }
+  }
+}

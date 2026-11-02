@@ -1,0 +1,311 @@
+{
+  "version": "1.0.0",
+  "updated_at": "2026-11-02",
+  "rules": [
+    {
+      "id": "DQ-ORD-001",
+      "dataset": "order",
+      "column": "order_id",
+      "name": "订单号唯一",
+      "dimension": "唯一性",
+      "type": "unique",
+      "severity": "high",
+      "owner": "订单域数据 Owner",
+      "sla_hours": 24,
+      "description": "同一订单号在明细表中只能出现一次，防止重复入账"
+    },
+    {
+      "id": "DQ-ORD-002",
+      "dataset": "order",
+      "column": "order_id",
+      "name": "订单号非空",
+      "dimension": "完整性",
+      "type": "not_null",
+      "severity": "high",
+      "owner": "订单域数据 Owner",
+      "sla_hours": 24,
+      "description": "订单号为主键，不允许为空或空白"
+    },
+    {
+      "id": "DQ-ORD-003",
+      "dataset": "order",
+      "column": "user_id",
+      "name": "用户 ID 非空",
+      "dimension": "完整性",
+      "type": "not_null",
+      "severity": "high",
+      "owner": "用户域数据 Owner",
+      "sla_hours": 24,
+      "description": "订单必须关联到具体用户，便于归因与售后"
+    },
+    {
+      "id": "DQ-ORD-004",
+      "dataset": "order",
+      "column": "channel_code",
+      "name": "渠道编码非空",
+      "dimension": "完整性",
+      "type": "not_null",
+      "severity": "medium",
+      "owner": "渠道域数据 Owner",
+      "sla_hours": 48,
+      "description": "渠道编码缺失会导致渠道日报口径缺口"
+    },
+    {
+      "id": "DQ-ORD-005",
+      "dataset": "order",
+      "column": "create_time",
+      "name": "下单时间非空",
+      "dimension": "完整性",
+      "type": "not_null",
+      "severity": "high",
+      "owner": "订单域数据 Owner",
+      "sla_hours": 24,
+      "description": "下单时间是所有时间维度分析的基础"
+    },
+    {
+      "id": "DQ-ORD-006",
+      "dataset": "order",
+      "column": "order_status",
+      "name": "订单状态取值合法",
+      "dimension": "有效性",
+      "type": "enum",
+      "severity": "medium",
+      "owner": "订单域数据 Owner",
+      "sla_hours": 48,
+      "params": {
+        "values": ["待支付", "已支付", "已发货", "已完成", "已取消", "退款中", "已退款"]
+      },
+      "description": "状态必须落在标准码值范围内，否则统计口径失真"
+    },
+    {
+      "id": "DQ-ORD-007",
+      "dataset": "order",
+      "column": "channel_code",
+      "name": "渠道编码符合标准",
+      "dimension": "有效性",
+      "type": "enum",
+      "severity": "medium",
+      "owner": "渠道域数据 Owner",
+      "sla_hours": 48,
+      "params": {
+        "values": ["APP", "WEB", "MINI", "TMALL", "JD", "OFFLINE"]
+      },
+      "description": "渠道编码必须使用标准码值，禁止大小写与空格变体"
+    },
+    {
+      "id": "DQ-ORD-008",
+      "dataset": "order",
+      "column": "phone",
+      "name": "收货手机号格式合法",
+      "dimension": "有效性",
+      "type": "regex",
+      "severity": "medium",
+      "owner": "用户域数据 Owner",
+      "sla_hours": 48,
+      "params": {
+        "pattern": "^1[3-9][0-9]{9}$"
+      },
+      "description": "手机号需符合中国大陆 11 位手机号规则，空值不计入格式失败"
+    },
+    {
+      "id": "DQ-ORD-009",
+      "dataset": "order",
+      "column": "pay_amount",
+      "name": "支付金额非负",
+      "dimension": "有效性",
+      "type": "expression",
+      "severity": "high",
+      "owner": "订单域数据 Owner",
+      "sla_hours": 24,
+      "params": {
+        "expr": "pay_amount >= 0"
+      },
+      "description": "支付金额为负数通常意味着退款回写串单"
+    },
+    {
+      "id": "DQ-ORD-010",
+      "dataset": "order",
+      "column": "order_amount",
+      "name": "订单金额非负",
+      "dimension": "有效性",
+      "type": "expression",
+      "severity": "high",
+      "owner": "订单域数据 Owner",
+      "sla_hours": 24,
+      "params": {
+        "expr": "order_amount >= 0"
+      },
+      "description": "订单金额出现负数需立即定位上游写入逻辑"
+    },
+    {
+      "id": "DQ-ORD-011",
+      "dataset": "order",
+      "column": "pay_time",
+      "name": "支付时间不早于下单时间",
+      "dimension": "一致性",
+      "type": "expression",
+      "severity": "high",
+      "owner": "订单域数据 Owner",
+      "sla_hours": 24,
+      "params": {
+        "expr": "pay_time IS NULL OR pay_time >= create_time"
+      },
+      "description": "支付时间早于下单时间属于时序矛盾，需核查时钟与时区"
+    },
+    {
+      "id": "DQ-ORD-012",
+      "dataset": "order",
+      "column": "pay_time",
+      "name": "已支付订单必须有支付时间",
+      "dimension": "一致性",
+      "type": "expression",
+      "severity": "high",
+      "owner": "订单域数据 Owner",
+      "sla_hours": 24,
+      "params": {
+        "expr": "order_status <> '已支付' OR pay_time IS NOT NULL"
+      },
+      "description": "状态与支付时间矛盾会导致 GMV 与订单量口径不一致"
+    },
+    {
+      "id": "DQ-ORD-013",
+      "dataset": "order",
+      "column": "product_id",
+      "name": "商品 ID 可关联",
+      "dimension": "一致性",
+      "type": "referential",
+      "severity": "high",
+      "owner": "商品域数据 Owner",
+      "sla_hours": 48,
+      "params": {
+        "ref_before_table": "ods_product",
+        "ref_after_table": "dwd_product_dim",
+        "ref_column": "product_id"
+      },
+      "description": "订单中的商品必须存在于商品维度，否则无法归属类目"
+    },
+    {
+      "id": "DQ-ORD-014",
+      "dataset": "order",
+      "column": "create_time",
+      "name": "下单时间无未来时间",
+      "dimension": "及时性",
+      "type": "freshness",
+      "severity": "medium",
+      "owner": "订单域数据 Owner",
+      "sla_hours": 48,
+      "params": {
+        "max_lag_hours": 24
+      },
+      "description": "下单时间晚于当前时间超过 24 小时视为异常"
+    },
+    {
+      "id": "DQ-USR-001",
+      "dataset": "user",
+      "column": "user_id",
+      "name": "用户 ID 唯一",
+      "dimension": "唯一性",
+      "type": "unique",
+      "severity": "high",
+      "owner": "用户域数据 Owner",
+      "sla_hours": 24,
+      "description": "用户主键重复会导致用户规模虚高"
+    },
+    {
+      "id": "DQ-USR-002",
+      "dataset": "user",
+      "column": "phone",
+      "name": "注册手机号格式合法",
+      "dimension": "有效性",
+      "type": "regex",
+      "severity": "high",
+      "owner": "用户域数据 Owner",
+      "sla_hours": 24,
+      "params": {
+        "pattern": "^1[3-9][0-9]{9}$"
+      },
+      "description": "手机号是用户唯一识别与触达的关键字段"
+    },
+    {
+      "id": "DQ-USR-003",
+      "dataset": "user",
+      "column": "register_time",
+      "name": "注册时间非空",
+      "dimension": "完整性",
+      "type": "not_null",
+      "severity": "medium",
+      "owner": "用户域数据 Owner",
+      "sla_hours": 48,
+      "description": "注册时间缺失会影响新增用户趋势"
+    },
+    {
+      "id": "DQ-USR-004",
+      "dataset": "user",
+      "column": "member_level",
+      "name": "会员等级取值合法",
+      "dimension": "有效性",
+      "type": "enum",
+      "severity": "medium",
+      "owner": "用户域数据 Owner",
+      "sla_hours": 48,
+      "params": {
+        "values": ["普通", "银卡", "金卡", "黑卡"]
+      },
+      "description": "会员等级必须使用标准码值"
+    },
+    {
+      "id": "DQ-PRD-001",
+      "dataset": "product",
+      "column": "product_id",
+      "name": "商品 ID 唯一",
+      "dimension": "唯一性",
+      "type": "unique",
+      "severity": "high",
+      "owner": "商品域数据 Owner",
+      "sla_hours": 24,
+      "description": "商品主键重复会造成类目 GMV 重复计算"
+    },
+    {
+      "id": "DQ-PRD-002",
+      "dataset": "product",
+      "column": "category_code",
+      "name": "类目编码非空",
+      "dimension": "完整性",
+      "type": "not_null",
+      "severity": "high",
+      "owner": "商品域数据 Owner",
+      "sla_hours": 48,
+      "description": "类目编码是商品分析的核心维度"
+    },
+    {
+      "id": "DQ-PRD-003",
+      "dataset": "product",
+      "column": "price",
+      "name": "商品价格非负",
+      "dimension": "有效性",
+      "type": "expression",
+      "severity": "medium",
+      "owner": "商品域数据 Owner",
+      "sla_hours": 48,
+      "params": {
+        "expr": "price >= 0"
+      },
+      "description": "价格为负通常来自上游录入错误"
+    },
+    {
+      "id": "DQ-PRD-004",
+      "dataset": "product",
+      "column": "status",
+      "name": "商品状态取值合法",
+      "dimension": "有效性",
+      "type": "enum",
+      "severity": "low",
+      "owner": "商品域数据 Owner",
+      "sla_hours": 72,
+      "params": {
+        "values": ["在售", "下架", "预售"]
+      },
+      "description": "商品状态需符合标准码值"
+    }
+  ]
+}

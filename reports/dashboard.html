@@ -1,0 +1,177 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>数据治理看板 · data-governance-in-action</title>
+<style>
+:root{
+  --navy:#0f2742; --navy2:#173a5e; --ink:#1b2430; --muted:#5b6b7c;
+  --line:#e3e9f0; --bg:#f4f7fb; --card:#ffffff; --accent:#2f6fed;
+  --good:#1f9d6b; --warn:#d98324; --bad:#c8453c;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--ink);font-family:"Microsoft YaHei","PingFang SC","Segoe UI",sans-serif;line-height:1.55}
+.wrap{max-width:1180px;margin:0 auto;padding:28px 24px 40px}
+.hero{background:linear-gradient(135deg,#0f2742 0%,#1c4a7a 55%,#2f6fed 100%);color:#fff;border-radius:18px;padding:30px 34px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-60px;top:-80px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.08)}
+.eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;opacity:.78}
+.hero h1{font-size:34px;font-weight:700;margin:8px 0 6px;letter-spacing:.02em}
+.hero p{opacity:.9;font-size:14px}
+.hero .meta{margin-top:14px;font-size:12px;opacity:.75}
+.kpis{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin:18px 0}
+.kpi{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.kpi .label{font-size:12px;color:var(--muted)}
+.kpi .value{font-size:27px;font-weight:700;color:var(--navy);margin-top:4px;font-variant-numeric:tabular-nums}
+.kpi .sub{font-size:11px;color:var(--muted);margin-top:2px}
+.kpi.accent .value{color:var(--accent)}
+.kpi.good .value{color:var(--good)}
+.grid2{display:grid;grid-template-columns:1.05fr .95fr;gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:16px}
+.card h2{font-size:15px;color:var(--navy);margin-bottom:4px}
+.card .hint{font-size:12px;color:var(--muted);margin-bottom:14px}
+.bar-row{display:grid;grid-template-columns:96px 1fr 64px;align-items:center;gap:10px;margin:9px 0;font-size:12px}
+.bar{height:12px;border-radius:6px;background:#eef2f7;overflow:hidden;position:relative}
+.bar span{display:block;height:100%;position:absolute;left:0;top:0}
+.bar .before{background:repeating-linear-gradient(45deg,#8ea6bf,#8ea6bf 4px,transparent 4px,transparent 8px);opacity:.65;z-index:2}
+.bar .after{background:linear-gradient(90deg,#2f6fed,#1f9d6b)}
+.num{text-align:right;color:var(--muted);font-variant-numeric:tabular-nums}
+table{width:100%;border-collapse:collapse;font-size:12.5px}
+th{color:var(--muted);font-weight:600;text-align:left;padding:8px 6px;border-bottom:1px solid var(--line)}
+td{padding:8px 6px;border-bottom:1px solid #f0f4f9;vertical-align:top}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tag{display:inline-block;padding:1px 7px;border-radius:999px;font-size:11px;background:#eef4ff;color:#2f6fed}
+.tag.good{background:#e8f6ef;color:#1f9d6b}
+.tag.warn{background:#fdf1e3;color:#b56a12}
+.tag.bad{background:#fbeceb;color:#b83b33}
+pre{background:#0f2742;color:#dce8f5;padding:16px 18px;border-radius:12px;font-size:12px;overflow:auto;line-height:1.55}
+.foot{margin-top:18px;color:var(--muted);font-size:11.5px;text-align:center}
+.legend{display:flex;gap:14px;font-size:11.5px;color:var(--muted);margin-top:6px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}
+.minis{display:grid;grid-template-columns:repeat(6,1fr);gap:12px}
+.mini{background:#f7f9fc;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+.mv{font-size:21px;font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums}
+.ml{font-size:11.5px;color:var(--muted);margin-top:2px}
+@media (max-width:900px){.kpis{grid-template-columns:repeat(2,1fr)}.grid2{grid-template-columns:1fr}}
+</style></head>
+<body><div class="wrap">
+  <header class="hero">
+    <div class="eyebrow">Data Governance in Action</div>
+    <h1>电商数据治理看板</h1>
+    <p>数据目录 · 标准与分级 · 质量规则 · 血缘 · 资产登记，一条流水线跑通治理闭环</p>
+    <div class="meta">数据周期 2026-07-01 ~ 2026-09-28 · 生成时间 2026-11-02 12:13 · 全部指标由脚本自动计算</div>
+  </header>
+
+  <section class="kpis">
+  <div class="kpi"><div class="label">治理范围</div><div class="value">12</div><div class="sub">张表 · 96 字段</div></div>
+  <div class="kpi"><div class="label">质量规则</div><div class="value">22</div><div class="sub">5 个维度 · 配置化</div></div>
+  <div class="kpi good"><div class="label">治理后质量分</div><div class="value">99.40</div><div class="sub">治理前 92.88 · +6.52</div></div>
+  <div class="kpi"><div class="label">数据资产</div><div class="value">12</div><div class="sub">已登记 · 100% 有 Owner</div></div>
+  <div class="kpi accent"><div class="label">待整改问题</div><div class="value">2</div><div class="sub">按 SLA 跟踪</div></div></section>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>质量分：治理前 vs 治理后</h2>
+      <div class="hint">按「未命中任何质量规则的行占比」计算，行级口径，避免被规则数量稀释</div>
+      
+    <div class="bar-row">
+      <div>整体质量分</div>
+      <div class="bar">
+        <span class="before" style="width:92.9%"></span>
+        <span class="after" style="width:99.4%;opacity:.9"></span>
+      </div>
+      <div class="num">99.40</div>
+    </div>
+      
+    <div class="bar-row">
+      <div>完整性</div>
+      <div class="bar">
+        <span class="before" style="width:99.1%"></span>
+        <span class="after" style="width:100.0%;opacity:.9"></span>
+      </div>
+      <div class="num">100.00</div>
+    </div>
+    <div class="bar-row">
+      <div>唯一性</div>
+      <div class="bar">
+        <span class="before" style="width:98.2%"></span>
+        <span class="after" style="width:100.0%;opacity:.9"></span>
+      </div>
+      <div class="num">100.00</div>
+    </div>
+    <div class="bar-row">
+      <div>有效性</div>
+      <div class="bar">
+        <span class="before" style="width:96.0%"></span>
+        <span class="after" style="width:99.7%;opacity:.9"></span>
+      </div>
+      <div class="num">99.65</div>
+    </div>
+    <div class="bar-row">
+      <div>一致性</div>
+      <div class="bar">
+        <span class="before" style="width:99.3%"></span>
+        <span class="after" style="width:99.7%;opacity:.9"></span>
+      </div>
+      <div class="num">99.71</div>
+    </div>
+    <div class="bar-row">
+      <div>及时性</div>
+      <div class="bar">
+        <span class="before" style="width:100.0%"></span>
+        <span class="after" style="width:100.0%;opacity:.9"></span>
+      </div>
+      <div class="num">100.00</div>
+    </div>
+      <div class="legend"><span><i class="dot" style="background:#c9d6e6"></i>治理前</span><span><i class="dot" style="background:#2f6fed"></i>治理后</span></div>
+    </div>
+    <div class="card">
+      <h2>数据分类分级分布</h2>
+      <div class="hint">按字段自动识别，L4 核心字段强制脱敏 + 访问审批</div>
+      <div class='bar-row'><div>L1 公开</div><div class='bar'><span class='after' style='width:75.0%'></span></div><div class='num'>72</div></div><div class='bar-row'><div>L2 内部</div><div class='bar'><span class='after' style='width:13.5%'></span></div><div class='num'>13</div></div><div class='bar-row'><div>L3 敏感</div><div class='bar'><span class='after' style='width:6.2%'></span></div><div class='num'>6</div></div><div class='bar-row'><div>L4 核心</div><div class='bar'><span class='after' style='width:5.2%'></span></div><div class='num'>5</div></div>
+      <div class="hint" style="margin-top:14px">敏感字段（L3/L4）共 <b>11</b> 个，已生成脱敏规则与最小权限策略。</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>核心表健康度</h2>
+    <div class="hint">质量分 ≥ 99.5 记为健康，低于阈值自动进入整改台账</div>
+    <table><thead><tr><th>数据集</th><th class="num">校验行数</th><th class="num">问题行数</th><th class="num">质量分</th><th>状态</th></tr></thead>
+    <tbody><tr><td>order</td><td class='num'>59,601</td><td class='num'>407</td><td class='num'>99.32</td><td><span class='tag warn'>亚健康</span></td></tr><tr><td>user</td><td class='num'>8,000</td><td class='num'>0</td><td class='num'>100.00</td><td><span class='tag good'>健康</span></td></tr><tr><td>product</td><td class='num'>120</td><td class='num'>0</td><td class='num'>100.00</td><td><span class='tag good'>健康</span></td></tr></tbody></table>
+  </div>
+
+  <div class="card">
+    <h2>本次治理动作</h2>
+    <div class="hint">从贴源层到明细层，脚本自动完成清洗、标准化与修复，每个动作都有计数可追溯</div>
+    <div class="minis"><div class="mini"><div class="mv">600</div><div class="ml">订单去重</div></div><div class="mini"><div class="mv">742</div><div class="ml">渠道码值纠正</div></div><div class="mini"><div class="mv">1,219</div><div class="ml">手机号修复</div></div><div class="mini"><div class="mv">475</div><div class="ml">状态纠正</div></div><div class="mini"><div class="mv">394</div><div class="ml">时序修复</div></div><div class="mini"><div class="mv">59,601</div><div class="ml">明细落库</div></div></div>
+  </div>
+
+  <div class="grid2">
+    <div class="card">
+      <h2>问题整改台账</h2>
+      <div class="hint">问题带责任人、SLA 期限与样本数据，可直接派单</div>
+      <table><thead><tr><th>规则</th><th>表</th><th>维度</th><th class="num">失败行</th><th>责任人</th><th>状态</th></tr></thead>
+      <tbody><tr><td>DQ-ORD-007</td><td>dwd_order_detail</td><td>有效性</td><td class='num'>235</td><td>渠道域数据 Owner</td><td><span class='tag warn'>待整改</span></td></tr><tr><td>DQ-ORD-013</td><td>dwd_order_detail</td><td>一致性</td><td class='num'>173</td><td>商品域数据 Owner</td><td><span class='tag warn'>待整改</span></td></tr></tbody></table>
+    </div>
+    <div class="card">
+      <h2>数据资产（示例）</h2>
+      <div class="hint">资产登记包含 Owner、密级、SLA、使用场景与质量分</div>
+      <table><thead><tr><th>资产</th><th>表</th><th>域</th><th>密级</th><th class="num">行数</th><th class="num">质量分</th></tr></thead>
+      <tbody><tr><td>订单贴源数据</td><td>ods_order</td><td>交易</td><td>L3</td><td class='num'>60,600</td><td class='num'>99.32</td></tr><tr><td>用户贴源数据</td><td>ods_user</td><td>用户</td><td>L4</td><td class='num'>8,000</td><td class='num'>100.0</td></tr><tr><td>商品贴源数据</td><td>ods_product</td><td>商品</td><td>L2</td><td class='num'>120</td><td class='num'>100.0</td></tr><tr><td>渠道标准码表</td><td>ods_channel</td><td>渠道</td><td>L1</td><td class='num'>6</td><td class='num'>—</td></tr><tr><td>物流履约数据</td><td>ods_logistics</td><td>履约</td><td>L3</td><td class='num'>38,764</td><td class='num'>—</td></tr><tr><td>营销活动数据</td><td>ods_campaign</td><td>营销</td><td>L2</td><td class='num'>8</td><td class='num'>—</td></tr><tr><td>订单明细数据</td><td>dwd_order_detail</td><td>交易</td><td>L4</td><td class='num'>59,601</td><td class='num'>99.32</td></tr><tr><td>用户画像数据</td><td>dwd_user_profile</td><td>用户</td><td>L4</td><td class='num'>8,000</td><td class='num'>100.0</td></tr><tr><td>商品维度数据</td><td>dwd_product_dim</td><td>商品</td><td>L2</td><td class='num'>120</td><td class='num'>100.0</td></tr><tr><td>渠道日汇总</td><td>dws_channel_daily</td><td>交易</td><td>L2</td><td class='num'>625</td><td class='num'>—</td></tr><tr><td>类目日汇总</td><td>dws_category_daily</td><td>商品</td><td>L2</td><td class='num'>540</td><td class='num'>—</td></tr><tr><td>活动日汇总</td><td>dws_campaign_daily</td><td>营销</td><td>L2</td><td class='num'>720</td><td class='num'>—</td></tr></tbody></table>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>表级血缘（节选）</h2>
+    <div class="hint">由清洗作业配置与 DWS 聚合 SQL 自动解析，可用于变更影响分析</div>
+    <pre>ods_order --&gt; dwd_order_detail
+ods_user --&gt; dwd_user_profile
+ods_product --&gt; dwd_product_dim
+ods_channel --&gt; dwd_order_detail
+dwd_order_detail --&gt; dws_channel_daily
+dwd_order_detail --&gt; dws_category_daily
+dwd_product_dim --&gt; dws_category_daily
+dwd_order_detail --&gt; dws_campaign_daily
+ods_campaign --&gt; dws_campaign_daily</pre>
+  </div>
+
+  <div class="foot">data-governance-in-action · 生成脚本 run_demo.py · 数据为可复现的模拟数据</div>
+</div></body></html>
