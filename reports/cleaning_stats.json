@@ -1,0 +1,78 @@
+{
+  "as_of": "2026-10-31",
+  "tables": {
+    "market_register": {
+      "input_rows": 1240,
+      "output_rows": 1139,
+      "quarantined": 101,
+      "repairs": {
+        "capital:negative_nulled": 6,
+        "company_name:cleaned": 45,
+        "district:corrected": 28,
+        "email:invalid_nulled": 25,
+        "industry:invalid_nulled": 11,
+        "industry:mapped": 21,
+        "phone:normalized": 51,
+        "status:mapped": 30,
+        "status:unmapped": 10,
+        "update_time:missing": 8
+      }
+    },
+    "credit_rating": {
+      "input_rows": 950,
+      "output_rows": 901,
+      "quarantined": 49,
+      "repairs": {
+        "credit_level:recalculated": 36,
+        "credit_score:range_nulled": 8
+      }
+    },
+    "complaint_case": {
+      "input_rows": 1500,
+      "output_rows": 1443,
+      "quarantined": 57,
+      "repairs": {
+        "case_type:mapped": 20,
+        "close_time:order_nulled": 12,
+        "satisfaction:invalid_nulled": 7,
+        "satisfaction:range_nulled": 14,
+        "status:mapped": 20,
+        "status:reopened": 12,
+        "status:unmapped": 5
+      }
+    }
+  },
+  "total_input": 3690,
+  "total_output": 3483,
+  "total_quarantined": 207,
+  "availability": 0.9439,
+  "quarantine_reasons": {
+    "DATE_FUTURE": 12,
+    "DATE_INVALID": 14,
+    "DATE_MISSING": 3,
+    "DUPLICATE": 40,
+    "ORPHAN": 92,
+    "USCC_INVALID": 40,
+    "USCC_MISSING": 6
+  },
+  "repairs": {
+    "capital:negative_nulled": 6,
+    "case_type:mapped": 20,
+    "close_time:order_nulled": 12,
+    "company_name:cleaned": 45,
+    "credit_level:recalculated": 36,
+    "credit_score:range_nulled": 8,
+    "district:corrected": 28,
+    "email:invalid_nulled": 25,
+    "industry:invalid_nulled": 11,
+    "industry:mapped": 21,
+    "phone:normalized": 51,
+    "satisfaction:invalid_nulled": 7,
+    "satisfaction:range_nulled": 14,
+    "status:mapped": 50,
+    "status:reopened": 12,
+    "status:unmapped": 15,
+    "update_time:missing": 8
+  },
+  "generated_at": "2026-11-02 13:00:45"
+}

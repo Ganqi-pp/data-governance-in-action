@@ -1,0 +1,473 @@
+{
+  "summary": {
+    "checks": 46,
+    "passed": 44,
+    "failed": 2,
+    "compliance_rate": 0.9565,
+    "high_failures": 0,
+    "generated_at": "2026-11-02 13:00:45",
+    "standard_version": "1.0.0"
+  },
+  "findings": [
+    {
+      "check_id": "STD-001",
+      "table": "ods_market_register",
+      "object": "ods_market_register",
+      "name": "标准表已落地",
+      "status": "pass",
+      "severity": "高",
+      "detail": "行数 1,240",
+      "suggestion": "-"
+    },
+    {
+      "check_id": "STD-002",
+      "table": "ods_market_register",
+      "object": "ods_market_register",
+      "name": "标准字段齐全",
+      "status": "pass",
+      "severity": "高",
+      "detail": "13 个标准字段全部存在",
+      "suggestion": "补齐缺失字段并重跑落标检查"
+    },
+    {
+      "check_id": "STD-003",
+      "table": "ods_market_register",
+      "object": "ods_market_register",
+      "name": "无未登记字段",
+      "status": "pass",
+      "severity": "中",
+      "detail": "所有物理字段均已在标准中登记",
+      "suggestion": "在标准中登记字段或下线冗余字段"
+    },
+    {
+      "check_id": "STD-004",
+      "table": "ods_market_register",
+      "object": "ods_market_register",
+      "name": "字段命名符合规范",
+      "status": "pass",
+      "severity": "中",
+      "detail": "正则 ^[a-z][a-z0-9_]{1,40}$ 全部通过",
+      "suggestion": "按 snake_case 重命名并同步上下游"
+    },
+    {
+      "check_id": "STD-005",
+      "table": "ods_market_register",
+      "object": "ods_market_register",
+      "name": "表命名符合规范",
+      "status": "pass",
+      "severity": "低",
+      "detail": "ods_market_register",
+      "suggestion": "-"
+    },
+    {
+      "check_id": "STD-006",
+      "table": "ods_market_register",
+      "object": "ods_market_register",
+      "name": "字段元数据完整",
+      "status": "pass",
+      "severity": "中",
+      "detail": "中文名/类型/说明/标准编号齐全",
+      "suggestion": "补齐字段元数据"
+    },
+    {
+      "check_id": "STD-007",
+      "table": "ods_market_register",
+      "object": "ods_market_register",
+      "name": "表级管理元数据完整",
+      "status": "pass",
+      "severity": "低",
+      "detail": "Owner/Steward/更新频率/说明齐全",
+      "suggestion": "补齐管理元数据"
+    },
+    {
+      "check_id": "STD-008",
+      "table": "ods_market_register",
+      "object": "reg_id",
+      "name": "主键已声明且存在",
+      "status": "pass",
+      "severity": "高",
+      "detail": "主键 reg_id",
+      "suggestion": "声明主键并保证唯一"
+    },
+    {
+      "check_id": "STD-009",
+      "table": "ods_market_register",
+      "object": "industry_code",
+      "name": "码表引用可解析",
+      "status": "pass",
+      "severity": "中",
+      "detail": "industry_code → ref_industry_codes 可访问",
+      "suggestion": "补齐码表或修正引用"
+    },
+    {
+      "check_id": "STD-009",
+      "table": "ods_market_register",
+      "object": "district_code",
+      "name": "码表引用可解析",
+      "status": "pass",
+      "severity": "中",
+      "detail": "district_code → ref_administrative_divisions 可访问",
+      "suggestion": "补齐码表或修正引用"
+    },
+    {
+      "check_id": "STD-010",
+      "table": "ods_market_register",
+      "object": "reg_id",
+      "name": "实际长度不超过标准长度",
+      "status": "pass",
+      "severity": "低",
+      "detail": "最长 14 / 标准 32",
+      "suggestion": "截断或扩展标准长度并评审"
+    },
+    {
+      "check_id": "STD-010",
+      "table": "ods_market_register",
+      "object": "unified_social_credit_code",
+      "name": "实际长度不超过标准长度",
+      "status": "pass",
+      "severity": "低",
+      "detail": "最长 18 / 标准 18",
+      "suggestion": "截断或扩展标准长度并评审"
+    },
+    {
+      "check_id": "STD-010",
+      "table": "ods_market_register",
+      "object": "company_name",
+      "name": "实际长度不超过标准长度",
+      "status": "pass",
+      "severity": "低",
+      "detail": "最长 13 / 标准 100",
+      "suggestion": "截断或扩展标准长度并评审"
+    },
+    {
+      "check_id": "STD-010",
+      "table": "ods_market_register",
+      "object": "industry_code",
+      "name": "实际长度不超过标准长度",
+      "status": "fail",
+      "severity": "低",
+      "detail": "最长 16 / 标准 4",
+      "suggestion": "截断或扩展标准长度并评审"
+    },
+    {
+      "check_id": "STD-010",
+      "table": "ods_market_register",
+      "object": "district_code",
+      "name": "实际长度不超过标准长度",
+      "status": "pass",
+      "severity": "低",
+      "detail": "最长 6 / 标准 6",
+      "suggestion": "截断或扩展标准长度并评审"
+    },
+    {
+      "check_id": "STD-010",
+      "table": "ods_market_register",
+      "object": "address",
+      "name": "实际长度不超过标准长度",
+      "status": "pass",
+      "severity": "低",
+      "detail": "最长 18 / 标准 200",
+      "suggestion": "截断或扩展标准长度并评审"
+    },
+    {
+      "check_id": "STD-010",
+      "table": "ods_market_register",
+      "object": "legal_person",
+      "name": "实际长度不超过标准长度",
+      "status": "pass",
+      "severity": "低",
+      "detail": "最长 3 / 标准 50",
+      "suggestion": "截断或扩展标准长度并评审"
+    },
+    {
+      "check_id": "STD-010",
+      "table": "ods_market_register",
+      "object": "contact_phone",
+      "name": "实际长度不超过标准长度",
+      "status": "pass",
+      "severity": "低",
+      "detail": "最长 14 / 标准 20",
+      "suggestion": "截断或扩展标准长度并评审"
+    },
+    {
+      "check_id": "STD-010",
+      "table": "ods_market_register",
+      "object": "contact_email",
+      "name": "实际长度不超过标准长度",
+      "status": "pass",
+      "severity": "低",
+      "detail": "最长 23 / 标准 100",
+      "suggestion": "截断或扩展标准长度并评审"
+    },
+    {
+      "check_id": "STD-010",
+      "table": "ods_market_register",
+      "object": "status",
+      "name": "实际长度不超过标准长度",
+      "status": "pass",
+      "severity": "低",
+      "detail": "最长 5 / 标准 10",
+      "suggestion": "截断或扩展标准长度并评审"
+    },
+    {
+      "check_id": "STD-001",
+      "table": "ods_credit_rating",
+      "object": "ods_credit_rating",
+      "name": "标准表已落地",
+      "status": "pass",
+      "severity": "高",
+      "detail": "行数 950",
+      "suggestion": "-"
+    },
+    {
+      "check_id": "STD-002",
+      "table": "ods_credit_rating",
+      "object": "ods_credit_rating",
+      "name": "标准字段齐全",
+      "status": "pass",
+      "severity": "高",
+      "detail": "7 个标准字段全部存在",
+      "suggestion": "补齐缺失字段并重跑落标检查"
+    },
+    {
+      "check_id": "STD-003",
+      "table": "ods_credit_rating",
+      "object": "ods_credit_rating",
+      "name": "无未登记字段",
+      "status": "pass",
+      "severity": "中",
+      "detail": "所有物理字段均已在标准中登记",
+      "suggestion": "在标准中登记字段或下线冗余字段"
+    },
+    {
+      "check_id": "STD-004",
+      "table": "ods_credit_rating",
+      "object": "ods_credit_rating",
+      "name": "字段命名符合规范",
+      "status": "pass",
+      "severity": "中",
+      "detail": "正则 ^[a-z][a-z0-9_]{1,40}$ 全部通过",
+      "suggestion": "按 snake_case 重命名并同步上下游"
+    },
+    {
+      "check_id": "STD-005",
+      "table": "ods_credit_rating",
+      "object": "ods_credit_rating",
+      "name": "表命名符合规范",
+      "status": "pass",
+      "severity": "低",
+      "detail": "ods_credit_rating",
+      "suggestion": "-"
+    },
+    {
+      "check_id": "STD-006",
+      "table": "ods_credit_rating",
+      "object": "ods_credit_rating",
+      "name": "字段元数据完整",
+      "status": "pass",
+      "severity": "中",
+      "detail": "中文名/类型/说明/标准编号齐全",
+      "suggestion": "补齐字段元数据"
+    },
+    {
+      "check_id": "STD-007",
+      "table": "ods_credit_rating",
+      "object": "ods_credit_rating",
+      "name": "表级管理元数据完整",
+      "status": "pass",
+      "severity": "低",
+      "detail": "Owner/Steward/更新频率/说明齐全",
+      "suggestion": "补齐管理元数据"
+    },
+    {
+      "check_id": "STD-008",
+      "table": "ods_credit_rating",
+      "object": "rating_id",
+      "name": "主键已声明且存在",
+      "status": "pass",
+      "severity": "高",
+      "detail": "主键 rating_id",
+      "suggestion": "声明主键并保证唯一"
+    },
+    {
+      "check_id": "STD-010",
+      "table": "ods_credit_rating",
+      "object": "rating_id",
+      "name": "实际长度不超过标准长度",
+      "status": "pass",
+      "severity": "低",
+      "detail": "最长 12 / 标准 32",
+      "suggestion": "截断或扩展标准长度并评审"
+    },
+    {
+      "check_id": "STD-010",
+      "table": "ods_credit_rating",
+      "object": "unified_social_credit_code",
+      "name": "实际长度不超过标准长度",
+      "status": "pass",
+      "severity": "低",
+      "detail": "最长 18 / 标准 18",
+      "suggestion": "截断或扩展标准长度并评审"
+    },
+    {
+      "check_id": "STD-010",
+      "table": "ods_credit_rating",
+      "object": "credit_level",
+      "name": "实际长度不超过标准长度",
+      "status": "fail",
+      "severity": "低",
+      "detail": "最长 4 / 标准 1",
+      "suggestion": "截断或扩展标准长度并评审"
+    },
+    {
+      "check_id": "STD-010",
+      "table": "ods_credit_rating",
+      "object": "rating_agency",
+      "name": "实际长度不超过标准长度",
+      "status": "pass",
+      "severity": "低",
+      "detail": "最长 10 / 标准 100",
+      "suggestion": "截断或扩展标准长度并评审"
+    },
+    {
+      "check_id": "STD-001",
+      "table": "ods_complaint_case",
+      "object": "ods_complaint_case",
+      "name": "标准表已落地",
+      "status": "pass",
+      "severity": "高",
+      "detail": "行数 1,500",
+      "suggestion": "-"
+    },
+    {
+      "check_id": "STD-002",
+      "table": "ods_complaint_case",
+      "object": "ods_complaint_case",
+      "name": "标准字段齐全",
+      "status": "pass",
+      "severity": "高",
+      "detail": "9 个标准字段全部存在",
+      "suggestion": "补齐缺失字段并重跑落标检查"
+    },
+    {
+      "check_id": "STD-003",
+      "table": "ods_complaint_case",
+      "object": "ods_complaint_case",
+      "name": "无未登记字段",
+      "status": "pass",
+      "severity": "中",
+      "detail": "所有物理字段均已在标准中登记",
+      "suggestion": "在标准中登记字段或下线冗余字段"
+    },
+    {
+      "check_id": "STD-004",
+      "table": "ods_complaint_case",
+      "object": "ods_complaint_case",
+      "name": "字段命名符合规范",
+      "status": "pass",
+      "severity": "中",
+      "detail": "正则 ^[a-z][a-z0-9_]{1,40}$ 全部通过",
+      "suggestion": "按 snake_case 重命名并同步上下游"
+    },
+    {
+      "check_id": "STD-005",
+      "table": "ods_complaint_case",
+      "object": "ods_complaint_case",
+      "name": "表命名符合规范",
+      "status": "pass",
+      "severity": "低",
+      "detail": "ods_complaint_case",
+      "suggestion": "-"
+    },
+    {
+      "check_id": "STD-006",
+      "table": "ods_complaint_case",
+      "object": "ods_complaint_case",
+      "name": "字段元数据完整",
+      "status": "pass",
+      "severity": "中",
+      "detail": "中文名/类型/说明/标准编号齐全",
+      "suggestion": "补齐字段元数据"
+    },
+    {
+      "check_id": "STD-007",
+      "table": "ods_complaint_case",
+      "object": "ods_complaint_case",
+      "name": "表级管理元数据完整",
+      "status": "pass",
+      "severity": "低",
+      "detail": "Owner/Steward/更新频率/说明齐全",
+      "suggestion": "补齐管理元数据"
+    },
+    {
+      "check_id": "STD-008",
+      "table": "ods_complaint_case",
+      "object": "case_id",
+      "name": "主键已声明且存在",
+      "status": "pass",
+      "severity": "高",
+      "detail": "主键 case_id",
+      "suggestion": "声明主键并保证唯一"
+    },
+    {
+      "check_id": "STD-010",
+      "table": "ods_complaint_case",
+      "object": "case_id",
+      "name": "实际长度不超过标准长度",
+      "status": "pass",
+      "severity": "低",
+      "detail": "最长 12 / 标准 32",
+      "suggestion": "截断或扩展标准长度并评审"
+    },
+    {
+      "check_id": "STD-010",
+      "table": "ods_complaint_case",
+      "object": "unified_social_credit_code",
+      "name": "实际长度不超过标准长度",
+      "status": "pass",
+      "severity": "低",
+      "detail": "最长 18 / 标准 18",
+      "suggestion": "截断或扩展标准长度并评审"
+    },
+    {
+      "check_id": "STD-010",
+      "table": "ods_complaint_case",
+      "object": "case_type",
+      "name": "实际长度不超过标准长度",
+      "status": "pass",
+      "severity": "低",
+      "detail": "最长 4 / 标准 20",
+      "suggestion": "截断或扩展标准长度并评审"
+    },
+    {
+      "check_id": "STD-010",
+      "table": "ods_complaint_case",
+      "object": "content",
+      "name": "实际长度不超过标准长度",
+      "status": "pass",
+      "severity": "低",
+      "detail": "最长 63 / 标准 2000",
+      "suggestion": "截断或扩展标准长度并评审"
+    },
+    {
+      "check_id": "STD-010",
+      "table": "ods_complaint_case",
+      "object": "handling_dept",
+      "name": "实际长度不超过标准长度",
+      "status": "pass",
+      "severity": "低",
+      "detail": "最长 5 / 标准 50",
+      "suggestion": "截断或扩展标准长度并评审"
+    },
+    {
+      "check_id": "STD-010",
+      "table": "ods_complaint_case",
+      "object": "status",
+      "name": "实际长度不超过标准长度",
+      "status": "pass",
+      "severity": "低",
+      "detail": "最长 3 / 标准 10",
+      "suggestion": "截断或扩展标准长度并评审"
+    }
+  ]
+}

@@ -1,311 +1,754 @@
 {
-  "version": "1.0.0",
-  "updated_at": "2026-11-02",
+  "schema_version": "1.0",
+  "dataset": "雄安新区市场主体服务数据",
+  "as_of": "2026-10-31",
+  "scoring": {
+    "table_weights": {
+      "market_register": 0.5,
+      "credit_rating": 0.3,
+      "complaint_case": 0.2
+    },
+    "dimension_weights": {
+      "完整性": 0.25,
+      "准确性": 0.25,
+      "一致性": 0.2,
+      "唯一性": 0.1,
+      "有效性": 0.1,
+      "及时性": 0.1
+    },
+    "health_formula": "表健康度 = 100 × (1 − 存在任一质量问题的主键数 ÷ 记录总数)；综合健康度 = Σ(表权重 × 表健康度)。",
+    "rule_pass_formula": "规则违规率 = 违规记录数 ÷ 校验记录数；违规率 ≤ 容差即判定该规则达标。",
+    "tolerance_note": "容差是治理 SLA，不是掩盖问题：超容差的规则进入整改工单，容差内的残留记为观察项。"
+  },
   "rules": [
     {
-      "id": "DQ-ORD-001",
-      "dataset": "order",
-      "column": "order_id",
-      "name": "订单号唯一",
+      "id": "DQ-REG-001",
+      "name": "统一社会信用代码非空",
+      "table": "market_register",
+      "field": "unified_social_credit_code",
+      "dimension": "完整性",
+      "severity": "高",
+      "type": "not_null",
+      "tolerance": 0.002,
+      "owner": "市场服务部登记注册科",
+      "sla_days": 3,
+      "standard_ref": "GOV-REG-002",
+      "remediation": "退回登记系统补录；无法补录的标记为不可用，不进入共享出口。"
+    },
+    {
+      "id": "DQ-REG-002",
+      "name": "统一社会信用代码唯一",
+      "table": "market_register",
+      "field": "unified_social_credit_code",
       "dimension": "唯一性",
+      "severity": "高",
       "type": "unique",
-      "severity": "high",
-      "owner": "订单域数据 Owner",
-      "sla_hours": 24,
-      "description": "同一订单号在明细表中只能出现一次，防止重复入账"
-    },
-    {
-      "id": "DQ-ORD-002",
-      "dataset": "order",
-      "column": "order_id",
-      "name": "订单号非空",
-      "dimension": "完整性",
-      "type": "not_null",
-      "severity": "high",
-      "owner": "订单域数据 Owner",
-      "sla_hours": 24,
-      "description": "订单号为主键，不允许为空或空白"
-    },
-    {
-      "id": "DQ-ORD-003",
-      "dataset": "order",
-      "column": "user_id",
-      "name": "用户 ID 非空",
-      "dimension": "完整性",
-      "type": "not_null",
-      "severity": "high",
-      "owner": "用户域数据 Owner",
-      "sla_hours": 24,
-      "description": "订单必须关联到具体用户，便于归因与售后"
-    },
-    {
-      "id": "DQ-ORD-004",
-      "dataset": "order",
-      "column": "channel_code",
-      "name": "渠道编码非空",
-      "dimension": "完整性",
-      "type": "not_null",
-      "severity": "medium",
-      "owner": "渠道域数据 Owner",
-      "sla_hours": 48,
-      "description": "渠道编码缺失会导致渠道日报口径缺口"
-    },
-    {
-      "id": "DQ-ORD-005",
-      "dataset": "order",
-      "column": "create_time",
-      "name": "下单时间非空",
-      "dimension": "完整性",
-      "type": "not_null",
-      "severity": "high",
-      "owner": "订单域数据 Owner",
-      "sla_hours": 24,
-      "description": "下单时间是所有时间维度分析的基础"
-    },
-    {
-      "id": "DQ-ORD-006",
-      "dataset": "order",
-      "column": "order_status",
-      "name": "订单状态取值合法",
-      "dimension": "有效性",
-      "type": "enum",
-      "severity": "medium",
-      "owner": "订单域数据 Owner",
-      "sla_hours": 48,
       "params": {
-        "values": ["待支付", "已支付", "已发货", "已完成", "已取消", "退款中", "已退款"]
+        "key": "unified_social_credit_code"
       },
-      "description": "状态必须落在标准码值范围内，否则统计口径失真"
+      "tolerance": 0.0,
+      "owner": "市场服务部数据管理岗",
+      "sla_days": 3,
+      "standard_ref": "GOV-REG-002",
+      "remediation": "按更新时间保留最新一条，其余转入重复数据隔离区并核对登记档案。"
     },
     {
-      "id": "DQ-ORD-007",
-      "dataset": "order",
-      "column": "channel_code",
-      "name": "渠道编码符合标准",
+      "id": "DQ-REG-003",
+      "name": "统一社会信用代码校验位正确",
+      "table": "market_register",
+      "field": "unified_social_credit_code",
+      "dimension": "准确性",
+      "severity": "高",
+      "type": "uscc",
+      "tolerance": 0.005,
+      "owner": "市场服务部登记注册科",
+      "sla_days": 3,
+      "standard_ref": "GOV-REG-002",
+      "remediation": "按 GB 32100-2015 重新核验；校验位错误的数据不得用于对外服务。"
+    },
+    {
+      "id": "DQ-REG-004",
+      "name": "企业名称不含首尾空白或全角空格",
+      "table": "market_register",
+      "field": "company_name",
       "dimension": "有效性",
-      "type": "enum",
-      "severity": "medium",
-      "owner": "渠道域数据 Owner",
-      "sla_hours": 48,
+      "severity": "低",
+      "type": "custom_sql",
       "params": {
-        "values": ["APP", "WEB", "MINI", "TMALL", "JD", "OFFLINE"]
+        "sql": "SELECT reg_id AS record_key, '企业名称含首尾空白或全角空格' AS evidence FROM {table} WHERE company_name <> TRIM(company_name) OR INSTR(company_name, '　') > 0"
       },
-      "description": "渠道编码必须使用标准码值，禁止大小写与空格变体"
+      "tolerance": 0.01,
+      "owner": "市场服务部登记注册科",
+      "sla_days": 15,
+      "standard_ref": "GOV-REG-003",
+      "remediation": "清洗时统一去除首尾空白、全角空格转半角并压缩连续空格。"
     },
     {
-      "id": "DQ-ORD-008",
-      "dataset": "order",
-      "column": "phone",
-      "name": "收货手机号格式合法",
+      "id": "DQ-REG-005",
+      "name": "企业名称非空",
+      "table": "market_register",
+      "field": "company_name",
+      "dimension": "完整性",
+      "severity": "高",
+      "type": "not_null",
+      "tolerance": 0.002,
+      "owner": "市场服务部登记注册科",
+      "sla_days": 3,
+      "standard_ref": "GOV-REG-003",
+      "remediation": "联系登记系统核对原始档案后补录。"
+    },
+    {
+      "id": "DQ-REG-006",
+      "name": "注册日期格式合法",
+      "table": "market_register",
+      "field": "reg_date",
       "dimension": "有效性",
+      "severity": "高",
+      "type": "date_valid",
+      "tolerance": 0.002,
+      "owner": "市场服务部登记注册科",
+      "sla_days": 3,
+      "standard_ref": "GOV-REG-004",
+      "remediation": "按 YYYY-MM-DD 重新解析；无法解析的转人工核对营业执照。"
+    },
+    {
+      "id": "DQ-REG-007",
+      "name": "注册日期不得晚于数据截止日",
+      "table": "market_register",
+      "field": "reg_date",
+      "dimension": "有效性",
+      "severity": "高",
+      "type": "date_not_future",
+      "tolerance": 0.0,
+      "owner": "市场服务部登记注册科",
+      "sla_days": 3,
+      "standard_ref": "GOV-REG-004",
+      "remediation": "核对系统时间与登记日期，未来日期视为录入错误并回退源系统。"
+    },
+    {
+      "id": "DQ-REG-008",
+      "name": "注册资本在合理区间",
+      "table": "market_register",
+      "field": "reg_capital_wan",
+      "dimension": "有效性",
+      "severity": "中",
+      "type": "range",
+      "params": {
+        "min": 0,
+        "max": 1000000
+      },
+      "tolerance": 0.005,
+      "owner": "市场服务部登记注册科",
+      "sla_days": 7,
+      "standard_ref": "GOV-REG-005",
+      "remediation": "负值或异常大值转人工核对；保留原值并记录修复痕迹。"
+    },
+    {
+      "id": "DQ-REG-009",
+      "name": "联系电话非空",
+      "table": "market_register",
+      "field": "contact_phone",
+      "dimension": "完整性",
+      "severity": "中",
+      "type": "not_null",
+      "tolerance": 0.02,
+      "owner": "市场服务部企业服务科",
+      "sla_days": 7,
+      "standard_ref": "GOV-REG-010",
+      "remediation": "通过政务服务大厅、年报名册等渠道补全；补全前不用于主动触达。"
+    },
+    {
+      "id": "DQ-REG-010",
+      "name": "联系电话符合手机号格式",
+      "table": "market_register",
+      "field": "contact_phone",
+      "dimension": "有效性",
+      "severity": "高",
       "type": "regex",
-      "severity": "medium",
-      "owner": "用户域数据 Owner",
-      "sla_hours": 48,
       "params": {
         "pattern": "^1[3-9][0-9]{9}$"
       },
-      "description": "手机号需符合中国大陆 11 位手机号规则，空值不计入格式失败"
+      "tolerance": 0.01,
+      "owner": "市场服务部企业服务科",
+      "sla_days": 3,
+      "standard_ref": "GOV-REG-010",
+      "remediation": "去除分隔符、+86 前缀，全角数字转半角后重新校验；仍不合规的置空。"
     },
     {
-      "id": "DQ-ORD-009",
-      "dataset": "order",
-      "column": "pay_amount",
-      "name": "支付金额非负",
+      "id": "DQ-REG-011",
+      "name": "电子邮箱格式合法",
+      "table": "market_register",
+      "field": "contact_email",
       "dimension": "有效性",
-      "type": "expression",
-      "severity": "high",
-      "owner": "订单域数据 Owner",
-      "sla_hours": 24,
+      "severity": "低",
+      "type": "regex",
       "params": {
-        "expr": "pay_amount >= 0"
+        "pattern": "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$"
       },
-      "description": "支付金额为负数通常意味着退款回写串单"
+      "tolerance": 0.02,
+      "owner": "市场服务部企业服务科",
+      "sla_days": 15,
+      "standard_ref": "GOV-REG-011",
+      "remediation": "统一转小写并校验域名；不合规邮箱置空，不阻断主数据。"
     },
     {
-      "id": "DQ-ORD-010",
-      "dataset": "order",
-      "column": "order_amount",
-      "name": "订单金额非负",
+      "id": "DQ-REG-012",
+      "name": "行业代码在标准码表中",
+      "table": "market_register",
+      "field": "industry_code",
       "dimension": "有效性",
-      "type": "expression",
-      "severity": "high",
-      "owner": "订单域数据 Owner",
-      "sla_hours": 24,
-      "params": {
-        "expr": "order_amount >= 0"
-      },
-      "description": "订单金额出现负数需立即定位上游写入逻辑"
-    },
-    {
-      "id": "DQ-ORD-011",
-      "dataset": "order",
-      "column": "pay_time",
-      "name": "支付时间不早于下单时间",
-      "dimension": "一致性",
-      "type": "expression",
-      "severity": "high",
-      "owner": "订单域数据 Owner",
-      "sla_hours": 24,
-      "params": {
-        "expr": "pay_time IS NULL OR pay_time >= create_time"
-      },
-      "description": "支付时间早于下单时间属于时序矛盾，需核查时钟与时区"
-    },
-    {
-      "id": "DQ-ORD-012",
-      "dataset": "order",
-      "column": "pay_time",
-      "name": "已支付订单必须有支付时间",
-      "dimension": "一致性",
-      "type": "expression",
-      "severity": "high",
-      "owner": "订单域数据 Owner",
-      "sla_hours": 24,
-      "params": {
-        "expr": "order_status <> '已支付' OR pay_time IS NOT NULL"
-      },
-      "description": "状态与支付时间矛盾会导致 GMV 与订单量口径不一致"
-    },
-    {
-      "id": "DQ-ORD-013",
-      "dataset": "order",
-      "column": "product_id",
-      "name": "商品 ID 可关联",
-      "dimension": "一致性",
+      "severity": "中",
       "type": "referential",
-      "severity": "high",
-      "owner": "商品域数据 Owner",
-      "sla_hours": 48,
       "params": {
-        "ref_before_table": "ods_product",
-        "ref_after_table": "dwd_product_dim",
-        "ref_column": "product_id"
+        "ref_table": "industry_codes",
+        "ref_field": "code",
+        "ref_filter": "1=1"
       },
-      "description": "订单中的商品必须存在于商品维度，否则无法归属类目"
+      "tolerance": 0.005,
+      "owner": "市场服务部数据管理岗",
+      "sla_days": 7,
+      "standard_ref": "GOV-REG-006",
+      "remediation": "行业名称按 GB/T 4754-2017 映射为标准代码；无法映射的置空并回源核实。"
     },
     {
-      "id": "DQ-ORD-014",
-      "dataset": "order",
-      "column": "create_time",
-      "name": "下单时间无未来时间",
+      "id": "DQ-REG-013",
+      "name": "法定代表人非空",
+      "table": "market_register",
+      "field": "legal_person",
+      "dimension": "完整性",
+      "severity": "中",
+      "type": "not_null",
+      "tolerance": 0.02,
+      "owner": "市场服务部登记注册科",
+      "sla_days": 7,
+      "standard_ref": "GOV-REG-009",
+      "remediation": "核对登记档案补录；属个人信息的字段仅限授权人员访问。"
+    },
+    {
+      "id": "DQ-REG-014",
+      "name": "登记住所与行政区划代码一致",
+      "table": "market_register",
+      "field": "district_code",
+      "dimension": "一致性",
+      "severity": "高",
+      "type": "custom_sql",
+      "params": {
+        "sql": "SELECT reg_id AS record_key, '登记住所与区划代码不一致' AS evidence FROM {table} WHERE address IS NOT NULL AND address <> '' AND ((address LIKE '%容城%' AND district_code <> '130629') OR (address LIKE '%安新县%' AND district_code <> '130632') OR (address LIKE '%雄县%' AND district_code <> '130638') OR (address LIKE '%启动区%' AND district_code <> '133100'))"
+      },
+      "tolerance": 0.005,
+      "owner": "市场服务部数据管理岗",
+      "sla_days": 3,
+      "standard_ref": "GOV-REG-007",
+      "remediation": "以住所中的县级行政区名为准修正 district_code，修正记录写入 dq_flags。"
+    },
+    {
+      "id": "DQ-REG-015",
+      "name": "经营状态在标准码表中",
+      "table": "market_register",
+      "field": "status",
+      "dimension": "有效性",
+      "severity": "高",
+      "type": "enum",
+      "params": {
+        "values": [
+          "存续",
+          "在业",
+          "注销",
+          "吊销",
+          "迁出"
+        ]
+      },
+      "tolerance": 0.01,
+      "owner": "市场服务部登记注册科",
+      "sla_days": 3,
+      "standard_ref": "GOV-REG-012",
+      "remediation": "同义词按映射表归一（正常→存续、在营→在业）；无法映射的转人工。"
+    },
+    {
+      "id": "DQ-REG-016",
+      "name": "更新时间非空",
+      "table": "market_register",
+      "field": "update_time",
+      "dimension": "完整性",
+      "severity": "中",
+      "type": "not_null",
+      "tolerance": 0.005,
+      "owner": "市场服务部数据管理岗",
+      "sla_days": 7,
+      "standard_ref": "GOV-REG-013",
+      "remediation": "由采集任务补写抽取时间；不得以当前时间伪造源系统更新时间。"
+    },
+    {
+      "id": "DQ-REG-017",
+      "name": "数据更新不超过 365 天",
+      "table": "market_register",
+      "field": "update_time",
       "dimension": "及时性",
+      "severity": "中",
       "type": "freshness",
-      "severity": "medium",
-      "owner": "订单域数据 Owner",
-      "sla_hours": 48,
       "params": {
-        "max_lag_hours": 24
+        "days": 365
       },
-      "description": "下单时间晚于当前时间超过 24 小时视为异常"
+      "tolerance": 0.1,
+      "owner": "市场服务部数据管理岗",
+      "sla_days": 7,
+      "standard_ref": "GOV-REG-013",
+      "remediation": "核查源系统同步任务；确认主体仍存续的补一次全量同步。"
     },
     {
-      "id": "DQ-USR-001",
-      "dataset": "user",
-      "column": "user_id",
-      "name": "用户 ID 唯一",
-      "dimension": "唯一性",
-      "type": "unique",
-      "severity": "high",
-      "owner": "用户域数据 Owner",
-      "sla_hours": 24,
-      "description": "用户主键重复会导致用户规模虚高"
-    },
-    {
-      "id": "DQ-USR-002",
-      "dataset": "user",
-      "column": "phone",
-      "name": "注册手机号格式合法",
-      "dimension": "有效性",
-      "type": "regex",
-      "severity": "high",
-      "owner": "用户域数据 Owner",
-      "sla_hours": 24,
-      "params": {
-        "pattern": "^1[3-9][0-9]{9}$"
-      },
-      "description": "手机号是用户唯一识别与触达的关键字段"
-    },
-    {
-      "id": "DQ-USR-003",
-      "dataset": "user",
-      "column": "register_time",
-      "name": "注册时间非空",
+      "id": "DQ-REG-018",
+      "name": "登记住所非空",
+      "table": "market_register",
+      "field": "address",
       "dimension": "完整性",
+      "severity": "中",
       "type": "not_null",
-      "severity": "medium",
-      "owner": "用户域数据 Owner",
-      "sla_hours": 48,
-      "description": "注册时间缺失会影响新增用户趋势"
+      "tolerance": 0.01,
+      "owner": "市场服务部登记注册科",
+      "sla_days": 7,
+      "standard_ref": "GOV-REG-008",
+      "remediation": "回源核对营业执照住所；空地址不进入对外共享出口。"
     },
     {
-      "id": "DQ-USR-004",
-      "dataset": "user",
-      "column": "member_level",
-      "name": "会员等级取值合法",
+      "id": "DQ-REG-019",
+      "name": "行政区划代码在标准码表中",
+      "table": "market_register",
+      "field": "district_code",
       "dimension": "有效性",
-      "type": "enum",
-      "severity": "medium",
-      "owner": "用户域数据 Owner",
-      "sla_hours": 48,
+      "severity": "高",
+      "type": "referential",
       "params": {
-        "values": ["普通", "银卡", "金卡", "黑卡"]
+        "ref_table": "administrative_divisions",
+        "ref_field": "code",
+        "ref_filter": "level IN ('县','功能区')"
       },
-      "description": "会员等级必须使用标准码值"
+      "tolerance": 0.002,
+      "owner": "市场服务部数据管理岗",
+      "sla_days": 3,
+      "standard_ref": "GOV-REG-007",
+      "remediation": "按民政部门行政区划代码修正；功能区代码仅限雄安新区使用。"
     },
     {
-      "id": "DQ-PRD-001",
-      "dataset": "product",
-      "column": "product_id",
-      "name": "商品 ID 唯一",
-      "dimension": "唯一性",
-      "type": "unique",
-      "severity": "high",
-      "owner": "商品域数据 Owner",
-      "sla_hours": 24,
-      "description": "商品主键重复会造成类目 GMV 重复计算"
+      "id": "DQ-REG-020",
+      "name": "更新时间不早于注册日期",
+      "table": "market_register",
+      "field": "update_time",
+      "dimension": "一致性",
+      "severity": "低",
+      "type": "date_order",
+      "params": {
+        "start_field": "reg_date",
+        "end_field": "update_time"
+      },
+      "tolerance": 0.01,
+      "owner": "市场服务部数据管理岗",
+      "sla_days": 15,
+      "standard_ref": "GOV-REG-013",
+      "remediation": "核对源系统时间戳；确认采集链路是否存在时区或回拨问题。"
     },
     {
-      "id": "DQ-PRD-002",
-      "dataset": "product",
-      "column": "category_code",
-      "name": "类目编码非空",
+      "id": "DQ-REG-021",
+      "name": "注册日期非空",
+      "table": "market_register",
+      "field": "reg_date",
       "dimension": "完整性",
+      "severity": "高",
       "type": "not_null",
-      "severity": "high",
-      "owner": "商品域数据 Owner",
-      "sla_hours": 48,
-      "description": "类目编码是商品分析的核心维度"
+      "tolerance": 0.002,
+      "owner": "市场服务部登记注册科",
+      "sla_days": 3,
+      "standard_ref": "GOV-REG-004",
+      "remediation": "回源补录营业执照成立日期；无法补录的主体不进入活跃主体统计。"
     },
     {
-      "id": "DQ-PRD-003",
-      "dataset": "product",
-      "column": "price",
-      "name": "商品价格非负",
-      "dimension": "有效性",
-      "type": "expression",
-      "severity": "medium",
-      "owner": "商品域数据 Owner",
-      "sla_hours": 48,
+      "id": "DQ-CRE-001",
+      "name": "信用记录信用代码非空",
+      "table": "credit_rating",
+      "field": "unified_social_credit_code",
+      "dimension": "完整性",
+      "severity": "高",
+      "type": "not_null",
+      "tolerance": 0.002,
+      "owner": "市场服务部信用管理科",
+      "sla_days": 3,
+      "standard_ref": "GOV-CRE-002",
+      "remediation": "回源补录信用代码，空值记录不得进入信用画像。"
+    },
+    {
+      "id": "DQ-CRE-002",
+      "name": "信用记录可关联到市场主体",
+      "table": "credit_rating",
+      "field": "unified_social_credit_code",
+      "dimension": "一致性",
+      "severity": "高",
+      "type": "referential",
       "params": {
-        "expr": "price >= 0"
+        "ref_table": "market_register",
+        "ref_field": "unified_social_credit_code",
+        "ref_filter": "1=1"
       },
-      "description": "价格为负通常来自上游录入错误"
+      "tolerance": 0.005,
+      "owner": "市场服务部信用管理科",
+      "sla_days": 3,
+      "standard_ref": "GOV-CRE-002",
+      "remediation": "按信用代码补建主体关联；确认主体已注销的标注为历史评价。"
     },
     {
-      "id": "DQ-PRD-004",
-      "dataset": "product",
-      "column": "status",
-      "name": "商品状态取值合法",
+      "id": "DQ-CRE-003",
+      "name": "信用评分在 0-100 之间",
+      "table": "credit_rating",
+      "field": "credit_score",
       "dimension": "有效性",
+      "severity": "高",
+      "type": "range",
+      "params": {
+        "min": 0,
+        "max": 100
+      },
+      "tolerance": 0.002,
+      "owner": "市场服务部信用管理科",
+      "sla_days": 3,
+      "standard_ref": "GOV-CRE-003",
+      "remediation": "越界分数回退评级机构复核，修复前不参与信用等级计算。"
+    },
+    {
+      "id": "DQ-CRE-004",
+      "name": "信用等级在标准码表中",
+      "table": "credit_rating",
+      "field": "credit_level",
+      "dimension": "有效性",
+      "severity": "高",
       "type": "enum",
-      "severity": "low",
-      "owner": "商品域数据 Owner",
-      "sla_hours": 72,
       "params": {
-        "values": ["在售", "下架", "预售"]
+        "values": [
+          "A",
+          "B",
+          "C",
+          "D"
+        ]
       },
-      "description": "商品状态需符合标准码值"
+      "tolerance": 0.005,
+      "owner": "市场服务部信用管理科",
+      "sla_days": 3,
+      "standard_ref": "GOV-CRE-004",
+      "remediation": "大小写、空格归一后按评分区间重算等级。"
+    },
+    {
+      "id": "DQ-CRE-005",
+      "name": "评级日期不得晚于截止日",
+      "table": "credit_rating",
+      "field": "rating_date",
+      "dimension": "有效性",
+      "severity": "中",
+      "type": "date_not_future",
+      "tolerance": 0.0,
+      "owner": "市场服务部信用管理科",
+      "sla_days": 7,
+      "standard_ref": "GOV-CRE-005",
+      "remediation": "未来日期视为录入错误，回退评级机构核实。"
+    },
+    {
+      "id": "DQ-CRE-006",
+      "name": "评级机构非空",
+      "table": "credit_rating",
+      "field": "rating_agency",
+      "dimension": "完整性",
+      "severity": "中",
+      "type": "not_null",
+      "tolerance": 0.02,
+      "owner": "市场服务部信用管理科",
+      "sla_days": 7,
+      "standard_ref": "GOV-CRE-006",
+      "remediation": "回源补录评级机构；无法确认的标注为来源不明。"
+    },
+    {
+      "id": "DQ-CRE-007",
+      "name": "信用数据更新不超过 365 天",
+      "table": "credit_rating",
+      "field": "update_time",
+      "dimension": "及时性",
+      "severity": "中",
+      "type": "freshness",
+      "params": {
+        "days": 365
+      },
+      "tolerance": 0.1,
+      "owner": "市场服务部信用管理岗",
+      "sla_days": 7,
+      "standard_ref": "GOV-CRE-007",
+      "remediation": "核查信用平台推送频率，必要时补拉增量。"
+    },
+    {
+      "id": "DQ-CRE-008",
+      "name": "信用等级与评分区间一致",
+      "table": "credit_rating",
+      "field": "credit_level",
+      "dimension": "一致性",
+      "severity": "中",
+      "type": "custom_sql",
+      "params": {
+        "sql": "SELECT rating_id AS record_key, '信用等级与评分区间不一致' AS evidence FROM {table} WHERE credit_score IS NOT NULL AND credit_level IS NOT NULL AND ((CAST(credit_score AS INTEGER) >= 90 AND credit_level <> 'A') OR (CAST(credit_score AS INTEGER) BETWEEN 75 AND 89 AND credit_level <> 'B') OR (CAST(credit_score AS INTEGER) BETWEEN 60 AND 74 AND credit_level <> 'C') OR (CAST(credit_score AS INTEGER) < 60 AND credit_level <> 'D'))"
+      },
+      "tolerance": 0.01,
+      "owner": "市场服务部信用管理科",
+      "sla_days": 7,
+      "standard_ref": "GOV-CRE-004",
+      "remediation": "以评分区间为准重算等级，保留原始等级到修复日志。"
+    },
+    {
+      "id": "DQ-CRE-009",
+      "name": "评价记录号唯一",
+      "table": "credit_rating",
+      "field": "rating_id",
+      "dimension": "唯一性",
+      "severity": "高",
+      "type": "unique",
+      "params": {
+        "key": "rating_id"
+      },
+      "tolerance": 0.0,
+      "owner": "市场服务部数据管理岗",
+      "sla_days": 3,
+      "standard_ref": "GOV-CRE-001",
+      "remediation": "重复记录按更新时间保留最新一条，其余隔离。"
+    },
+    {
+      "id": "DQ-CRE-010",
+      "name": "评级日期格式合法",
+      "table": "credit_rating",
+      "field": "rating_date",
+      "dimension": "有效性",
+      "severity": "中",
+      "type": "date_valid",
+      "tolerance": 0.005,
+      "owner": "市场服务部信用管理科",
+      "sla_days": 7,
+      "standard_ref": "GOV-CRE-005",
+      "remediation": "统一解析为 YYYY-MM-DD，无法解析的回源核对。"
+    },
+    {
+      "id": "DQ-CRE-011",
+      "name": "评级日期非空",
+      "table": "credit_rating",
+      "field": "rating_date",
+      "dimension": "完整性",
+      "severity": "中",
+      "type": "not_null",
+      "tolerance": 0.005,
+      "owner": "市场服务部信用管理科",
+      "sla_days": 7,
+      "standard_ref": "GOV-CRE-005",
+      "remediation": "回源补录评级日期；日期缺失的评价不参与年度信用分析。"
+    },
+    {
+      "id": "DQ-CASE-001",
+      "name": "诉求内容非空",
+      "table": "complaint_case",
+      "field": "content",
+      "dimension": "完整性",
+      "severity": "高",
+      "type": "not_null",
+      "tolerance": 0.005,
+      "owner": "市场服务部企业服务科",
+      "sla_days": 3,
+      "standard_ref": "GOV-CASE-005",
+      "remediation": "从热线工单原文补录；无法补录的标记为无效工单。"
+    },
+    {
+      "id": "DQ-CASE-002",
+      "name": "工单可关联到市场主体",
+      "table": "complaint_case",
+      "field": "unified_social_credit_code",
+      "dimension": "一致性",
+      "severity": "高",
+      "type": "referential",
+      "params": {
+        "ref_table": "market_register",
+        "ref_field": "unified_social_credit_code",
+        "ref_filter": "1=1"
+      },
+      "tolerance": 0.005,
+      "owner": "市场服务部企业服务科",
+      "sla_days": 3,
+      "standard_ref": "GOV-CASE-002",
+      "remediation": "按企业名称/信用代码补关联；确实无法关联的保留为匿名工单单独统计。"
+    },
+    {
+      "id": "DQ-CASE-003",
+      "name": "诉求类型在标准码表中",
+      "table": "complaint_case",
+      "field": "case_type",
+      "dimension": "有效性",
+      "severity": "中",
+      "type": "enum",
+      "params": {
+        "values": [
+          "登记注册",
+          "税务办理",
+          "社保缴纳",
+          "政策咨询",
+          "融资服务",
+          "市场监管",
+          "其他"
+        ]
+      },
+      "tolerance": 0.01,
+      "owner": "市场服务部企业服务科",
+      "sla_days": 7,
+      "standard_ref": "GOV-CASE-003",
+      "remediation": "按业务条线映射表归一；无法映射的归入“其他”并保留原文。"
+    },
+    {
+      "id": "DQ-CASE-004",
+      "name": "工单状态在标准码表中",
+      "table": "complaint_case",
+      "field": "status",
+      "dimension": "有效性",
+      "severity": "中",
+      "type": "enum",
+      "params": {
+        "values": [
+          "待受理",
+          "办理中",
+          "已办结",
+          "已回访"
+        ]
+      },
+      "tolerance": 0.01,
+      "owner": "市场服务部企业服务科",
+      "sla_days": 7,
+      "standard_ref": "GOV-CASE-007",
+      "remediation": "同义词归一（处理中→办理中、已完成→已办结）；挂起状态需补充子状态。"
+    },
+    {
+      "id": "DQ-CASE-005",
+      "name": "满意度在 1-5 分之间",
+      "table": "complaint_case",
+      "field": "satisfaction",
+      "dimension": "有效性",
+      "severity": "中",
+      "type": "range",
+      "params": {
+        "min": 1,
+        "max": 5
+      },
+      "tolerance": 0.01,
+      "owner": "市场服务部企业服务科",
+      "sla_days": 7,
+      "standard_ref": "GOV-CASE-008",
+      "remediation": "非 1-5 分记录置空并回访补录，不参与满意度均值计算。"
+    },
+    {
+      "id": "DQ-CASE-006",
+      "name": "办结时间不早于提交时间",
+      "table": "complaint_case",
+      "field": "close_time",
+      "dimension": "一致性",
+      "severity": "高",
+      "type": "date_order",
+      "params": {
+        "start_field": "submit_time",
+        "end_field": "close_time"
+      },
+      "tolerance": 0.0,
+      "owner": "市场服务部企业服务科",
+      "sla_days": 3,
+      "standard_ref": "GOV-CASE-009",
+      "remediation": "核对工单流转日志；时间倒挂的以最后一次操作时间为准。"
+    },
+    {
+      "id": "DQ-CASE-007",
+      "name": "提交时间不得晚于截止日",
+      "table": "complaint_case",
+      "field": "submit_time",
+      "dimension": "有效性",
+      "severity": "中",
+      "type": "date_not_future",
+      "tolerance": 0.0,
+      "owner": "市场服务部企业服务科",
+      "sla_days": 7,
+      "standard_ref": "GOV-CASE-004",
+      "remediation": "未来时间视为录入错误，回退热线系统核实。"
+    },
+    {
+      "id": "DQ-CASE-008",
+      "name": "已办结工单必须有办结时间",
+      "table": "complaint_case",
+      "field": "close_time",
+      "dimension": "完整性",
+      "severity": "高",
+      "type": "conditional_not_null",
+      "params": {
+        "condition_field": "status",
+        "values": [
+          "已办结",
+          "已回访"
+        ]
+      },
+      "tolerance": 0.005,
+      "owner": "市场服务部企业服务科",
+      "sla_days": 3,
+      "standard_ref": "GOV-CASE-009",
+      "remediation": "从工单流转日志补写办结时间；状态与时间不一致的流转人工复核。"
+    },
+    {
+      "id": "DQ-CASE-009",
+      "name": "工单编号唯一",
+      "table": "complaint_case",
+      "field": "case_id",
+      "dimension": "唯一性",
+      "severity": "高",
+      "type": "unique",
+      "params": {
+        "key": "case_id"
+      },
+      "tolerance": 0.0,
+      "owner": "市场服务部数据管理岗",
+      "sla_days": 3,
+      "standard_ref": "GOV-CASE-001",
+      "remediation": "重复工单合并，保留最早提交记录并关联重复编号。"
+    },
+    {
+      "id": "DQ-CASE-010",
+      "name": "承办部门非空",
+      "table": "complaint_case",
+      "field": "handling_dept",
+      "dimension": "完整性",
+      "severity": "中",
+      "type": "not_null",
+      "tolerance": 0.01,
+      "owner": "市场服务部企业服务科",
+      "sla_days": 7,
+      "standard_ref": "GOV-CASE-006",
+      "remediation": "按诉求类型自动分派规则补全；无法分派的转总值班室。"
+    },
+    {
+      "id": "DQ-CASE-011",
+      "name": "提交时间非空",
+      "table": "complaint_case",
+      "field": "submit_time",
+      "dimension": "完整性",
+      "severity": "高",
+      "type": "not_null",
+      "tolerance": 0.002,
+      "owner": "市场服务部企业服务科",
+      "sla_days": 3,
+      "standard_ref": "GOV-CASE-004",
+      "remediation": "从热线平台抽取日志补录。"
+    },
+    {
+      "id": "DQ-CASE-012",
+      "name": "提交时间格式合法",
+      "table": "complaint_case",
+      "field": "submit_time",
+      "dimension": "有效性",
+      "severity": "中",
+      "type": "date_valid",
+      "tolerance": 0.005,
+      "owner": "市场服务部企业服务科",
+      "sla_days": 7,
+      "standard_ref": "GOV-CASE-004",
+      "remediation": "统一解析为 YYYY-MM-DD HH:MM:SS。"
     }
   ]
 }

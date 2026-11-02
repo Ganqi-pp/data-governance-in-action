@@ -1,0 +1,62 @@
+﻿表,中文名,分层,字段,中文名,类型,长度,可空,分级,分类,个人信息,空值率,基数,标准编号,说明
+ods_market_register,市场主体登记信息（贴源层）,ODS,reg_id,登记流水号,string,32,否,L2,C01,否,0.0,1240,GOV-REG-001,登记系统内唯一流水号，主键。
+ods_market_register,市场主体登记信息（贴源层）,ODS,unified_social_credit_code,统一社会信用代码,string,18,否,L1,C01,否,0.0048,1195,GOV-REG-002,按 GB 32100-2015 编制，18 位，含校验位。
+ods_market_register,市场主体登记信息（贴源层）,ODS,company_name,企业名称,string,100,否,L1,C01,否,0.0,1200,GOV-REG-003,登记机关核准的企业全称，不含首尾空白。
+ods_market_register,市场主体登记信息（贴源层）,ODS,reg_date,注册日期,date,,否,L1,C01,否,0.0,1118,GOV-REG-004,营业执照载明的成立日期，格式 YYYY-MM-DD。
+ods_market_register,市场主体登记信息（贴源层）,ODS,reg_capital_wan,注册资本（万元）,number,18,是,L1,C01,否,0.0,1162,GOV-REG-005,注册资本，单位万元，保留两位小数。
+ods_market_register,市场主体登记信息（贴源层）,ODS,industry_code,行业代码,string,4,是,L1,C01,否,0.0,37,GOV-REG-006,GB/T 4754-2017 行业代码，门类字母 + 两位大类数字。
+ods_market_register,市场主体登记信息（贴源层）,ODS,district_code,行政区划代码,string,6,否,L1,C01,否,0.0,4,GOV-REG-007,登记机关所在行政区划，6 位数字代码。
+ods_market_register,市场主体登记信息（贴源层）,ODS,address,住所,string,200,否,L2,C01,否,0.0097,1158,GOV-REG-008,营业执照载明的住所，精确到门牌号。
+ods_market_register,市场主体登记信息（贴源层）,ODS,legal_person,法定代表人,string,50,否,L3,C02,是,0.0161,984,GOV-REG-009,法定代表人姓名。
+ods_market_register,市场主体登记信息（贴源层）,ODS,contact_phone,联系电话,string,20,是,L3,C02,是,0.0524,1136,GOV-REG-010,11 位手机号，存储时去除分隔符与国家码。
+ods_market_register,市场主体登记信息（贴源层）,ODS,contact_email,电子邮箱,string,100,是,L3,C02,是,0.0,1179,GOV-REG-011,企业联系人邮箱，小写存储。
+ods_market_register,市场主体登记信息（贴源层）,ODS,status,经营状态,string,10,否,L1,C01,否,0.0,11,GOV-REG-012,登记状态，统一使用五种标准码值。
+ods_market_register,市场主体登记信息（贴源层）,ODS,update_time,更新时间,datetime,,否,L2,C05,否,0.0065,372,GOV-REG-013,源系统最后一次更新时间，用于及时性监控。
+ods_credit_rating,市场主体信用评价（贴源层）,ODS,rating_id,评价记录号,string,32,否,L2,C03,否,0.0,950,GOV-CRE-001,信用评价记录唯一标识。
+ods_credit_rating,市场主体信用评价（贴源层）,ODS,unified_social_credit_code,统一社会信用代码,string,18,否,L2,C03,否,0.0,923,GOV-CRE-002,关联市场主体的统一社会信用代码。
+ods_credit_rating,市场主体信用评价（贴源层）,ODS,credit_score,信用评分,integer,,是,L2,C03,否,0.0,49,GOV-CRE-003,百分制信用评分。
+ods_credit_rating,市场主体信用评价（贴源层）,ODS,credit_level,信用等级,string,1,是,L2,C03,否,0.0,8,GOV-CRE-004,A/B/C/D 四级，与评分区间保持一致。
+ods_credit_rating,市场主体信用评价（贴源层）,ODS,rating_date,评级日期,date,,否,L2,C03,否,0.0,317,GOV-CRE-005,本次信用评价出具日期。
+ods_credit_rating,市场主体信用评价（贴源层）,ODS,rating_agency,评级机构,string,100,是,L2,C03,否,0.0189,5,GOV-CRE-006,出具信用评价的机构名称。
+ods_credit_rating,市场主体信用评价（贴源层）,ODS,update_time,更新时间,datetime,,否,L2,C03,否,0.0,353,GOV-CRE-007,评价结果归集时间。
+ods_complaint_case,企业诉求工单（贴源层）,ODS,case_id,工单编号,string,32,否,L2,C04,否,0.0,1500,GOV-CASE-001,诉求工单唯一编号。
+ods_complaint_case,企业诉求工单（贴源层）,ODS,unified_social_credit_code,统一社会信用代码,string,18,是,L2,C04,否,0.0,863,GOV-CASE-002,诉求关联的市场主体，无法关联时为空。
+ods_complaint_case,企业诉求工单（贴源层）,ODS,case_type,诉求类型,string,20,否,L2,C04,否,0.0,10,GOV-CASE-003,按业务条线划分的诉求类型。
+ods_complaint_case,企业诉求工单（贴源层）,ODS,submit_time,提交时间,datetime,,否,L2,C04,否,0.0,582,GOV-CASE-004,企业提交诉求的时间。
+ods_complaint_case,企业诉求工单（贴源层）,ODS,content,诉求内容,string,2000,否,L3,C04,是,0.008,78,GOV-CASE-005,诉求正文，可能包含联系人、电话等个人信息，使用前须脱敏。
+ods_complaint_case,企业诉求工单（贴源层）,ODS,handling_dept,承办部门,string,50,否,L2,C04,否,0.0,6,GOV-CASE-006,工单承办部门。
+ods_complaint_case,企业诉求工单（贴源层）,ODS,status,工单状态,string,10,否,L2,C04,否,0.0,9,GOV-CASE-007,工单流转状态。
+ods_complaint_case,企业诉求工单（贴源层）,ODS,satisfaction,满意度,integer,,是,L2,C04,否,0.246,9,GOV-CASE-008,1-5 分满意度，未回访时为空。
+ods_complaint_case,企业诉求工单（贴源层）,ODS,close_time,办结时间,datetime,,是,L2,C04,否,0.2433,541,GOV-CASE-009,工单办结或回访完成时间，已办结工单必填。
+dwd_market_register,市场主体登记信息（明细层）,DWD,reg_id,登记流水号,string,32,否,L2,C01,否,0.0,1139,GOV-REG-001,登记系统内唯一流水号，主键。
+dwd_market_register,市场主体登记信息（明细层）,DWD,unified_social_credit_code,统一社会信用代码,string,18,否,L1,C01,否,0.0,1139,GOV-REG-002,按 GB 32100-2015 编制，18 位，含校验位。
+dwd_market_register,市场主体登记信息（明细层）,DWD,company_name,企业名称,string,100,否,L1,C01,否,0.0,1139,GOV-REG-003,登记机关核准的企业全称，不含首尾空白。
+dwd_market_register,市场主体登记信息（明细层）,DWD,reg_date,注册日期,date,,否,L1,C01,否,0.0,1060,GOV-REG-004,营业执照载明的成立日期，格式 YYYY-MM-DD。
+dwd_market_register,市场主体登记信息（明细层）,DWD,reg_capital_wan,注册资本（万元）,number,18,是,L1,C01,否,0.0053,1103,GOV-REG-005,注册资本，单位万元，保留两位小数。
+dwd_market_register,市场主体登记信息（明细层）,DWD,industry_code,行业代码,string,4,是,L1,C01,否,0.0097,22,GOV-REG-006,GB/T 4754-2017 行业代码，门类字母 + 两位大类数字。
+dwd_market_register,市场主体登记信息（明细层）,DWD,district_code,行政区划代码,string,6,否,L1,C01,否,0.0,4,GOV-REG-007,登记机关所在行政区划，6 位数字代码。
+dwd_market_register,市场主体登记信息（明细层）,DWD,address,住所,string,200,否,L2,C01,否,0.0105,1100,GOV-REG-008,营业执照载明的住所，精确到门牌号。
+dwd_market_register,市场主体登记信息（明细层）,DWD,legal_person,法定代表人,string,50,否,L3,C02,是,0.0176,942,GOV-REG-009,法定代表人姓名。
+dwd_market_register,市场主体登记信息（明细层）,DWD,contact_phone,联系电话,string,20,是,L3,C02,是,0.0571,1074,GOV-REG-010,11 位手机号，存储时去除分隔符与国家码。
+dwd_market_register,市场主体登记信息（明细层）,DWD,contact_email,电子邮箱,string,100,是,L3,C02,是,0.0219,1114,GOV-REG-011,企业联系人邮箱，小写存储。
+dwd_market_register,市场主体登记信息（明细层）,DWD,status,经营状态,string,10,否,L1,C01,否,0.0,6,GOV-REG-012,登记状态，统一使用五种标准码值。
+dwd_market_register,市场主体登记信息（明细层）,DWD,update_time,更新时间,datetime,,否,L2,C05,否,0.007,368,GOV-REG-013,源系统最后一次更新时间，用于及时性监控。
+dwd_market_register,市场主体登记信息（明细层）,DWD,dq_flags,数据质量标记,string,,是,L2,C05,否,0.7937,11,,记录本条数据的清洗与修复动作。
+dwd_credit_rating,市场主体信用评价（明细层）,DWD,rating_id,评价记录号,string,32,否,L2,C03,否,0.0,901,GOV-CRE-001,信用评价记录唯一标识。
+dwd_credit_rating,市场主体信用评价（明细层）,DWD,unified_social_credit_code,统一社会信用代码,string,18,否,L2,C03,否,0.0,874,GOV-CRE-002,关联市场主体的统一社会信用代码。
+dwd_credit_rating,市场主体信用评价（明细层）,DWD,credit_score,信用评分,integer,,是,L2,C03,否,0.0089,47,GOV-CRE-003,百分制信用评分。
+dwd_credit_rating,市场主体信用评价（明细层）,DWD,credit_level,信用等级,string,1,是,L2,C03,否,0.0,4,GOV-CRE-004,A/B/C/D 四级，与评分区间保持一致。
+dwd_credit_rating,市场主体信用评价（明细层）,DWD,rating_date,评级日期,date,,否,L2,C03,否,0.0,310,GOV-CRE-005,本次信用评价出具日期。
+dwd_credit_rating,市场主体信用评价（明细层）,DWD,rating_agency,评级机构,string,100,是,L2,C03,否,0.02,4,GOV-CRE-006,出具信用评价的机构名称。
+dwd_credit_rating,市场主体信用评价（明细层）,DWD,update_time,更新时间,datetime,,否,L2,C03,否,0.0,352,GOV-CRE-007,评价结果归集时间。
+dwd_credit_rating,市场主体信用评价（明细层）,DWD,dq_flags,数据质量标记,string,,是,L2,C05,否,0.9512,3,,记录本条数据的清洗与修复动作。
+dwd_complaint_case,企业诉求工单（明细层）,DWD,case_id,工单编号,string,32,否,L2,C04,否,0.0,1443,GOV-CASE-001,诉求工单唯一编号。
+dwd_complaint_case,企业诉求工单（明细层）,DWD,unified_social_credit_code,统一社会信用代码,string,18,是,L2,C04,否,0.0,817,GOV-CASE-002,诉求关联的市场主体，无法关联时为空。
+dwd_complaint_case,企业诉求工单（明细层）,DWD,case_type,诉求类型,string,20,否,L2,C04,否,0.0,7,GOV-CASE-003,按业务条线划分的诉求类型。
+dwd_complaint_case,企业诉求工单（明细层）,DWD,submit_time,提交时间,datetime,,否,L2,C04,否,0.0,579,GOV-CASE-004,企业提交诉求的时间。
+dwd_complaint_case,企业诉求工单（明细层）,DWD,content,诉求内容,string,2000,否,L3,C04,是,0.0083,77,GOV-CASE-005,诉求正文，可能包含联系人、电话等个人信息，使用前须脱敏。
+dwd_complaint_case,企业诉求工单（明细层）,DWD,handling_dept,承办部门,string,50,否,L2,C04,否,0.0,6,GOV-CASE-006,工单承办部门。
+dwd_complaint_case,企业诉求工单（明细层）,DWD,status,工单状态,string,10,否,L2,C04,否,0.0,5,GOV-CASE-007,工单流转状态。
+dwd_complaint_case,企业诉求工单（明细层）,DWD,satisfaction,满意度,integer,,是,L2,C04,否,0.2606,5,GOV-CASE-008,1-5 分满意度，未回访时为空。
+dwd_complaint_case,企业诉求工单（明细层）,DWD,close_time,办结时间,datetime,,是,L2,C04,否,0.2516,527,GOV-CASE-009,工单办结或回访完成时间，已办结工单必填。
+dwd_complaint_case,企业诉求工单（明细层）,DWD,dq_flags,数据质量标记,string,,是,L2,C05,否,0.9459,7,,记录本条数据的清洗与修复动作。

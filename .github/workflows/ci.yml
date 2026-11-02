@@ -1,28 +1,56 @@
-name: governance-pipeline
+name: CI
 
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
-  run:
+  governance:
+    name: Python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.12"]
     steps:
       - uses: actions/checkout@v4
 
-      - uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: ${{ matrix.python-version }}
 
-      - name: 运行治理流水线
+      - name: Run governance pipeline
         run: python run_demo.py
 
-      - name: 单元测试
+      - name: Run tests
         run: python -m unittest discover -s tests -v
 
-      - name: 上传治理产物
+      - name: Acceptance checks
+        run: python run_demo.py verify
+
+      - name: Show key results
+        run: |
+          python - <<'PY'
+          import json
+          q = json.load(open("reports/quality_result.json", encoding="utf-8"))
+          print("health:", q["before"]["summary"]["overall_health"], "->", q["after"]["summary"]["overall_health"])
+          print("recall:", q["effectiveness"]["summary"]["recall"])
+          print("closure:", q["closure"])
+          PY
+
+      - name: Upload reports
+        if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: governance-reports
-          path: reports/
+          name: governance-reports-py${{ matrix.python-version }}
+          path: |
+            reports/
+            data/raw/
+            data/serving/
+          retention-days: 14

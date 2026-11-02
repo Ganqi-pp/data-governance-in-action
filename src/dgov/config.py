@@ -1,24 +1,27 @@
-# -*- coding: utf-8 -*-
-"""全局配置与路径。"""
+"""配置装载与 JSON 读写。"""
 from __future__ import annotations
 
 import json
 from pathlib import Path
+from typing import Any
 
-ROOT = Path(__file__).resolve().parents[2]
-CONFIG_DIR = ROOT / "config"
-SQL_DIR = ROOT / "sql"
-DATA_DIR = ROOT / "data"
-REPORT_DIR = ROOT / "reports"
-DOCS_DIR = ROOT / "docs"
-
-DB_PATH = DATA_DIR / "governance.db"
-
-SEVERITY_WEIGHT = {"high": 3, "medium": 2, "low": 1}
-SEVERITY_LABEL = {"high": "高", "medium": "中", "low": "低"}
-LAYER_LABEL = {"ods": "贴源层", "dwd": "明细层", "dws": "汇总层"}
+from .paths import CONFIG_DIR
 
 
-def load_json(name: str) -> dict:
-    with open(CONFIG_DIR / name, "r", encoding="utf-8") as fh:
-        return json.load(fh)
+def load_config(name: str) -> dict[str, Any]:
+    path = CONFIG_DIR / name
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def load_json(path: Path) -> Any:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def write_json(path: Path, data: Any) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def write_text(path: Path, text: str) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(text, encoding="utf-8")

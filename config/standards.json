@@ -1,19 +1,298 @@
 {
+  "schema_version": "1.0",
+  "dataset": "雄安新区市场主体服务数据",
+  "domain": "市场服务",
+  "owner": "雄安新区市场服务部",
   "version": "1.0.0",
+  "effective_date": "2026-10-01",
+  "description": "面向市场主体登记、信用评价、企业诉求三类数据的字段标准与数据字典，作为建表、落标检查和资产登记的权威依据。",
   "naming": {
-    "table": "^(ods|dwd|dws|dim|ads)_[a-z][a-z0-9_]*$",
-    "column": "^[a-z][a-z0-9_]*$"
+    "table_pattern": "^[a-z][a-z0-9_]{2,40}$",
+    "field_pattern": "^[a-z][a-z0-9_]{1,40}$",
+    "forbidden_prefixes": ["tmp_", "test_", "bak_"],
+    "layer_prefixes": ["ods_", "dwd_", "dws_", "dim_"]
   },
-  "types": ["TEXT", "INTEGER", "REAL", "NUMERIC", "BLOB"],
-  "codes": {
-    "order_status": ["待支付", "已支付", "已发货", "已完成", "已取消", "退款中", "已退款"],
-    "channel_code": ["APP", "WEB", "MINI", "TMALL", "JD", "OFFLINE"],
-    "member_level": ["普通", "银卡", "金卡", "黑卡"],
-    "product_status": ["在售", "下架", "预售"]
-  },
-  "layers": {
-    "ods": "贴源层：与源系统保持同构，只做字段映射，不做业务加工",
-    "dwd": "明细层：完成清洗、标准化、去重与一致性校验",
-    "dws": "汇总层：面向主题的轻度聚合，统一指标口径"
+  "tables": {
+    "market_register": {
+      "name_zh": "市场主体登记信息",
+      "layer": "ODS",
+      "source_system": "市场监督管理局登记系统",
+      "owner": "市场服务部登记注册科",
+      "steward": "数据管理岗",
+      "description": "雄安新区市场主体设立、变更、注销等登记信息，是市场主体服务的主数据。",
+      "update_frequency": "每日",
+      "retention": "永久",
+      "primary_key": "reg_id",
+      "business_key": "unified_social_credit_code",
+      "fields": {
+        "reg_id": {
+          "name_zh": "登记流水号",
+          "type": "string",
+          "length": 32,
+          "nullable": false,
+          "standard_no": "GOV-REG-001",
+          "description": "登记系统内唯一流水号，主键。"
+        },
+        "unified_social_credit_code": {
+          "name_zh": "统一社会信用代码",
+          "type": "string",
+          "length": 18,
+          "nullable": false,
+          "standard_no": "GOV-REG-002",
+          "pattern": "^[0-9A-HJ-NPQRTUWXY]{18}$",
+          "unique": true,
+          "description": "按 GB 32100-2015 编制，18 位，含校验位。"
+        },
+        "company_name": {
+          "name_zh": "企业名称",
+          "type": "string",
+          "length": 100,
+          "nullable": false,
+          "standard_no": "GOV-REG-003",
+          "description": "登记机关核准的企业全称，不含首尾空白。"
+        },
+        "reg_date": {
+          "name_zh": "注册日期",
+          "type": "date",
+          "nullable": false,
+          "standard_no": "GOV-REG-004",
+          "description": "营业执照载明的成立日期，格式 YYYY-MM-DD。"
+        },
+        "reg_capital_wan": {
+          "name_zh": "注册资本（万元）",
+          "type": "number",
+          "precision": 18,
+          "scale": 2,
+          "nullable": true,
+          "standard_no": "GOV-REG-005",
+          "min": 0,
+          "description": "注册资本，单位万元，保留两位小数。"
+        },
+        "industry_code": {
+          "name_zh": "行业代码",
+          "type": "string",
+          "length": 4,
+          "nullable": true,
+          "standard_no": "GOV-REG-006",
+          "ref": "industry_codes",
+          "description": "GB/T 4754-2017 行业代码，门类字母 + 两位大类数字。"
+        },
+        "district_code": {
+          "name_zh": "行政区划代码",
+          "type": "string",
+          "length": 6,
+          "nullable": false,
+          "standard_no": "GOV-REG-007",
+          "ref": "administrative_divisions",
+          "description": "登记机关所在行政区划，6 位数字代码。"
+        },
+        "address": {
+          "name_zh": "住所",
+          "type": "string",
+          "length": 200,
+          "nullable": false,
+          "standard_no": "GOV-REG-008",
+          "description": "营业执照载明的住所，精确到门牌号。"
+        },
+        "legal_person": {
+          "name_zh": "法定代表人",
+          "type": "string",
+          "length": 50,
+          "nullable": false,
+          "standard_no": "GOV-REG-009",
+          "description": "法定代表人姓名。"
+        },
+        "contact_phone": {
+          "name_zh": "联系电话",
+          "type": "string",
+          "length": 20,
+          "nullable": true,
+          "standard_no": "GOV-REG-010",
+          "pattern": "^1[3-9][0-9]{9}$",
+          "description": "11 位手机号，存储时去除分隔符与国家码。"
+        },
+        "contact_email": {
+          "name_zh": "电子邮箱",
+          "type": "string",
+          "length": 100,
+          "nullable": true,
+          "standard_no": "GOV-REG-011",
+          "description": "企业联系人邮箱，小写存储。"
+        },
+        "status": {
+          "name_zh": "经营状态",
+          "type": "string",
+          "length": 10,
+          "nullable": false,
+          "standard_no": "GOV-REG-012",
+          "enum": ["存续", "在业", "注销", "吊销", "迁出"],
+          "description": "登记状态，统一使用五种标准码值。"
+        },
+        "update_time": {
+          "name_zh": "更新时间",
+          "type": "datetime",
+          "nullable": false,
+          "standard_no": "GOV-REG-013",
+          "description": "源系统最后一次更新时间，用于及时性监控。"
+        }
+      }
+    },
+    "credit_rating": {
+      "name_zh": "市场主体信用评价",
+      "layer": "ODS",
+      "source_system": "公共信用信息平台",
+      "owner": "市场服务部信用管理科",
+      "steward": "数据管理岗",
+      "description": "按年度/批次归集的市场主体信用评分与信用等级。",
+      "update_frequency": "每月",
+      "retention": "10 年",
+      "primary_key": "rating_id",
+      "business_key": "rating_id",
+      "fields": {
+        "rating_id": {
+          "name_zh": "评价记录号",
+          "type": "string",
+          "length": 32,
+          "nullable": false,
+          "standard_no": "GOV-CRE-001",
+          "description": "信用评价记录唯一标识。"
+        },
+        "unified_social_credit_code": {
+          "name_zh": "统一社会信用代码",
+          "type": "string",
+          "length": 18,
+          "nullable": false,
+          "standard_no": "GOV-CRE-002",
+          "description": "关联市场主体的统一社会信用代码。"
+        },
+        "credit_score": {
+          "name_zh": "信用评分",
+          "type": "integer",
+          "nullable": true,
+          "standard_no": "GOV-CRE-003",
+          "min": 0,
+          "max": 100,
+          "description": "百分制信用评分。"
+        },
+        "credit_level": {
+          "name_zh": "信用等级",
+          "type": "string",
+          "length": 1,
+          "nullable": true,
+          "standard_no": "GOV-CRE-004",
+          "enum": ["A", "B", "C", "D"],
+          "description": "A/B/C/D 四级，与评分区间保持一致。"
+        },
+        "rating_date": {
+          "name_zh": "评级日期",
+          "type": "date",
+          "nullable": false,
+          "standard_no": "GOV-CRE-005",
+          "description": "本次信用评价出具日期。"
+        },
+        "rating_agency": {
+          "name_zh": "评级机构",
+          "type": "string",
+          "length": 100,
+          "nullable": true,
+          "standard_no": "GOV-CRE-006",
+          "description": "出具信用评价的机构名称。"
+        },
+        "update_time": {
+          "name_zh": "更新时间",
+          "type": "datetime",
+          "nullable": false,
+          "standard_no": "GOV-CRE-007",
+          "description": "评价结果归集时间。"
+        }
+      }
+    },
+    "complaint_case": {
+      "name_zh": "企业诉求工单",
+      "layer": "ODS",
+      "source_system": "12345 政务服务便民热线",
+      "owner": "市场服务部企业服务科",
+      "steward": "数据管理岗",
+      "description": "企业通过 12345 热线、线上平台提交的咨询、投诉、建议等诉求工单。",
+      "update_frequency": "实时",
+      "retention": "5 年",
+      "primary_key": "case_id",
+      "business_key": "case_id",
+      "fields": {
+        "case_id": {
+          "name_zh": "工单编号",
+          "type": "string",
+          "length": 32,
+          "nullable": false,
+          "standard_no": "GOV-CASE-001",
+          "description": "诉求工单唯一编号。"
+        },
+        "unified_social_credit_code": {
+          "name_zh": "统一社会信用代码",
+          "type": "string",
+          "length": 18,
+          "nullable": true,
+          "standard_no": "GOV-CASE-002",
+          "description": "诉求关联的市场主体，无法关联时为空。"
+        },
+        "case_type": {
+          "name_zh": "诉求类型",
+          "type": "string",
+          "length": 20,
+          "nullable": false,
+          "standard_no": "GOV-CASE-003",
+          "enum": ["登记注册", "税务办理", "社保缴纳", "政策咨询", "融资服务", "市场监管", "其他"],
+          "description": "按业务条线划分的诉求类型。"
+        },
+        "submit_time": {
+          "name_zh": "提交时间",
+          "type": "datetime",
+          "nullable": false,
+          "standard_no": "GOV-CASE-004",
+          "description": "企业提交诉求的时间。"
+        },
+        "content": {
+          "name_zh": "诉求内容",
+          "type": "string",
+          "length": 2000,
+          "nullable": false,
+          "standard_no": "GOV-CASE-005",
+          "description": "诉求正文，可能包含联系人、电话等个人信息，使用前须脱敏。"
+        },
+        "handling_dept": {
+          "name_zh": "承办部门",
+          "type": "string",
+          "length": 50,
+          "nullable": false,
+          "standard_no": "GOV-CASE-006",
+          "description": "工单承办部门。"
+        },
+        "status": {
+          "name_zh": "工单状态",
+          "type": "string",
+          "length": 10,
+          "nullable": false,
+          "standard_no": "GOV-CASE-007",
+          "enum": ["待受理", "办理中", "已办结", "已回访"],
+          "description": "工单流转状态。"
+        },
+        "satisfaction": {
+          "name_zh": "满意度",
+          "type": "integer",
+          "nullable": true,
+          "standard_no": "GOV-CASE-008",
+          "min": 1,
+          "max": 5,
+          "description": "1-5 分满意度，未回访时为空。"
+        },
+        "close_time": {
+          "name_zh": "办结时间",
+          "type": "datetime",
+          "nullable": true,
+          "standard_no": "GOV-CASE-009",
+          "description": "工单办结或回访完成时间，已办结工单必填。"
+        }
+      }
+    }
   }
 }

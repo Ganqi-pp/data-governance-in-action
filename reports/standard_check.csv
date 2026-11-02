@@ -1,0 +1,47 @@
+﻿检查编号,表,对象,检查项,状态,严重度,详情,建议
+STD-001,ods_market_register,ods_market_register,标准表已落地,pass,高,"行数 1,240",-
+STD-002,ods_market_register,ods_market_register,标准字段齐全,pass,高,13 个标准字段全部存在,补齐缺失字段并重跑落标检查
+STD-003,ods_market_register,ods_market_register,无未登记字段,pass,中,所有物理字段均已在标准中登记,在标准中登记字段或下线冗余字段
+STD-004,ods_market_register,ods_market_register,字段命名符合规范,pass,中,"正则 ^[a-z][a-z0-9_]{1,40}$ 全部通过",按 snake_case 重命名并同步上下游
+STD-005,ods_market_register,ods_market_register,表命名符合规范,pass,低,ods_market_register,-
+STD-006,ods_market_register,ods_market_register,字段元数据完整,pass,中,中文名/类型/说明/标准编号齐全,补齐字段元数据
+STD-007,ods_market_register,ods_market_register,表级管理元数据完整,pass,低,Owner/Steward/更新频率/说明齐全,补齐管理元数据
+STD-008,ods_market_register,reg_id,主键已声明且存在,pass,高,主键 reg_id,声明主键并保证唯一
+STD-009,ods_market_register,industry_code,码表引用可解析,pass,中,industry_code → ref_industry_codes 可访问,补齐码表或修正引用
+STD-009,ods_market_register,district_code,码表引用可解析,pass,中,district_code → ref_administrative_divisions 可访问,补齐码表或修正引用
+STD-010,ods_market_register,reg_id,实际长度不超过标准长度,pass,低,最长 14 / 标准 32,截断或扩展标准长度并评审
+STD-010,ods_market_register,unified_social_credit_code,实际长度不超过标准长度,pass,低,最长 18 / 标准 18,截断或扩展标准长度并评审
+STD-010,ods_market_register,company_name,实际长度不超过标准长度,pass,低,最长 13 / 标准 100,截断或扩展标准长度并评审
+STD-010,ods_market_register,industry_code,实际长度不超过标准长度,fail,低,最长 16 / 标准 4,截断或扩展标准长度并评审
+STD-010,ods_market_register,district_code,实际长度不超过标准长度,pass,低,最长 6 / 标准 6,截断或扩展标准长度并评审
+STD-010,ods_market_register,address,实际长度不超过标准长度,pass,低,最长 18 / 标准 200,截断或扩展标准长度并评审
+STD-010,ods_market_register,legal_person,实际长度不超过标准长度,pass,低,最长 3 / 标准 50,截断或扩展标准长度并评审
+STD-010,ods_market_register,contact_phone,实际长度不超过标准长度,pass,低,最长 14 / 标准 20,截断或扩展标准长度并评审
+STD-010,ods_market_register,contact_email,实际长度不超过标准长度,pass,低,最长 23 / 标准 100,截断或扩展标准长度并评审
+STD-010,ods_market_register,status,实际长度不超过标准长度,pass,低,最长 5 / 标准 10,截断或扩展标准长度并评审
+STD-001,ods_credit_rating,ods_credit_rating,标准表已落地,pass,高,行数 950,-
+STD-002,ods_credit_rating,ods_credit_rating,标准字段齐全,pass,高,7 个标准字段全部存在,补齐缺失字段并重跑落标检查
+STD-003,ods_credit_rating,ods_credit_rating,无未登记字段,pass,中,所有物理字段均已在标准中登记,在标准中登记字段或下线冗余字段
+STD-004,ods_credit_rating,ods_credit_rating,字段命名符合规范,pass,中,"正则 ^[a-z][a-z0-9_]{1,40}$ 全部通过",按 snake_case 重命名并同步上下游
+STD-005,ods_credit_rating,ods_credit_rating,表命名符合规范,pass,低,ods_credit_rating,-
+STD-006,ods_credit_rating,ods_credit_rating,字段元数据完整,pass,中,中文名/类型/说明/标准编号齐全,补齐字段元数据
+STD-007,ods_credit_rating,ods_credit_rating,表级管理元数据完整,pass,低,Owner/Steward/更新频率/说明齐全,补齐管理元数据
+STD-008,ods_credit_rating,rating_id,主键已声明且存在,pass,高,主键 rating_id,声明主键并保证唯一
+STD-010,ods_credit_rating,rating_id,实际长度不超过标准长度,pass,低,最长 12 / 标准 32,截断或扩展标准长度并评审
+STD-010,ods_credit_rating,unified_social_credit_code,实际长度不超过标准长度,pass,低,最长 18 / 标准 18,截断或扩展标准长度并评审
+STD-010,ods_credit_rating,credit_level,实际长度不超过标准长度,fail,低,最长 4 / 标准 1,截断或扩展标准长度并评审
+STD-010,ods_credit_rating,rating_agency,实际长度不超过标准长度,pass,低,最长 10 / 标准 100,截断或扩展标准长度并评审
+STD-001,ods_complaint_case,ods_complaint_case,标准表已落地,pass,高,"行数 1,500",-
+STD-002,ods_complaint_case,ods_complaint_case,标准字段齐全,pass,高,9 个标准字段全部存在,补齐缺失字段并重跑落标检查
+STD-003,ods_complaint_case,ods_complaint_case,无未登记字段,pass,中,所有物理字段均已在标准中登记,在标准中登记字段或下线冗余字段
+STD-004,ods_complaint_case,ods_complaint_case,字段命名符合规范,pass,中,"正则 ^[a-z][a-z0-9_]{1,40}$ 全部通过",按 snake_case 重命名并同步上下游
+STD-005,ods_complaint_case,ods_complaint_case,表命名符合规范,pass,低,ods_complaint_case,-
+STD-006,ods_complaint_case,ods_complaint_case,字段元数据完整,pass,中,中文名/类型/说明/标准编号齐全,补齐字段元数据
+STD-007,ods_complaint_case,ods_complaint_case,表级管理元数据完整,pass,低,Owner/Steward/更新频率/说明齐全,补齐管理元数据
+STD-008,ods_complaint_case,case_id,主键已声明且存在,pass,高,主键 case_id,声明主键并保证唯一
+STD-010,ods_complaint_case,case_id,实际长度不超过标准长度,pass,低,最长 12 / 标准 32,截断或扩展标准长度并评审
+STD-010,ods_complaint_case,unified_social_credit_code,实际长度不超过标准长度,pass,低,最长 18 / 标准 18,截断或扩展标准长度并评审
+STD-010,ods_complaint_case,case_type,实际长度不超过标准长度,pass,低,最长 4 / 标准 20,截断或扩展标准长度并评审
+STD-010,ods_complaint_case,content,实际长度不超过标准长度,pass,低,最长 63 / 标准 2000,截断或扩展标准长度并评审
+STD-010,ods_complaint_case,handling_dept,实际长度不超过标准长度,pass,低,最长 5 / 标准 50,截断或扩展标准长度并评审
+STD-010,ods_complaint_case,status,实际长度不超过标准长度,pass,低,最长 3 / 标准 10,截断或扩展标准长度并评审

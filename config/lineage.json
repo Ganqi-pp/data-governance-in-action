@@ -1,0 +1,81 @@
+{
+  "schema_version": "1.0",
+  "layers": [
+    {"id": "source", "name": "源系统层"},
+    {"id": "ods", "name": "贴源层 ODS"},
+    {"id": "dwd", "name": "明细层 DWD"},
+    {"id": "dws", "name": "指标层 DWS"},
+    {"id": "serving", "name": "共享与服务层"},
+    {"id": "governance", "name": "治理与运维"}
+  ],
+  "nodes": [
+    {"id": "sys_reg", "name": "市场监督管理局登记系统", "type": "system", "layer": "source", "owner": "登记注册科"},
+    {"id": "sys_credit", "name": "公共信用信息平台", "type": "system", "layer": "source", "owner": "信用管理科"},
+    {"id": "sys_hotline", "name": "12345 政务服务便民热线", "type": "system", "layer": "source", "owner": "企业服务科"},
+    {"id": "sys_code_division", "name": "行政区划代码表", "type": "reference", "layer": "source", "owner": "数据管理岗"},
+    {"id": "sys_code_industry", "name": "行业代码表（GB/T 4754）", "type": "reference", "layer": "source", "owner": "数据管理岗"},
+
+    {"id": "ods_market_register", "name": "ods_market_register", "type": "table", "layer": "ods", "table": "ods_market_register", "owner": "数据管理岗"},
+    {"id": "ods_credit_rating", "name": "ods_credit_rating", "type": "table", "layer": "ods", "table": "ods_credit_rating", "owner": "数据管理岗"},
+    {"id": "ods_complaint_case", "name": "ods_complaint_case", "type": "table", "layer": "ods", "table": "ods_complaint_case", "owner": "数据管理岗"},
+
+    {"id": "dwd_market_register", "name": "dwd_market_register", "type": "table", "layer": "dwd", "table": "dwd_market_register", "owner": "数据管理岗"},
+    {"id": "dwd_credit_rating", "name": "dwd_credit_rating", "type": "table", "layer": "dwd", "table": "dwd_credit_rating", "owner": "数据管理岗"},
+    {"id": "dwd_complaint_case", "name": "dwd_complaint_case", "type": "table", "layer": "dwd", "table": "dwd_complaint_case", "owner": "数据管理岗"},
+
+    {"id": "metric_market_total", "name": "市场主体总数", "type": "metric", "layer": "dws", "owner": "市场服务部"},
+    {"id": "metric_market_active", "name": "市场主体活跃率", "type": "metric", "layer": "dws", "owner": "市场服务部"},
+    {"id": "metric_credit_a", "name": "A 级信用企业占比", "type": "metric", "layer": "dws", "owner": "信用管理科"},
+    {"id": "metric_case_close", "name": "诉求办结率", "type": "metric", "layer": "dws", "owner": "企业服务科"},
+    {"id": "metric_satisfaction", "name": "平均满意度", "type": "metric", "layer": "dws", "owner": "企业服务科"},
+
+    {"id": "share_market_register", "name": "市场主体共享接口（脱敏）", "type": "api", "layer": "serving", "owner": "数据管理岗"},
+    {"id": "share_complaint_case", "name": "企业诉求共享接口（脱敏）", "type": "api", "layer": "serving", "owner": "数据管理岗"},
+    {"id": "report_dashboard", "name": "治理驾驶舱", "type": "report", "layer": "serving", "owner": "数据管理岗"},
+    {"id": "report_quality", "name": "数据质量报告", "type": "report", "layer": "serving", "owner": "数据管理岗"},
+    {"id": "quarantine", "name": "数据隔离区", "type": "table", "layer": "governance", "owner": "数据管理岗"}
+  ],
+  "edges": [
+    {"from": "sys_reg", "to": "ods_market_register", "label": "T+1 批量抽取"},
+    {"from": "sys_credit", "to": "ods_credit_rating", "label": "每月增量推送"},
+    {"from": "sys_hotline", "to": "ods_complaint_case", "label": "实时接口同步"},
+    {"from": "sys_code_division", "to": "ods_market_register", "label": "区划码表校验"},
+    {"from": "sys_code_industry", "to": "ods_market_register", "label": "行业码表校验"},
+
+    {"from": "ods_market_register", "to": "dwd_market_register", "label": "清洗·标准化·去重"},
+    {"from": "ods_credit_rating", "to": "dwd_credit_rating", "label": "校验·等级重算"},
+    {"from": "ods_complaint_case", "to": "dwd_complaint_case", "label": "清洗·状态归一"},
+    {"from": "ods_market_register", "to": "quarantine", "label": "信用代码失败/重复记录"},
+    {"from": "ods_credit_rating", "to": "quarantine", "label": "关联主体失败"},
+    {"from": "ods_complaint_case", "to": "quarantine", "label": "关联主体失败"},
+
+    {"from": "dwd_market_register", "to": "metric_market_total", "label": "按状态统计"},
+    {"from": "dwd_market_register", "to": "metric_market_active", "label": "存续+在业占比"},
+    {"from": "dwd_credit_rating", "to": "metric_credit_a", "label": "A 级占比"},
+    {"from": "dwd_complaint_case", "to": "metric_case_close", "label": "办结/回访占比"},
+    {"from": "dwd_complaint_case", "to": "metric_satisfaction", "label": "有效满意度均值"},
+
+    {"from": "dwd_market_register", "to": "share_market_register", "label": "字段级脱敏后共享"},
+    {"from": "dwd_complaint_case", "to": "share_complaint_case", "label": "正文内容识别与脱敏"},
+    {"from": "metric_market_active", "to": "report_dashboard", "label": "指标展示"},
+    {"from": "metric_case_close", "to": "report_dashboard", "label": "指标展示"},
+    {"from": "metric_satisfaction", "to": "report_dashboard", "label": "指标展示"},
+    {"from": "dwd_market_register", "to": "report_quality", "label": "规则校验结果"},
+    {"from": "dwd_credit_rating", "to": "report_quality", "label": "规则校验结果"},
+    {"from": "dwd_complaint_case", "to": "report_quality", "label": "规则校验结果"},
+    {"from": "quarantine", "to": "report_quality", "label": "隔离数据统计"}
+  ],
+  "field_dependencies": [
+    {"target": "metric_market_total", "fields": ["dwd_market_register.status"]},
+    {"target": "metric_market_active", "fields": ["dwd_market_register.status"]},
+    {"target": "metric_credit_a", "fields": ["dwd_credit_rating.credit_level"]},
+    {"target": "metric_case_close", "fields": ["dwd_complaint_case.status"]},
+    {"target": "metric_satisfaction", "fields": ["dwd_complaint_case.satisfaction"]},
+    {"target": "share_market_register", "fields": ["dwd_market_register.legal_person", "dwd_market_register.contact_phone", "dwd_market_register.contact_email", "dwd_market_register.address"]},
+    {"target": "share_complaint_case", "fields": ["dwd_complaint_case.content"]}
+  ],
+  "impact_examples": [
+    {"field": "contact_phone", "change": "手机号标准由 11 位调整为支持固话", "expected_impact": "市场主体共享接口、企业服务触达清单、质量规则 DQ-REG-010"},
+    {"field": "status", "change": "经营状态码表新增“歇业”", "expected_impact": "市场主体活跃率、治理驾驶舱、共享接口"}
+  ]
+}

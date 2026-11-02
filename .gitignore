@@ -1,16 +1,30 @@
 # Python
 __pycache__/
 *.py[cod]
-*.egg-info/
+*.pyo
 .venv/
 venv/
 
-# 运行时数据库（由 run_demo.py 生成）
-data/*.db
-data/*.db-journal
-data/*.db-wal
+# Local tooling / temp
+.tools/
+.tmp/
+.edge-profile/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
 
-# 临时文件
+# Runtime database (rebuild with python run_demo.py)
+data/warehouse.db
+data/warehouse.db-*
+data/warehouse.db-journal
+
+# Logs and OS files
 *.log
 .DS_Store
-docs/images/_bottom.png
+Thumbs.db
+desktop.ini
+
+# Editor
+.idea/
+.vscode/
+*.swp

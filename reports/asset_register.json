@@ -1,0 +1,514 @@
+{
+  "summary": {
+    "assets": 15,
+    "by_type": {
+      "数据表": 6,
+      "指标": 3,
+      "数据接口": 2,
+      "码表": 2,
+      "报表": 1,
+      "报告": 1
+    },
+    "registered_complete": 15,
+    "completeness": 1.0,
+    "with_owner": 15,
+    "with_quality_score": 6,
+    "level_distribution": {
+      "L3": 6,
+      "L2": 5,
+      "L1": 4
+    },
+    "total_rows": 7173,
+    "generated_at": "2026-11-02 13:00:46",
+    "findings": []
+  },
+  "assets": [
+    {
+      "id": "DA-001",
+      "node_id": "ods_market_register",
+      "name": "市场主体登记贴源表",
+      "type": "数据表",
+      "domain": "市场主体",
+      "layer": "ODS",
+      "table": "ods_market_register",
+      "owner": "市场服务部登记注册科",
+      "steward": "数据管理岗",
+      "level": "L3",
+      "sharing": "不共享",
+      "update_frequency": "每日",
+      "criticality": "核心",
+      "consumers": [
+        "数据治理平台",
+        "明细层加工任务"
+      ],
+      "description": "登记系统原始落地数据，保留缺陷与原始值，用于追溯和重跑。",
+      "registered_at": "2026-10-08",
+      "rows": 1240,
+      "quality_score": 56.05,
+      "upstream_count": 3,
+      "downstream_count": 2,
+      "upstream": [
+        "市场监督管理局登记系统",
+        "行政区划代码表",
+        "行业代码表（GB/T 4754）"
+      ],
+      "downstream": [
+        "dwd_market_register",
+        "数据隔离区"
+      ],
+      "status": "在册",
+      "missing_fields": []
+    },
+    {
+      "id": "DA-002",
+      "node_id": "ods_credit_rating",
+      "name": "信用评价贴源表",
+      "type": "数据表",
+      "domain": "信用监管",
+      "layer": "ODS",
+      "table": "ods_credit_rating",
+      "owner": "市场服务部信用管理科",
+      "steward": "数据管理岗",
+      "level": "L2",
+      "sharing": "不共享",
+      "update_frequency": "每月",
+      "criticality": "重要",
+      "consumers": [
+        "信用画像",
+        "明细层加工任务"
+      ],
+      "description": "公共信用信息平台推送的原始评价记录。",
+      "registered_at": "2026-10-08",
+      "rows": 950,
+      "quality_score": 86.95,
+      "upstream_count": 1,
+      "downstream_count": 2,
+      "upstream": [
+        "公共信用信息平台"
+      ],
+      "downstream": [
+        "dwd_credit_rating",
+        "数据隔离区"
+      ],
+      "status": "在册",
+      "missing_fields": []
+    },
+    {
+      "id": "DA-003",
+      "node_id": "ods_complaint_case",
+      "name": "企业诉求贴源表",
+      "type": "数据表",
+      "domain": "企业服务",
+      "layer": "ODS",
+      "table": "ods_complaint_case",
+      "owner": "市场服务部企业服务科",
+      "steward": "数据管理岗",
+      "level": "L3",
+      "sharing": "不共享",
+      "update_frequency": "实时",
+      "criticality": "核心",
+      "consumers": [
+        "12345 工单分析",
+        "明细层加工任务"
+      ],
+      "description": "热线工单原始数据，正文可能包含个人信息，仅限授权人员访问。",
+      "registered_at": "2026-10-08",
+      "rows": 1500,
+      "quality_score": 90.47,
+      "upstream_count": 1,
+      "downstream_count": 2,
+      "upstream": [
+        "12345 政务服务便民热线"
+      ],
+      "downstream": [
+        "dwd_complaint_case",
+        "数据隔离区"
+      ],
+      "status": "在册",
+      "missing_fields": []
+    },
+    {
+      "id": "DA-004",
+      "node_id": "dwd_market_register",
+      "name": "市场主体登记明细",
+      "type": "数据表",
+      "domain": "市场主体",
+      "layer": "DWD",
+      "table": "dwd_market_register",
+      "owner": "市场服务部登记注册科",
+      "steward": "数据管理岗",
+      "level": "L3",
+      "sharing": "有条件共享",
+      "update_frequency": "每日",
+      "criticality": "核心",
+      "consumers": [
+        "市场主体活跃率",
+        "共享接口",
+        "治理驾驶舱"
+      ],
+      "description": "完成信用代码校验、去重、码值归一后的市场主体主数据。",
+      "registered_at": "2026-10-08",
+      "rows": 1139,
+      "quality_score": 85.51,
+      "upstream_count": 1,
+      "downstream_count": 4,
+      "upstream": [
+        "ods_market_register"
+      ],
+      "downstream": [
+        "市场主体总数",
+        "市场主体活跃率",
+        "市场主体共享接口（脱敏）",
+        "数据质量报告"
+      ],
+      "status": "在册",
+      "missing_fields": []
+    },
+    {
+      "id": "DA-005",
+      "node_id": "dwd_credit_rating",
+      "name": "市场主体信用评价明细",
+      "type": "数据表",
+      "domain": "信用监管",
+      "layer": "DWD",
+      "table": "dwd_credit_rating",
+      "owner": "市场服务部信用管理科",
+      "steward": "数据管理岗",
+      "level": "L2",
+      "sharing": "有条件共享",
+      "update_frequency": "每月",
+      "criticality": "重要",
+      "consumers": [
+        "A 级信用企业占比",
+        "信用监管场景"
+      ],
+      "description": "等级重算、分数校验后的信用评价明细。",
+      "registered_at": "2026-10-08",
+      "rows": 901,
+      "quality_score": 95.23,
+      "upstream_count": 1,
+      "downstream_count": 2,
+      "upstream": [
+        "ods_credit_rating"
+      ],
+      "downstream": [
+        "A 级信用企业占比",
+        "数据质量报告"
+      ],
+      "status": "在册",
+      "missing_fields": []
+    },
+    {
+      "id": "DA-006",
+      "node_id": "dwd_complaint_case",
+      "name": "企业诉求工单明细",
+      "type": "数据表",
+      "domain": "企业服务",
+      "layer": "DWD",
+      "table": "dwd_complaint_case",
+      "owner": "市场服务部企业服务科",
+      "steward": "数据管理岗",
+      "level": "L3",
+      "sharing": "脱敏共享",
+      "update_frequency": "实时",
+      "criticality": "核心",
+      "consumers": [
+        "诉求办结率",
+        "平均满意度",
+        "脱敏共享接口"
+      ],
+      "description": "状态归一、时间校验后的工单明细，正文保留原文供内部办理。",
+      "registered_at": "2026-10-08",
+      "rows": 1443,
+      "quality_score": 97.92,
+      "upstream_count": 1,
+      "downstream_count": 4,
+      "upstream": [
+        "ods_complaint_case"
+      ],
+      "downstream": [
+        "诉求办结率",
+        "平均满意度",
+        "企业诉求共享接口（脱敏）",
+        "数据质量报告"
+      ],
+      "status": "在册",
+      "missing_fields": []
+    },
+    {
+      "id": "DA-007",
+      "node_id": "metric_market_active",
+      "name": "市场主体活跃率",
+      "type": "指标",
+      "domain": "市场主体",
+      "layer": "DWS",
+      "owner": "市场服务部",
+      "steward": "数据管理岗",
+      "level": "L1",
+      "sharing": "公开",
+      "update_frequency": "每月",
+      "criticality": "重要",
+      "consumers": [
+        "治理驾驶舱",
+        "部门月报"
+      ],
+      "description": "存续或在业主体占全部登记主体的比例。",
+      "registered_at": "2026-10-09",
+      "rows": null,
+      "quality_score": null,
+      "upstream_count": 1,
+      "downstream_count": 1,
+      "upstream": [
+        "dwd_market_register"
+      ],
+      "downstream": [
+        "治理驾驶舱"
+      ],
+      "status": "在册",
+      "missing_fields": []
+    },
+    {
+      "id": "DA-008",
+      "node_id": "metric_case_close",
+      "name": "企业诉求办结率",
+      "type": "指标",
+      "domain": "企业服务",
+      "layer": "DWS",
+      "owner": "市场服务部企业服务科",
+      "steward": "数据管理岗",
+      "level": "L1",
+      "sharing": "公开",
+      "update_frequency": "每月",
+      "criticality": "重要",
+      "consumers": [
+        "治理驾驶舱",
+        "政务服务考核"
+      ],
+      "description": "已办结与已回访工单占全部工单的比例。",
+      "registered_at": "2026-10-09",
+      "rows": null,
+      "quality_score": null,
+      "upstream_count": 1,
+      "downstream_count": 1,
+      "upstream": [
+        "dwd_complaint_case"
+      ],
+      "downstream": [
+        "治理驾驶舱"
+      ],
+      "status": "在册",
+      "missing_fields": []
+    },
+    {
+      "id": "DA-009",
+      "node_id": "metric_credit_a",
+      "name": "A 级信用企业占比",
+      "type": "指标",
+      "domain": "信用监管",
+      "layer": "DWS",
+      "owner": "市场服务部信用管理科",
+      "steward": "数据管理岗",
+      "level": "L2",
+      "sharing": "有条件共享",
+      "update_frequency": "每月",
+      "criticality": "一般",
+      "consumers": [
+        "治理驾驶舱",
+        "信用监管分析"
+      ],
+      "description": "A 级信用企业占有效评价企业的比例。",
+      "registered_at": "2026-10-09",
+      "rows": null,
+      "quality_score": null,
+      "upstream_count": 1,
+      "downstream_count": 0,
+      "upstream": [
+        "dwd_credit_rating"
+      ],
+      "downstream": [],
+      "status": "在册",
+      "missing_fields": []
+    },
+    {
+      "id": "DA-010",
+      "node_id": "share_market_register",
+      "name": "市场主体共享接口（脱敏）",
+      "type": "数据接口",
+      "domain": "市场主体",
+      "layer": "共享层",
+      "owner": "市场服务部数据管理岗",
+      "steward": "数据管理岗",
+      "level": "L3",
+      "sharing": "有条件共享",
+      "update_frequency": "每日",
+      "criticality": "核心",
+      "consumers": [
+        "政务服务大厅",
+        "雄安新区数据共享交换平台"
+      ],
+      "description": "对外提供市场主体基础信息，姓名/电话/邮箱/地址按策略脱敏。",
+      "registered_at": "2026-10-10",
+      "rows": null,
+      "quality_score": null,
+      "upstream_count": 1,
+      "downstream_count": 0,
+      "upstream": [
+        "dwd_market_register"
+      ],
+      "downstream": [],
+      "status": "在册",
+      "missing_fields": []
+    },
+    {
+      "id": "DA-011",
+      "node_id": "share_complaint_case",
+      "name": "企业诉求共享接口（脱敏）",
+      "type": "数据接口",
+      "domain": "企业服务",
+      "layer": "共享层",
+      "owner": "市场服务部数据管理岗",
+      "steward": "数据管理岗",
+      "level": "L3",
+      "sharing": "脱敏共享",
+      "update_frequency": "每日",
+      "criticality": "重要",
+      "consumers": [
+        "营商环境分析",
+        "政务服务优化专班"
+      ],
+      "description": "提供诉求类型、办理时效等字段，正文经内容识别后脱敏。",
+      "registered_at": "2026-10-10",
+      "rows": null,
+      "quality_score": null,
+      "upstream_count": 1,
+      "downstream_count": 0,
+      "upstream": [
+        "dwd_complaint_case"
+      ],
+      "downstream": [],
+      "status": "在册",
+      "missing_fields": []
+    },
+    {
+      "id": "DA-012",
+      "node_id": null,
+      "name": "行政区划代码表",
+      "type": "码表",
+      "domain": "公共参考",
+      "layer": "参考层",
+      "owner": "市场服务部数据管理岗",
+      "steward": "数据管理岗",
+      "level": "L1",
+      "sharing": "公开",
+      "update_frequency": "按需",
+      "criticality": "重要",
+      "consumers": [
+        "区划校验",
+        "地址标准化"
+      ],
+      "description": "河北省及雄安新区县级行政区划代码。",
+      "registered_at": "2026-10-08",
+      "rows": null,
+      "quality_score": null,
+      "upstream_count": 0,
+      "downstream_count": 0,
+      "upstream": [],
+      "downstream": [],
+      "status": "在册",
+      "missing_fields": []
+    },
+    {
+      "id": "DA-013",
+      "node_id": null,
+      "name": "行业代码表（GB/T 4754-2017）",
+      "type": "码表",
+      "domain": "公共参考",
+      "layer": "参考层",
+      "owner": "市场服务部数据管理岗",
+      "steward": "数据管理岗",
+      "level": "L1",
+      "sharing": "公开",
+      "update_frequency": "按需",
+      "criticality": "重要",
+      "consumers": [
+        "行业标准化",
+        "产业结构分析"
+      ],
+      "description": "国家标准行业分类代码子集，覆盖雄安新区主要行业。",
+      "registered_at": "2026-10-08",
+      "rows": null,
+      "quality_score": null,
+      "upstream_count": 0,
+      "downstream_count": 0,
+      "upstream": [],
+      "downstream": [],
+      "status": "在册",
+      "missing_fields": []
+    },
+    {
+      "id": "DA-014",
+      "node_id": "report_dashboard",
+      "name": "数据治理驾驶舱",
+      "type": "报表",
+      "domain": "数据治理",
+      "layer": "服务层",
+      "owner": "市场服务部数据管理岗",
+      "steward": "数据管理岗",
+      "level": "L2",
+      "sharing": "内部共享",
+      "update_frequency": "每日",
+      "criticality": "重要",
+      "consumers": [
+        "数据治理委员会",
+        "市场服务部管理层"
+      ],
+      "description": "质量、分级、资产、整改与核心指标的一页式驾驶舱。",
+      "registered_at": "2026-10-12",
+      "rows": null,
+      "quality_score": null,
+      "upstream_count": 3,
+      "downstream_count": 0,
+      "upstream": [
+        "市场主体活跃率",
+        "诉求办结率",
+        "平均满意度"
+      ],
+      "downstream": [],
+      "status": "在册",
+      "missing_fields": []
+    },
+    {
+      "id": "DA-015",
+      "node_id": "report_quality",
+      "name": "数据质量月报",
+      "type": "报告",
+      "domain": "数据治理",
+      "layer": "服务层",
+      "owner": "市场服务部数据管理岗",
+      "steward": "数据管理岗",
+      "level": "L2",
+      "sharing": "内部共享",
+      "update_frequency": "每月",
+      "criticality": "一般",
+      "consumers": [
+        "数据治理委员会",
+        "源系统责任部门"
+      ],
+      "description": "质量评分、问题定位、整改验收与规则有效性验证报告。",
+      "registered_at": "2026-10-12",
+      "rows": null,
+      "quality_score": null,
+      "upstream_count": 4,
+      "downstream_count": 0,
+      "upstream": [
+        "dwd_market_register",
+        "dwd_credit_rating",
+        "dwd_complaint_case",
+        "数据隔离区"
+      ],
+      "downstream": [],
+      "status": "在册",
+      "missing_fields": []
+    }
+  ]
+}

@@ -1,0 +1,2057 @@
+{
+  "seed": 20260701,
+  "as_of": "2026-10-31",
+  "note": "模拟数据，全部为虚构内容；缺陷为脚本按固定种子注入，可用于评估规则检出率。",
+  "tables": {
+    "market_register": {
+      "rows": 1240,
+      "defects": [
+        {
+          "type": "USCC_INVALID",
+          "field": "unified_social_credit_code",
+          "keys": [
+            "REG2026001193",
+            "REG2026001120",
+            "REG2026000548",
+            "REG2026000522",
+            "REG2026000201",
+            "REG2026001022",
+            "REG2026000063",
+            "REG2026000087",
+            "REG2026000147",
+            "REG2026000763",
+            "REG2026000491",
+            "REG2026001041",
+            "REG2026000456",
+            "REG2026000822",
+            "REG2026000768",
+            "REG2026001185",
+            "REG2026000917",
+            "REG2026000952",
+            "REG2026001139",
+            "REG2026000520",
+            "REG2026000647",
+            "REG2026000588",
+            "REG2026000414",
+            "REG2026000059",
+            "REG2026001002",
+            "REG2026000929",
+            "REG2026000493",
+            "REG2026000383",
+            "REG2026000668",
+            "REG2026000743",
+            "REG2026000122",
+            "REG2026000870",
+            "REG2026000843",
+            "REG2026000172",
+            "REG2026000710",
+            "REG2026000549",
+            "REG2026001101",
+            "REG2026000622",
+            "REG2026000854",
+            "REG2026001005"
+          ],
+          "expected_rules": [
+            "DQ-REG-003"
+          ]
+        },
+        {
+          "type": "USCC_MISSING",
+          "field": "unified_social_credit_code",
+          "keys": [
+            "REG2026000807",
+            "REG2026000241",
+            "REG2026000828",
+            "REG2026001152",
+            "REG2026000976",
+            "REG2026000131"
+          ],
+          "expected_rules": [
+            "DQ-REG-001"
+          ]
+        },
+        {
+          "type": "NAME_WHITESPACE",
+          "field": "company_name",
+          "keys": [
+            "REG2026000379",
+            "REG2026001011",
+            "REG2026000957",
+            "REG2026000372",
+            "REG2026000563",
+            "REG2026000612",
+            "REG2026000944",
+            "REG2026000420",
+            "REG2026001189",
+            "REG2026001114",
+            "REG2026000331",
+            "REG2026000017",
+            "REG2026000229",
+            "REG2026000189",
+            "REG2026000623",
+            "REG2026000523",
+            "REG2026000173",
+            "REG2026000199",
+            "REG2026000349",
+            "REG2026000889",
+            "REG2026000018",
+            "REG2026000765",
+            "REG2026000006",
+            "REG2026000138",
+            "REG2026000920",
+            "REG2026000363",
+            "REG2026000404",
+            "REG2026000543",
+            "REG2026000315",
+            "REG2026000935",
+            "REG2026000672",
+            "REG2026000149",
+            "REG2026000606",
+            "REG2026000839",
+            "REG2026000395",
+            "REG2026001136",
+            "REG2026000999",
+            "REG2026001017",
+            "REG2026000009",
+            "REG2026001150",
+            "REG2026000291",
+            "REG2026001146",
+            "REG2026000262",
+            "REG2026000676",
+            "REG2026000185"
+          ],
+          "expected_rules": [
+            "DQ-REG-004"
+          ]
+        },
+        {
+          "type": "NAME_TRUNCATED",
+          "field": "company_name",
+          "keys": [
+            "REG2026000753",
+            "REG2026000725",
+            "REG2026000384",
+            "REG2026000146",
+            "REG2026000065",
+            "REG2026001148",
+            "REG2026001194",
+            "REG2026000255",
+            "REG2026000465",
+            "REG2026000947",
+            "REG2026000204",
+            "REG2026000091"
+          ],
+          "expected_rules": []
+        },
+        {
+          "type": "PHONE_FORMAT",
+          "field": "contact_phone",
+          "keys": [
+            "REG2026000038",
+            "REG2026000643",
+            "REG2026000829",
+            "REG2026000787",
+            "REG2026000160",
+            "REG2026000742",
+            "REG2026001035",
+            "REG2026000374",
+            "REG2026000054",
+            "REG2026001039",
+            "REG2026000177",
+            "REG2026000759",
+            "REG2026000412",
+            "REG2026000798",
+            "REG2026000256",
+            "REG2026000247",
+            "REG2026000908",
+            "REG2026000353",
+            "REG2026000209",
+            "REG2026000846",
+            "REG2026000440",
+            "REG2026000566",
+            "REG2026000368",
+            "REG2026001155",
+            "REG2026000406",
+            "REG2026000472",
+            "REG2026000365",
+            "REG2026000867",
+            "REG2026000979",
+            "REG2026000061",
+            "REG2026000164",
+            "REG2026000442",
+            "REG2026000790",
+            "REG2026000689",
+            "REG2026001119",
+            "REG2026000844",
+            "REG2026000960",
+            "REG2026000099",
+            "REG2026000439",
+            "REG2026000385",
+            "REG2026000626",
+            "REG2026000988",
+            "REG2026000760",
+            "REG2026000108",
+            "REG2026000040",
+            "REG2026000730",
+            "REG2026000711",
+            "REG2026000296",
+            "REG2026000971",
+            "REG2026001049",
+            "REG2026000090",
+            "REG2026000948",
+            "REG2026000055",
+            "REG2026000882",
+            "REG2026000827",
+            "REG2026001065",
+            "REG2026000419",
+            "REG2026000823",
+            "REG2026000613",
+            "REG2026001178",
+            "REG2026000233",
+            "REG2026000047",
+            "REG2026001106",
+            "REG2026000031",
+            "REG2026000269",
+            "REG2026001026",
+            "REG2026000265",
+            "REG2026001023",
+            "REG2026000447",
+            "REG2026000239"
+          ],
+          "expected_rules": [
+            "DQ-REG-010"
+          ]
+        },
+        {
+          "type": "PHONE_MISSING",
+          "field": "contact_phone",
+          "keys": [
+            "REG2026000319",
+            "REG2026000772",
+            "REG2026001020",
+            "REG2026001173",
+            "REG2026000423",
+            "REG2026000076",
+            "REG2026001008",
+            "REG2026000259",
+            "REG2026001056",
+            "REG2026001045",
+            "REG2026001088",
+            "REG2026000907",
+            "REG2026000880",
+            "REG2026000144",
+            "REG2026000023",
+            "REG2026000370",
+            "REG2026000547",
+            "REG2026000153",
+            "REG2026000221",
+            "REG2026000036",
+            "REG2026000777",
+            "REG2026000569",
+            "REG2026000631",
+            "REG2026000906",
+            "REG2026000086",
+            "REG2026001138",
+            "REG2026000302",
+            "REG2026000795",
+            "REG2026000860",
+            "REG2026000791",
+            "REG2026001111",
+            "REG2026000736",
+            "REG2026000283",
+            "REG2026000585",
+            "REG2026001084",
+            "REG2026000093",
+            "REG2026000186",
+            "REG2026001031",
+            "REG2026000968",
+            "REG2026000558",
+            "REG2026000003",
+            "REG2026000589",
+            "REG2026001025",
+            "REG2026000321",
+            "REG2026000913",
+            "REG2026001182",
+            "REG2026000263",
+            "REG2026000280",
+            "REG2026000584",
+            "REG2026000327",
+            "REG2026000540",
+            "REG2026000142",
+            "REG2026000260",
+            "REG2026001091",
+            "REG2026000250",
+            "REG2026000941",
+            "REG2026000714",
+            "REG2026000366",
+            "REG2026000926",
+            "REG2026000057",
+            "REG2026000696",
+            "REG2026000460",
+            "REG2026001161",
+            "REG2026001050",
+            "REG2026000996"
+          ],
+          "expected_rules": [
+            "DQ-REG-009"
+          ]
+        },
+        {
+          "type": "EMAIL_INVALID",
+          "field": "contact_email",
+          "keys": [
+            "REG2026000150",
+            "REG2026000429",
+            "REG2026001147",
+            "REG2026000227",
+            "REG2026000717",
+            "REG2026000830",
+            "REG2026000206",
+            "REG2026000264",
+            "REG2026001129",
+            "REG2026001168",
+            "REG2026000989",
+            "REG2026000207",
+            "REG2026000167",
+            "REG2026000826",
+            "REG2026001092",
+            "REG2026000504",
+            "REG2026000450",
+            "REG2026001192",
+            "REG2026000163",
+            "REG2026001071",
+            "REG2026000089",
+            "REG2026001062",
+            "REG2026000305",
+            "REG2026001006",
+            "REG2026001188"
+          ],
+          "expected_rules": [
+            "DQ-REG-011"
+          ]
+        },
+        {
+          "type": "DATE_FUTURE",
+          "field": "reg_date",
+          "keys": [
+            "REG2026000194",
+            "REG2026000345",
+            "REG2026000639",
+            "REG2026001042",
+            "REG2026000821",
+            "REG2026000033",
+            "REG2026000272",
+            "REG2026000785",
+            "REG2026000629",
+            "REG2026000919",
+            "REG2026000482",
+            "REG2026001079"
+          ],
+          "expected_rules": [
+            "DQ-REG-007"
+          ]
+        },
+        {
+          "type": "DATE_INVALID",
+          "field": "reg_date",
+          "keys": [
+            "REG2026000544",
+            "REG2026000995",
+            "REG2026000792",
+            "REG2026000294",
+            "REG2026000284",
+            "REG2026000903",
+            "REG2026001064",
+            "REG2026000746"
+          ],
+          "expected_rules": [
+            "DQ-REG-006"
+          ]
+        },
+        {
+          "type": "CAPITAL_NEGATIVE",
+          "field": "reg_capital_wan",
+          "keys": [
+            "REG2026000744",
+            "REG2026000732",
+            "REG2026000663",
+            "REG2026000351",
+            "REG2026000762",
+            "REG2026000202"
+          ],
+          "expected_rules": [
+            "DQ-REG-008"
+          ]
+        },
+        {
+          "type": "INDUSTRY_NONSTANDARD",
+          "field": "industry_code",
+          "keys": [
+            "REG2026000858",
+            "REG2026000266",
+            "REG2026000515",
+            "REG2026000200",
+            "REG2026000803",
+            "REG2026001144",
+            "REG2026000660",
+            "REG2026000401",
+            "REG2026000168",
+            "REG2026000539",
+            "REG2026000007",
+            "REG2026000915",
+            "REG2026001125",
+            "REG2026000895",
+            "REG2026000083",
+            "REG2026000611",
+            "REG2026000258",
+            "REG2026000865",
+            "REG2026001044",
+            "REG2026000212",
+            "REG2026000669",
+            "REG2026000698",
+            "REG2026000574",
+            "REG2026000435",
+            "REG2026000502",
+            "REG2026000002",
+            "REG2026000188",
+            "REG2026000705",
+            "REG2026000635",
+            "REG2026000190",
+            "REG2026000166",
+            "REG2026000987"
+          ],
+          "expected_rules": [
+            "DQ-REG-012"
+          ]
+        },
+        {
+          "type": "DISTRICT_MISMATCH",
+          "field": "district_code",
+          "keys": [
+            "REG2026001140",
+            "REG2026000892",
+            "REG2026000680",
+            "REG2026000338",
+            "REG2026000145",
+            "REG2026000276",
+            "REG2026000432",
+            "REG2026000457",
+            "REG2026000494",
+            "REG2026000323",
+            "REG2026001191",
+            "REG2026000386",
+            "REG2026000184",
+            "REG2026000425",
+            "REG2026000984",
+            "REG2026001196",
+            "REG2026000154",
+            "REG2026000959",
+            "REG2026000512",
+            "REG2026000208",
+            "REG2026001066",
+            "REG2026000119",
+            "REG2026000745",
+            "REG2026000691",
+            "REG2026001104",
+            "REG2026001142",
+            "REG2026000977",
+            "REG2026000443"
+          ],
+          "expected_rules": [
+            "DQ-REG-014"
+          ]
+        },
+        {
+          "type": "STATUS_NONSTANDARD",
+          "field": "status",
+          "keys": [
+            "REG2026000032",
+            "REG2026000510",
+            "REG2026000174",
+            "REG2026000393",
+            "REG2026000141",
+            "REG2026000104",
+            "REG2026001176",
+            "REG2026000376",
+            "REG2026000105",
+            "REG2026000877",
+            "REG2026000802",
+            "REG2026000231",
+            "REG2026000674",
+            "REG2026000052",
+            "REG2026000034",
+            "REG2026000699",
+            "REG2026000369",
+            "REG2026000898",
+            "REG2026000767",
+            "REG2026000277",
+            "REG2026000921",
+            "REG2026000282",
+            "REG2026000878",
+            "REG2026000580",
+            "REG2026000396",
+            "REG2026000506",
+            "REG2026000413",
+            "REG2026000025",
+            "REG2026000364",
+            "REG2026000820",
+            "REG2026000474",
+            "REG2026000228",
+            "REG2026000641",
+            "REG2026001163",
+            "REG2026000097",
+            "REG2026000884",
+            "REG2026000554",
+            "REG2026000357",
+            "REG2026000101",
+            "REG2026000455"
+          ],
+          "expected_rules": [
+            "DQ-REG-015"
+          ]
+        },
+        {
+          "type": "UPDATE_STALE",
+          "field": "update_time",
+          "keys": [
+            "REG2026000373",
+            "REG2026000240",
+            "REG2026001094",
+            "REG2026000912",
+            "REG2026000394",
+            "REG2026000716",
+            "REG2026000748",
+            "REG2026000715",
+            "REG2026000015",
+            "REG2026000627",
+            "REG2026001121",
+            "REG2026000991",
+            "REG2026000159",
+            "REG2026000016",
+            "REG2026000879",
+            "REG2026000389",
+            "REG2026000521",
+            "REG2026000932",
+            "REG2026000811",
+            "REG2026000896",
+            "REG2026001077",
+            "REG2026000498",
+            "REG2026001089",
+            "REG2026000382",
+            "REG2026000028",
+            "REG2026001167",
+            "REG2026000079",
+            "REG2026000848",
+            "REG2026001061",
+            "REG2026000599",
+            "REG2026000495",
+            "REG2026000872",
+            "REG2026000464",
+            "REG2026000538",
+            "REG2026000924",
+            "REG2026000437",
+            "REG2026000230",
+            "REG2026000775",
+            "REG2026000236",
+            "REG2026000565",
+            "REG2026000077",
+            "REG2026000840",
+            "REG2026000449",
+            "REG2026000080",
+            "REG2026000529",
+            "REG2026000238",
+            "REG2026000973",
+            "REG2026000724",
+            "REG2026000232",
+            "REG2026000448"
+          ],
+          "expected_rules": [
+            "DQ-REG-017"
+          ]
+        },
+        {
+          "type": "UPDATE_MISSING",
+          "field": "update_time",
+          "keys": [
+            "REG2026001108",
+            "REG2026000596",
+            "REG2026000361",
+            "REG2026001158",
+            "REG2026001130",
+            "REG2026000573",
+            "REG2026000519",
+            "REG2026000591"
+          ],
+          "expected_rules": [
+            "DQ-REG-016"
+          ]
+        },
+        {
+          "type": "LEGAL_PERSON_MISSING",
+          "field": "legal_person",
+          "keys": [
+            "REG2026001157",
+            "REG2026000729",
+            "REG2026000292",
+            "REG2026000967",
+            "REG2026000030",
+            "REG2026000617",
+            "REG2026000478",
+            "REG2026001021",
+            "REG2026001058",
+            "REG2026000942",
+            "REG2026000471",
+            "REG2026000222",
+            "REG2026000246",
+            "REG2026000706",
+            "REG2026000817",
+            "REG2026000940",
+            "REG2026000910",
+            "REG2026000990",
+            "REG2026000267",
+            "REG2026000754"
+          ],
+          "expected_rules": [
+            "DQ-REG-013"
+          ]
+        },
+        {
+          "type": "ADDRESS_MISSING",
+          "field": "address",
+          "keys": [
+            "REG2026000602",
+            "REG2026001081",
+            "REG2026000196",
+            "REG2026001170",
+            "REG2026000572",
+            "REG2026000664",
+            "REG2026000595",
+            "REG2026000697",
+            "REG2026000067",
+            "REG2026000169",
+            "REG2026000738",
+            "REG2026001074"
+          ],
+          "expected_rules": [
+            "DQ-REG-018"
+          ]
+        },
+        {
+          "type": "DUPLICATE_REG",
+          "field": "unified_social_credit_code",
+          "keys": [
+            "REG2026000411",
+            "REG2026DUP0001",
+            "REG2026001068",
+            "REG2026DUP0002",
+            "REG2026000916",
+            "REG2026DUP0003",
+            "REG2026000463",
+            "REG2026DUP0004",
+            "REG2026001070",
+            "REG2026DUP0005",
+            "REG2026000679",
+            "REG2026DUP0006",
+            "REG2026000695",
+            "REG2026DUP0007",
+            "REG2026000126",
+            "REG2026DUP0008",
+            "REG2026000381",
+            "REG2026DUP0009",
+            "REG2026001059",
+            "REG2026DUP0010",
+            "REG2026000682",
+            "REG2026DUP0011",
+            "REG2026000526",
+            "REG2026DUP0012",
+            "REG2026000809",
+            "REG2026DUP0013",
+            "REG2026000081",
+            "REG2026DUP0014",
+            "REG2026000462",
+            "REG2026DUP0015",
+            "REG2026000245",
+            "REG2026DUP0016",
+            "REG2026000137",
+            "REG2026DUP0017",
+            "REG2026000140",
+            "REG2026DUP0018",
+            "REG2026000444",
+            "REG2026DUP0019",
+            "REG2026000068",
+            "REG2026DUP0020",
+            "REG2026000275",
+            "REG2026DUP0021",
+            "REG2026000195",
+            "REG2026DUP0022",
+            "REG2026001051",
+            "REG2026DUP0023",
+            "REG2026000859",
+            "REG2026DUP0024",
+            "REG2026001181",
+            "REG2026DUP0025",
+            "REG2026000470",
+            "REG2026DUP0026",
+            "REG2026000890",
+            "REG2026DUP0027",
+            "REG2026001165",
+            "REG2026DUP0028",
+            "REG2026000721",
+            "REG2026DUP0029",
+            "REG2026001172",
+            "REG2026DUP0030",
+            "REG2026001053",
+            "REG2026DUP0031",
+            "REG2026000873",
+            "REG2026DUP0032",
+            "REG2026001177",
+            "REG2026DUP0033",
+            "REG2026000994",
+            "REG2026DUP0034",
+            "REG2026000224",
+            "REG2026DUP0035",
+            "REG2026000254",
+            "REG2026DUP0036",
+            "REG2026000438",
+            "REG2026DUP0037",
+            "REG2026000249",
+            "REG2026DUP0038",
+            "REG2026001124",
+            "REG2026DUP0039",
+            "REG2026001115",
+            "REG2026DUP0040"
+          ],
+          "expected_rules": [
+            "DQ-REG-002"
+          ]
+        }
+      ]
+    },
+    "credit_rating": {
+      "rows": 950,
+      "defects": [
+        {
+          "type": "CREDIT_ORPHAN",
+          "field": "unified_social_credit_code",
+          "keys": [
+            "CR2026000670",
+            "CR2026000338",
+            "CR2026000669",
+            "CR2026000333",
+            "CR2026000056",
+            "CR2026000814",
+            "CR2026000325",
+            "CR2026000467",
+            "CR2026000427",
+            "CR2026000492",
+            "CR2026000722",
+            "CR2026000731",
+            "CR2026000806",
+            "CR2026000622",
+            "CR2026000238",
+            "CR2026000745",
+            "CR2026000701",
+            "CR2026000794",
+            "CR2026000653",
+            "CR2026000573",
+            "CR2026000249",
+            "CR2026000685",
+            "CR2026000361",
+            "CR2026000105",
+            "CR2026000616",
+            "CR2026000572",
+            "CR2026000031",
+            "CR2026000108",
+            "CR2026000561",
+            "CR2026000552"
+          ],
+          "expected_rules": [
+            "DQ-CRE-002"
+          ]
+        },
+        {
+          "type": "CREDIT_LEVEL_INVALID",
+          "field": "credit_level",
+          "keys": [
+            "CR2026000617",
+            "CR2026000163",
+            "CR2026000310",
+            "CR2026000790",
+            "CR2026000650",
+            "CR2026000697",
+            "CR2026000299",
+            "CR2026000426",
+            "CR2026000120",
+            "CR2026000434",
+            "CR2026000219",
+            "CR2026000345",
+            "CR2026000423",
+            "CR2026000638",
+            "CR2026000949",
+            "CR2026000010",
+            "CR2026000581",
+            "CR2026000950",
+            "CR2026000062",
+            "CR2026000570",
+            "CR2026000507",
+            "CR2026000901"
+          ],
+          "expected_rules": [
+            "DQ-CRE-004"
+          ]
+        },
+        {
+          "type": "CREDIT_SCORE_RANGE",
+          "field": "credit_score",
+          "keys": [
+            "CR2026000415",
+            "CR2026000923",
+            "CR2026000207",
+            "CR2026000702",
+            "CR2026000150",
+            "CR2026000798",
+            "CR2026000304",
+            "CR2026000376"
+          ],
+          "expected_rules": [
+            "DQ-CRE-003"
+          ]
+        },
+        {
+          "type": "RATING_DATE_FUTURE",
+          "field": "rating_date",
+          "keys": [
+            "CR2026000591",
+            "CR2026000004",
+            "CR2026000726",
+            "CR2026000173",
+            "CR2026000080",
+            "CR2026000149"
+          ],
+          "expected_rules": [
+            "DQ-CRE-005"
+          ]
+        },
+        {
+          "type": "AGENCY_MISSING",
+          "field": "rating_agency",
+          "keys": [
+            "CR2026000469",
+            "CR2026000575",
+            "CR2026000364",
+            "CR2026000825",
+            "CR2026000356",
+            "CR2026000077",
+            "CR2026000586",
+            "CR2026000396",
+            "CR2026000221",
+            "CR2026000893",
+            "CR2026000460",
+            "CR2026000714",
+            "CR2026000797",
+            "CR2026000914",
+            "CR2026000051",
+            "CR2026000468",
+            "CR2026000592",
+            "CR2026000045"
+          ],
+          "expected_rules": [
+            "DQ-CRE-006"
+          ]
+        },
+        {
+          "type": "UPDATE_STALE",
+          "field": "update_time",
+          "keys": [
+            "CR2026000072",
+            "CR2026000165",
+            "CR2026000104",
+            "CR2026000174",
+            "CR2026000144",
+            "CR2026000680",
+            "CR2026000836",
+            "CR2026000184",
+            "CR2026000355",
+            "CR2026000889",
+            "CR2026000916",
+            "CR2026000474",
+            "CR2026000320",
+            "CR2026000252",
+            "CR2026000931",
+            "CR2026000717",
+            "CR2026000760",
+            "CR2026000490",
+            "CR2026000453",
+            "CR2026000677",
+            "CR2026000688",
+            "CR2026000042",
+            "CR2026000799",
+            "CR2026000251",
+            "CR2026000580"
+          ],
+          "expected_rules": [
+            "DQ-CRE-007"
+          ]
+        },
+        {
+          "type": "LEVEL_SCORE_MISMATCH",
+          "field": "credit_level",
+          "keys": [
+            "CR2026000869",
+            "CR2026000147",
+            "CR2026000803",
+            "CR2026000883",
+            "CR2026000152",
+            "CR2026000881",
+            "CR2026000328",
+            "CR2026000074",
+            "CR2026000451",
+            "CR2026000626",
+            "CR2026000843",
+            "CR2026000538",
+            "CR2026000791",
+            "CR2026000804",
+            "CR2026000493"
+          ],
+          "expected_rules": [
+            "DQ-CRE-008"
+          ]
+        }
+      ]
+    },
+    "complaint_case": {
+      "rows": 1500,
+      "defects": [
+        {
+          "type": "CASE_ORPHAN",
+          "field": "unified_social_credit_code",
+          "keys": [
+            "TS2026000646",
+            "TS2026000538",
+            "TS2026000728",
+            "TS2026000097",
+            "TS2026000816",
+            "TS2026001219",
+            "TS2026000685",
+            "TS2026001119",
+            "TS2026000663",
+            "TS2026000295",
+            "TS2026000699",
+            "TS2026000704",
+            "TS2026001335",
+            "TS2026000494",
+            "TS2026000448",
+            "TS2026000221",
+            "TS2026001084",
+            "TS2026001081",
+            "TS2026001012",
+            "TS2026000764",
+            "TS2026001095",
+            "TS2026000384",
+            "TS2026000345",
+            "TS2026001107",
+            "TS2026000417",
+            "TS2026001318",
+            "TS2026001189",
+            "TS2026001371",
+            "TS2026001430",
+            "TS2026000227",
+            "TS2026001031",
+            "TS2026000440",
+            "TS2026000371",
+            "TS2026000136",
+            "TS2026000654"
+          ],
+          "expected_rules": [
+            "DQ-CASE-002"
+          ]
+        },
+        {
+          "type": "SATISFACTION_INVALID",
+          "field": "satisfaction",
+          "keys": [
+            "TS2026000415",
+            "TS2026000823",
+            "TS2026000357",
+            "TS2026001106",
+            "TS2026000030",
+            "TS2026000966",
+            "TS2026001014",
+            "TS2026000127",
+            "TS2026001002",
+            "TS2026001089",
+            "TS2026000761",
+            "TS2026000306",
+            "TS2026001484",
+            "TS2026000478",
+            "TS2026001074",
+            "TS2026000118",
+            "TS2026000005",
+            "TS2026001032",
+            "TS2026000661",
+            "TS2026000563",
+            "TS2026001469",
+            "TS2026001275",
+            "TS2026001210",
+            "TS2026001364",
+            "TS2026000870",
+            "TS2026000468",
+            "TS2026001319",
+            "TS2026001428"
+          ],
+          "expected_rules": [
+            "DQ-CASE-005"
+          ]
+        },
+        {
+          "type": "CLOSE_BEFORE_SUBMIT",
+          "field": "close_time",
+          "keys": [
+            "TS2026000924",
+            "TS2026001461",
+            "TS2026001440",
+            "TS2026000962",
+            "TS2026001055",
+            "TS2026000421",
+            "TS2026000985",
+            "TS2026001488",
+            "TS2026001293",
+            "TS2026001077",
+            "TS2026001029",
+            "TS2026001297"
+          ],
+          "expected_rules": [
+            "DQ-CASE-006"
+          ]
+        },
+        {
+          "type": "CASE_STATUS_NONSTANDARD",
+          "field": "status",
+          "keys": [
+            "TS2026000827",
+            "TS2026000972",
+            "TS2026000336",
+            "TS2026000268",
+            "TS2026000382",
+            "TS2026000883",
+            "TS2026000838",
+            "TS2026001357",
+            "TS2026000536",
+            "TS2026000154",
+            "TS2026000483",
+            "TS2026001199",
+            "TS2026000029",
+            "TS2026000803",
+            "TS2026000033",
+            "TS2026001332",
+            "TS2026001142",
+            "TS2026001362",
+            "TS2026000629",
+            "TS2026000052",
+            "TS2026001247",
+            "TS2026001205",
+            "TS2026000608",
+            "TS2026000994",
+            "TS2026000177"
+          ],
+          "expected_rules": [
+            "DQ-CASE-004"
+          ]
+        },
+        {
+          "type": "CASE_TYPE_NONSTANDARD",
+          "field": "case_type",
+          "keys": [
+            "TS2026001187",
+            "TS2026000220",
+            "TS2026000981",
+            "TS2026000355",
+            "TS2026001086",
+            "TS2026001458",
+            "TS2026001273",
+            "TS2026000399",
+            "TS2026000243",
+            "TS2026000300",
+            "TS2026001283",
+            "TS2026001071",
+            "TS2026000400",
+            "TS2026001239",
+            "TS2026000719",
+            "TS2026000914",
+            "TS2026000226",
+            "TS2026000614",
+            "TS2026000633",
+            "TS2026000631"
+          ],
+          "expected_rules": [
+            "DQ-CASE-003"
+          ]
+        },
+        {
+          "type": "CONTENT_MISSING",
+          "field": "content",
+          "keys": [
+            "TS2026001068",
+            "TS2026001447",
+            "TS2026000165",
+            "TS2026000627",
+            "TS2026000303",
+            "TS2026000758",
+            "TS2026000718",
+            "TS2026001378",
+            "TS2026000342",
+            "TS2026000831",
+            "TS2026000778",
+            "TS2026000741"
+          ],
+          "expected_rules": [
+            "DQ-CASE-001"
+          ]
+        },
+        {
+          "type": "SUBMIT_DATE_FUTURE",
+          "field": "submit_time",
+          "keys": [
+            "TS2026000732",
+            "TS2026000564",
+            "TS2026000680",
+            "TS2026001022",
+            "TS2026001321",
+            "TS2026000708",
+            "TS2026000533",
+            "TS2026001418"
+          ],
+          "expected_rules": [
+            "DQ-CASE-007"
+          ]
+        },
+        {
+          "type": "CLOSE_TIME_MISSING",
+          "field": "close_time",
+          "keys": [
+            "TS2026000519",
+            "TS2026000476",
+            "TS2026001242",
+            "TS2026001495",
+            "TS2026000146",
+            "TS2026001157",
+            "TS2026001420",
+            "TS2026000267",
+            "TS2026000553",
+            "TS2026000973"
+          ],
+          "expected_rules": [
+            "DQ-CASE-008"
+          ]
+        }
+      ]
+    }
+  },
+  "pii": {
+    "table": "complaint_case",
+    "field": "content",
+    "injected": 150,
+    "items": [
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001161"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001397"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000329"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000428"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001429"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001224"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000963"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000389"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001425"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000682"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000366"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000854"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001041"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001056"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000965"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000477"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000703"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000063"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001160"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000894"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001287"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000605"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000335"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000558"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001144"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000395"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000497"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000637"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000804"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000549"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000294"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001394"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000422"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000370"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001459"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001136"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001121"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000481"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000026"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000158"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000659"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000715"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000752"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000540"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001345"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000983"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000786"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001001"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000129"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000040"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001473"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001052"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001483"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001248"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000208"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000739"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000545"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001080"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000670"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000392"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001075"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001156"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001261"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001355"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001244"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000028"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000575"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000606"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000557"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000210"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000515"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000190"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000083"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001302"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000414"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001105"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000156"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001082"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000989"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000126"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001383"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000747"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000001"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000339"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001088"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000316"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001218"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000114"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001231"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000709"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000567"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001024"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001474"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001093"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000909"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000385"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000782"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001310"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000473"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000278"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000638"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001476"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000255"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000257"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000200"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001229"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000653"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000596"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000430"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001390"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000495"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001478"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000714"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000656"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000035"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000550"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000650"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001149"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001125"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000157"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000901"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000643"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001137"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000713"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000092"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000488"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000742"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000943"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000738"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000211"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000511"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000031"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000587"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000434"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000351"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000170"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001069"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000665"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000264"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001213"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000328"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000590"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000153"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001197"
+      },
+      {
+        "type": "PII-MOBILE",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000179"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001139"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000025"
+      },
+      {
+        "type": "PII-BANKCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026001295"
+      },
+      {
+        "type": "PII-IDCARD",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000570"
+      },
+      {
+        "type": "PII-EMAIL",
+        "table": "complaint_case",
+        "field": "content",
+        "key": "TS2026000078"
+      }
+    ]
+  }
+}

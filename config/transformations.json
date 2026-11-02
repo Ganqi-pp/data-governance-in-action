@@ -1,0 +1,59 @@
+{
+  "schema_version": "1.0",
+  "description": "ODS→DWD 的字段级转换说明，同时作为数据血缘字段映射的唯一来源，避免文档与实现漂移。",
+  "tables": {
+    "market_register": {
+      "source_table": "ods_market_register",
+      "target_table": "dwd_market_register",
+      "grain": "一行一个市场主体",
+      "fields": [
+        {"target": "reg_id", "sources": ["reg_id"], "rule": "原样保留，作为明细层主键"},
+        {"target": "unified_social_credit_code", "sources": ["unified_social_credit_code"], "rule": "去空格、转大写，按 GB 32100-2015 校验；校验失败转隔离区"},
+        {"target": "company_name", "sources": ["company_name"], "rule": "全角转半角、去首尾空白、压缩连续空格"},
+        {"target": "reg_date", "sources": ["reg_date"], "rule": "多格式解析为 YYYY-MM-DD；未来日期与非法日期置空并标记"},
+        {"target": "reg_capital_wan", "sources": ["reg_capital_wan"], "rule": "转数值，负值置空并标记"},
+        {"target": "industry_code", "sources": ["industry_code"], "rule": "行业名称按码表映射为标准代码；无法映射置空"},
+        {"target": "district_code", "sources": ["district_code", "address"], "rule": "按住所中的县级行政区名修正区划代码"},
+        {"target": "address", "sources": ["address"], "rule": "去首尾空白、全角转半角"},
+        {"target": "legal_person", "sources": ["legal_person"], "rule": "去空白，保留姓名原文"},
+        {"target": "contact_phone", "sources": ["contact_phone"], "rule": "去分隔符与 +86、全角转半角，按手机号规则校验；不合规置空"},
+        {"target": "contact_email", "sources": ["contact_email"], "rule": "转小写并按邮箱规则校验；不合规置空"},
+        {"target": "status", "sources": ["status"], "rule": "同义词映射为标准状态码；无法映射置空"},
+        {"target": "update_time", "sources": ["update_time"], "rule": "解析为标准日期时间；缺失保持为空"},
+        {"target": "dq_flags", "sources": [], "rule": "记录本条数据的修复动作，供审计追溯"}
+      ]
+    },
+    "credit_rating": {
+      "source_table": "ods_credit_rating",
+      "target_table": "dwd_credit_rating",
+      "grain": "一行一次信用评价",
+      "fields": [
+        {"target": "rating_id", "sources": ["rating_id"], "rule": "原样保留，作为明细层主键"},
+        {"target": "unified_social_credit_code", "sources": ["unified_social_credit_code"], "rule": "去空格转大写，并校验能否关联市场主体；关联失败转隔离区"},
+        {"target": "credit_score", "sources": ["credit_score"], "rule": "转整数；越界置空并标记"},
+        {"target": "credit_level", "sources": ["credit_level", "credit_score"], "rule": "去空格转大写；按分数区间重算标准等级"},
+        {"target": "rating_date", "sources": ["rating_date"], "rule": "解析为标准日期；未来日期置空"},
+        {"target": "rating_agency", "sources": ["rating_agency"], "rule": "去首尾空白，空值保留以便质量整改"},
+        {"target": "update_time", "sources": ["update_time"], "rule": "解析为标准日期时间"},
+        {"target": "dq_flags", "sources": [], "rule": "记录修复动作"}
+      ]
+    },
+    "complaint_case": {
+      "source_table": "ods_complaint_case",
+      "target_table": "dwd_complaint_case",
+      "grain": "一行一个诉求工单",
+      "fields": [
+        {"target": "case_id", "sources": ["case_id"], "rule": "原样保留，作为明细层主键"},
+        {"target": "unified_social_credit_code", "sources": ["unified_social_credit_code"], "rule": "去空格转大写，并校验能否关联市场主体；关联失败转隔离区"},
+        {"target": "case_type", "sources": ["case_type"], "rule": "同义词映射到标准诉求类型；无法映射归入“其他”"},
+        {"target": "submit_time", "sources": ["submit_time"], "rule": "解析为标准日期时间；未来时间置空"},
+        {"target": "content", "sources": ["content"], "rule": "去首尾空白；保留原文供内部办理，共享时按内容识别结果脱敏"},
+        {"target": "handling_dept", "sources": ["handling_dept"], "rule": "去首尾空白"},
+        {"target": "status", "sources": ["status"], "rule": "同义词映射为标准状态码；无法映射保留原值"},
+        {"target": "satisfaction", "sources": ["satisfaction"], "rule": "转整数；非 1-5 分置空"},
+        {"target": "close_time", "sources": ["close_time"], "rule": "解析为标准日期时间；早于提交时间则置空并标记"},
+        {"target": "dq_flags", "sources": [], "rule": "记录修复动作"}
+      ]
+    }
+  }
+}

@@ -1,0 +1,4345 @@
+{
+  "summary": {
+    "stage": "ods",
+    "rows": 3690,
+    "tables": 3,
+    "rules": 44,
+    "passed_rules": 18,
+    "rule_pass_rate": 0.4091,
+    "issues": 860,
+    "high_issues": 418,
+    "overall_health": 72.2,
+    "dimensions": {
+      "完整性": 94.66,
+      "准确性": 98.38,
+      "一致性": 95.33,
+      "唯一性": 96.78,
+      "有效性": 88.36,
+      "及时性": 97.2
+    },
+    "table_weights": {
+      "market_register": 0.5,
+      "credit_rating": 0.3,
+      "complaint_case": 0.2
+    },
+    "as_of": "2026-10-31",
+    "generated_at": "2026-11-02 13:00:45"
+  },
+  "tables": {
+    "market_register": {
+      "rows": 1240,
+      "bad_rows": 545,
+      "health": 56.05,
+      "dimensions": {
+        "完整性": 91.05,
+        "准确性": 96.77,
+        "一致性": 96.77,
+        "唯一性": 93.55,
+        "有效性": 80.97,
+        "及时性": 95.97
+      },
+      "rules": 21,
+      "passed_rules": 8,
+      "issues": 557
+    },
+    "credit_rating": {
+      "rows": 950,
+      "bad_rows": 124,
+      "health": 86.95,
+      "dimensions": {
+        "完整性": 98.11,
+        "准确性": 100.0,
+        "一致性": 92.21,
+        "唯一性": 100.0,
+        "有效性": 96.21,
+        "及时性": 97.37
+      },
+      "rules": 11,
+      "passed_rules": 6,
+      "issues": 153
+    },
+    "complaint_case": {
+      "rows": 1500,
+      "bad_rows": 143,
+      "health": 90.47,
+      "dimensions": {
+        "完整性": 98.53,
+        "准确性": 100.0,
+        "一致性": 96.4,
+        "唯一性": 100.0,
+        "有效性": 95.07,
+        "及时性": 100.0
+      },
+      "rules": 12,
+      "passed_rules": 4,
+      "issues": 150
+    }
+  },
+  "rules": [
+    {
+      "id": "DQ-REG-001",
+      "name": "统一社会信用代码非空",
+      "table": "market_register",
+      "field": "unified_social_credit_code",
+      "dimension": "完整性",
+      "severity": "高",
+      "owner": "市场服务部登记注册科",
+      "sla_days": 3,
+      "standard_ref": "GOV-REG-002",
+      "remediation": "退回登记系统补录；无法补录的标记为不可用，不进入共享出口。",
+      "checked": 1240,
+      "failed": 6,
+      "rate": 0.004839,
+      "tolerance": 0.002,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "REG2026000131",
+          "evidence": "unified_social_credit_code 为空"
+        },
+        {
+          "record_key": "REG2026000241",
+          "evidence": "unified_social_credit_code 为空"
+        },
+        {
+          "record_key": "REG2026000807",
+          "evidence": "unified_social_credit_code 为空"
+        },
+        {
+          "record_key": "REG2026000828",
+          "evidence": "unified_social_credit_code 为空"
+        },
+        {
+          "record_key": "REG2026000976",
+          "evidence": "unified_social_credit_code 为空"
+        },
+        {
+          "record_key": "REG2026001152",
+          "evidence": "unified_social_credit_code 为空"
+        }
+      ]
+    },
+    {
+      "id": "DQ-REG-002",
+      "name": "统一社会信用代码唯一",
+      "table": "market_register",
+      "field": "unified_social_credit_code",
+      "dimension": "唯一性",
+      "severity": "高",
+      "owner": "市场服务部数据管理岗",
+      "sla_days": 3,
+      "standard_ref": "GOV-REG-002",
+      "remediation": "按更新时间保留最新一条，其余转入重复数据隔离区并核对登记档案。",
+      "checked": 1234,
+      "failed": 80,
+      "rate": 0.06483,
+      "tolerance": 0.0,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "REG2026000068",
+          "evidence": "业务主键重复：unified_social_credit_code 911331009W9H3JC8PH"
+        },
+        {
+          "record_key": "REG2026000081",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100YHJQ0B54NA"
+        },
+        {
+          "record_key": "REG2026000126",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100D6K56FYCEG"
+        },
+        {
+          "record_key": "REG2026000137",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100R5R5CWEEL2"
+        },
+        {
+          "record_key": "REG2026000140",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100KD8G6QRHF8"
+        },
+        {
+          "record_key": "REG2026000195",
+          "evidence": "业务主键重复：unified_social_credit_code 911331000RQ4RAX6L6"
+        },
+        {
+          "record_key": "REG2026000224",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100WTL1NN3HC4"
+        },
+        {
+          "record_key": "REG2026000245",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100RGBJ8FJ54J"
+        },
+        {
+          "record_key": "REG2026000249",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100B68NYCHMMT"
+        },
+        {
+          "record_key": "REG2026000254",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100K2EAXXEUNY"
+        },
+        {
+          "record_key": "REG2026000275",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100ML7UKLQ1DY"
+        },
+        {
+          "record_key": "REG2026000381",
+          "evidence": "业务主键重复：unified_social_credit_code 911331009HJ4FCA69R"
+        },
+        {
+          "record_key": "REG2026000411",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100ED2P330LJU"
+        },
+        {
+          "record_key": "REG2026000438",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100PPDY5B5TD9"
+        },
+        {
+          "record_key": "REG2026000444",
+          "evidence": "业务主键重复：unified_social_credit_code 9113310091ADQ13KJ6"
+        },
+        {
+          "record_key": "REG2026000462",
+          "evidence": "业务主键重复：unified_social_credit_code 911331003XLLXJG56K"
+        },
+        {
+          "record_key": "REG2026000463",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100CL17M9239Q"
+        },
+        {
+          "record_key": "REG2026000470",
+          "evidence": "业务主键重复：unified_social_credit_code 911331008N83Y0KLMC"
+        },
+        {
+          "record_key": "REG2026000526",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100CPFRXXG2PC"
+        },
+        {
+          "record_key": "REG2026000679",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100NQEBPMEGJ1"
+        },
+        {
+          "record_key": "REG2026000682",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100PQXK94UGNW"
+        },
+        {
+          "record_key": "REG2026000695",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100HN8JJ26G22"
+        },
+        {
+          "record_key": "REG2026000721",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100P7TAG3QLGF"
+        },
+        {
+          "record_key": "REG2026000809",
+          "evidence": "业务主键重复：unified_social_credit_code 911331000J55GE3X3B"
+        },
+        {
+          "record_key": "REG2026000859",
+          "evidence": "业务主键重复：unified_social_credit_code 9113310006GGWWW2XP"
+        },
+        {
+          "record_key": "REG2026000873",
+          "evidence": "业务主键重复：unified_social_credit_code 911331005AGKPKCLMP"
+        },
+        {
+          "record_key": "REG2026000890",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100P67M65QBL8"
+        },
+        {
+          "record_key": "REG2026000916",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100WXM39CPCQA"
+        },
+        {
+          "record_key": "REG2026000994",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100DQNCN4XC2U"
+        },
+        {
+          "record_key": "REG2026001051",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100FXAQNC4D3H"
+        },
+        {
+          "record_key": "REG2026001053",
+          "evidence": "业务主键重复：unified_social_credit_code 911331006950YLR1U2"
+        },
+        {
+          "record_key": "REG2026001059",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100QD1800NLNW"
+        },
+        {
+          "record_key": "REG2026001068",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100C9RQWJGY4M"
+        },
+        {
+          "record_key": "REG2026001070",
+          "evidence": "业务主键重复：unified_social_credit_code 911331008DDCYPU7K0"
+        },
+        {
+          "record_key": "REG2026001115",
+          "evidence": "业务主键重复：unified_social_credit_code 911331009HW4B35U91"
+        },
+        {
+          "record_key": "REG2026001124",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100KDQB0K494A"
+        },
+        {
+          "record_key": "REG2026001165",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100AHP79GGGE6"
+        },
+        {
+          "record_key": "REG2026001172",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100LLDGPH0P48"
+        },
+        {
+          "record_key": "REG2026001177",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100GCHRR5JU8R"
+        },
+        {
+          "record_key": "REG2026001181",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100DJ0C93FQP9"
+        },
+        {
+          "record_key": "REG2026DUP0001",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100ED2P330LJU"
+        },
+        {
+          "record_key": "REG2026DUP0002",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100C9RQWJGY4M"
+        },
+        {
+          "record_key": "REG2026DUP0003",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100WXM39CPCQA"
+        },
+        {
+          "record_key": "REG2026DUP0004",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100CL17M9239Q"
+        },
+        {
+          "record_key": "REG2026DUP0005",
+          "evidence": "业务主键重复：unified_social_credit_code 911331008DDCYPU7K0"
+        },
+        {
+          "record_key": "REG2026DUP0006",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100NQEBPMEGJ1"
+        },
+        {
+          "record_key": "REG2026DUP0007",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100HN8JJ26G22"
+        },
+        {
+          "record_key": "REG2026DUP0008",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100D6K56FYCEG"
+        },
+        {
+          "record_key": "REG2026DUP0009",
+          "evidence": "业务主键重复：unified_social_credit_code 911331009HJ4FCA69R"
+        },
+        {
+          "record_key": "REG2026DUP0010",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100QD1800NLNW"
+        },
+        {
+          "record_key": "REG2026DUP0011",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100PQXK94UGNW"
+        },
+        {
+          "record_key": "REG2026DUP0012",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100CPFRXXG2PC"
+        },
+        {
+          "record_key": "REG2026DUP0013",
+          "evidence": "业务主键重复：unified_social_credit_code 911331000J55GE3X3B"
+        },
+        {
+          "record_key": "REG2026DUP0014",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100YHJQ0B54NA"
+        },
+        {
+          "record_key": "REG2026DUP0015",
+          "evidence": "业务主键重复：unified_social_credit_code 911331003XLLXJG56K"
+        },
+        {
+          "record_key": "REG2026DUP0016",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100RGBJ8FJ54J"
+        },
+        {
+          "record_key": "REG2026DUP0017",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100R5R5CWEEL2"
+        },
+        {
+          "record_key": "REG2026DUP0018",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100KD8G6QRHF8"
+        },
+        {
+          "record_key": "REG2026DUP0019",
+          "evidence": "业务主键重复：unified_social_credit_code 9113310091ADQ13KJ6"
+        },
+        {
+          "record_key": "REG2026DUP0020",
+          "evidence": "业务主键重复：unified_social_credit_code 911331009W9H3JC8PH"
+        },
+        {
+          "record_key": "REG2026DUP0021",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100ML7UKLQ1DY"
+        },
+        {
+          "record_key": "REG2026DUP0022",
+          "evidence": "业务主键重复：unified_social_credit_code 911331000RQ4RAX6L6"
+        },
+        {
+          "record_key": "REG2026DUP0023",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100FXAQNC4D3H"
+        },
+        {
+          "record_key": "REG2026DUP0024",
+          "evidence": "业务主键重复：unified_social_credit_code 9113310006GGWWW2XP"
+        },
+        {
+          "record_key": "REG2026DUP0025",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100DJ0C93FQP9"
+        },
+        {
+          "record_key": "REG2026DUP0026",
+          "evidence": "业务主键重复：unified_social_credit_code 911331008N83Y0KLMC"
+        },
+        {
+          "record_key": "REG2026DUP0027",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100P67M65QBL8"
+        },
+        {
+          "record_key": "REG2026DUP0028",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100AHP79GGGE6"
+        },
+        {
+          "record_key": "REG2026DUP0029",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100P7TAG3QLGF"
+        },
+        {
+          "record_key": "REG2026DUP0030",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100LLDGPH0P48"
+        },
+        {
+          "record_key": "REG2026DUP0031",
+          "evidence": "业务主键重复：unified_social_credit_code 911331006950YLR1U2"
+        },
+        {
+          "record_key": "REG2026DUP0032",
+          "evidence": "业务主键重复：unified_social_credit_code 911331005AGKPKCLMP"
+        },
+        {
+          "record_key": "REG2026DUP0033",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100GCHRR5JU8R"
+        },
+        {
+          "record_key": "REG2026DUP0034",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100DQNCN4XC2U"
+        },
+        {
+          "record_key": "REG2026DUP0035",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100WTL1NN3HC4"
+        },
+        {
+          "record_key": "REG2026DUP0036",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100K2EAXXEUNY"
+        },
+        {
+          "record_key": "REG2026DUP0037",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100PPDY5B5TD9"
+        },
+        {
+          "record_key": "REG2026DUP0038",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100B68NYCHMMT"
+        },
+        {
+          "record_key": "REG2026DUP0039",
+          "evidence": "业务主键重复：unified_social_credit_code 91133100KDQB0K494A"
+        },
+        {
+          "record_key": "REG2026DUP0040",
+          "evidence": "业务主键重复：unified_social_credit_code 911331009HW4B35U91"
+        }
+      ]
+    },
+    {
+      "id": "DQ-REG-003",
+      "name": "统一社会信用代码校验位正确",
+      "table": "market_register",
+      "field": "unified_social_credit_code",
+      "dimension": "准确性",
+      "severity": "高",
+      "owner": "市场服务部登记注册科",
+      "sla_days": 3,
+      "standard_ref": "GOV-REG-002",
+      "remediation": "按 GB 32100-2015 重新核验；校验位错误的数据不得用于对外服务。",
+      "checked": 1234,
+      "failed": 40,
+      "rate": 0.032415,
+      "tolerance": 0.005,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "REG2026000059",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000063",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000087",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000122",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000147",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000172",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000201",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000383",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000414",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000456",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000491",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000493",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000520",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000522",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000548",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000549",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000588",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000622",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000647",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000668",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000710",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000743",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000763",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000768",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000822",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000843",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000854",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000870",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000917",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000929",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026000952",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026001002",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026001005",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026001022",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026001041",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026001101",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026001120",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026001139",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026001185",
+          "evidence": "统一社会信用代码校验位错误"
+        },
+        {
+          "record_key": "REG2026001193",
+          "evidence": "统一社会信用代码校验位错误"
+        }
+      ]
+    },
+    {
+      "id": "DQ-REG-004",
+      "name": "企业名称不含首尾空白或全角空格",
+      "table": "market_register",
+      "field": "company_name",
+      "dimension": "有效性",
+      "severity": "低",
+      "owner": "市场服务部登记注册科",
+      "sla_days": 15,
+      "standard_ref": "GOV-REG-003",
+      "remediation": "清洗时统一去除首尾空白、全角空格转半角并压缩连续空格。",
+      "checked": 1240,
+      "failed": 45,
+      "rate": 0.03629,
+      "tolerance": 0.01,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "REG2026000006",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000009",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000017",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000018",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000138",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000149",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000173",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000185",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000189",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000199",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000229",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000262",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000291",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000315",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000331",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000349",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000363",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000372",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000379",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000395",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000404",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000420",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000523",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000543",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000563",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000606",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000612",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000623",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000672",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000676",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000765",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000839",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000889",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000920",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000935",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000944",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000957",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026000999",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026001011",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026001017",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026001114",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026001136",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026001146",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026001150",
+          "evidence": "企业名称含首尾空白或全角空格"
+        },
+        {
+          "record_key": "REG2026001189",
+          "evidence": "企业名称含首尾空白或全角空格"
+        }
+      ]
+    },
+    {
+      "id": "DQ-REG-005",
+      "name": "企业名称非空",
+      "table": "market_register",
+      "field": "company_name",
+      "dimension": "完整性",
+      "severity": "高",
+      "owner": "市场服务部登记注册科",
+      "sla_days": 3,
+      "standard_ref": "GOV-REG-003",
+      "remediation": "联系登记系统核对原始档案后补录。",
+      "checked": 1240,
+      "failed": 0,
+      "rate": 0.0,
+      "tolerance": 0.002,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "DQ-REG-006",
+      "name": "注册日期格式合法",
+      "table": "market_register",
+      "field": "reg_date",
+      "dimension": "有效性",
+      "severity": "高",
+      "owner": "市场服务部登记注册科",
+      "sla_days": 3,
+      "standard_ref": "GOV-REG-004",
+      "remediation": "按 YYYY-MM-DD 重新解析；无法解析的转人工核对营业执照。",
+      "checked": 1240,
+      "failed": 6,
+      "rate": 0.004839,
+      "tolerance": 0.002,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "REG2026000284",
+          "evidence": "reg_date 不是合法日期"
+        },
+        {
+          "record_key": "REG2026000544",
+          "evidence": "reg_date 不是合法日期"
+        },
+        {
+          "record_key": "REG2026000746",
+          "evidence": "reg_date 不是合法日期"
+        },
+        {
+          "record_key": "REG2026000792",
+          "evidence": "reg_date 不是合法日期"
+        },
+        {
+          "record_key": "REG2026000995",
+          "evidence": "reg_date 不是合法日期"
+        },
+        {
+          "record_key": "REG2026001064",
+          "evidence": "reg_date 不是合法日期"
+        }
+      ]
+    },
+    {
+      "id": "DQ-REG-007",
+      "name": "注册日期不得晚于数据截止日",
+      "table": "market_register",
+      "field": "reg_date",
+      "dimension": "有效性",
+      "severity": "高",
+      "owner": "市场服务部登记注册科",
+      "sla_days": 3,
+      "standard_ref": "GOV-REG-004",
+      "remediation": "核对系统时间与登记日期，未来日期视为录入错误并回退源系统。",
+      "checked": 1234,
+      "failed": 12,
+      "rate": 0.009724,
+      "tolerance": 0.0,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "REG2026000033",
+          "evidence": "reg_date 晚于数据截止日"
+        },
+        {
+          "record_key": "REG2026000194",
+          "evidence": "reg_date 晚于数据截止日"
+        },
+        {
+          "record_key": "REG2026000272",
+          "evidence": "reg_date 晚于数据截止日"
+        },
+        {
+          "record_key": "REG2026000345",
+          "evidence": "reg_date 晚于数据截止日"
+        },
+        {
+          "record_key": "REG2026000482",
+          "evidence": "reg_date 晚于数据截止日"
+        },
+        {
+          "record_key": "REG2026000629",
+          "evidence": "reg_date 晚于数据截止日"
+        },
+        {
+          "record_key": "REG2026000639",
+          "evidence": "reg_date 晚于数据截止日"
+        },
+        {
+          "record_key": "REG2026000785",
+          "evidence": "reg_date 晚于数据截止日"
+        },
+        {
+          "record_key": "REG2026000821",
+          "evidence": "reg_date 晚于数据截止日"
+        },
+        {
+          "record_key": "REG2026000919",
+          "evidence": "reg_date 晚于数据截止日"
+        },
+        {
+          "record_key": "REG2026001042",
+          "evidence": "reg_date 晚于数据截止日"
+        },
+        {
+          "record_key": "REG2026001079",
+          "evidence": "reg_date 晚于数据截止日"
+        }
+      ]
+    },
+    {
+      "id": "DQ-REG-008",
+      "name": "注册资本在合理区间",
+      "table": "market_register",
+      "field": "reg_capital_wan",
+      "dimension": "有效性",
+      "severity": "中",
+      "owner": "市场服务部登记注册科",
+      "sla_days": 7,
+      "standard_ref": "GOV-REG-005",
+      "remediation": "负值或异常大值转人工核对；保留原值并记录修复痕迹。",
+      "checked": 1240,
+      "failed": 6,
+      "rate": 0.004839,
+      "tolerance": 0.005,
+      "passed": true,
+      "failures": [
+        {
+          "record_key": "REG2026000202",
+          "evidence": "reg_capital_wan 超出允许范围：-100.00"
+        },
+        {
+          "record_key": "REG2026000351",
+          "evidence": "reg_capital_wan 超出允许范围：-100.00"
+        },
+        {
+          "record_key": "REG2026000663",
+          "evidence": "reg_capital_wan 超出允许范围：-100.00"
+        },
+        {
+          "record_key": "REG2026000732",
+          "evidence": "reg_capital_wan 超出允许范围：-100.00"
+        },
+        {
+          "record_key": "REG2026000744",
+          "evidence": "reg_capital_wan 超出允许范围：-100.00"
+        },
+        {
+          "record_key": "REG2026000762",
+          "evidence": "reg_capital_wan 超出允许范围：-100.00"
+        }
+      ]
+    },
+    {
+      "id": "DQ-REG-009",
+      "name": "联系电话非空",
+      "table": "market_register",
+      "field": "contact_phone",
+      "dimension": "完整性",
+      "severity": "中",
+      "owner": "市场服务部企业服务科",
+      "sla_days": 7,
+      "standard_ref": "GOV-REG-010",
+      "remediation": "通过政务服务大厅、年报名册等渠道补全；补全前不用于主动触达。",
+      "checked": 1240,
+      "failed": 65,
+      "rate": 0.052419,
+      "tolerance": 0.02,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "REG2026000003",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000023",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000036",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000057",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000076",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000086",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000093",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000142",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000144",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000153",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000186",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000221",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000250",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000259",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000260",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000263",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000280",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000283",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000302",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000319",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000321",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000327",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000366",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000370",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000423",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000460",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000540",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000547",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000558",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000569",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000584",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000585",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000589",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000631",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000696",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000714",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000736",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000772",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000777",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000791",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000795",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000860",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000880",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000906",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000907",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000913",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000926",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000941",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000968",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026000996",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026001008",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026001020",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026001025",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026001031",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026001045",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026001050",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026001056",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026001084",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026001088",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026001091",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026001111",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026001138",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026001161",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026001173",
+          "evidence": "contact_phone 为空"
+        },
+        {
+          "record_key": "REG2026001182",
+          "evidence": "contact_phone 为空"
+        }
+      ]
+    },
+    {
+      "id": "DQ-REG-010",
+      "name": "联系电话符合手机号格式",
+      "table": "market_register",
+      "field": "contact_phone",
+      "dimension": "有效性",
+      "severity": "高",
+      "owner": "市场服务部企业服务科",
+      "sla_days": 3,
+      "standard_ref": "GOV-REG-010",
+      "remediation": "去除分隔符、+86 前缀，全角数字转半角后重新校验；仍不合规的置空。",
+      "checked": 1175,
+      "failed": 70,
+      "rate": 0.059574,
+      "tolerance": 0.01,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "REG2026000031",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000038",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000040",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000047",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000054",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000055",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000061",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000090",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000099",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000108",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000160",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000164",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000177",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000209",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000233",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000239",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000247",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000256",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000265",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000269",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000296",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000353",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000365",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000368",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000374",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000385",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000406",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000412",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000419",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000439",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000440",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000442",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000447",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000472",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000566",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000613",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000626",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000643",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000689",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000711",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000730",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000742",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000759",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000760",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000787",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000790",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000798",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000823",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000827",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000829",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000844",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000846",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000867",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000882",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000908",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000948",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000960",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000971",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000979",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000988",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026001023",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026001026",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026001035",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026001039",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026001049",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026001065",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026001106",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026001119",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026001155",
+          "evidence": "contact_phone 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026001178",
+          "evidence": "contact_phone 不符合格式规范"
+        }
+      ]
+    },
+    {
+      "id": "DQ-REG-011",
+      "name": "电子邮箱格式合法",
+      "table": "market_register",
+      "field": "contact_email",
+      "dimension": "有效性",
+      "severity": "低",
+      "owner": "市场服务部企业服务科",
+      "sla_days": 15,
+      "standard_ref": "GOV-REG-011",
+      "remediation": "统一转小写并校验域名；不合规邮箱置空，不阻断主数据。",
+      "checked": 1240,
+      "failed": 25,
+      "rate": 0.020161,
+      "tolerance": 0.02,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "REG2026000089",
+          "evidence": "contact_email 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000150",
+          "evidence": "contact_email 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000163",
+          "evidence": "contact_email 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000167",
+          "evidence": "contact_email 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000206",
+          "evidence": "contact_email 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000207",
+          "evidence": "contact_email 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000227",
+          "evidence": "contact_email 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000264",
+          "evidence": "contact_email 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000305",
+          "evidence": "contact_email 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000429",
+          "evidence": "contact_email 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000450",
+          "evidence": "contact_email 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000504",
+          "evidence": "contact_email 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000717",
+          "evidence": "contact_email 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000826",
+          "evidence": "contact_email 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000830",
+          "evidence": "contact_email 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026000989",
+          "evidence": "contact_email 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026001006",
+          "evidence": "contact_email 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026001062",
+          "evidence": "contact_email 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026001071",
+          "evidence": "contact_email 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026001092",
+          "evidence": "contact_email 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026001129",
+          "evidence": "contact_email 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026001147",
+          "evidence": "contact_email 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026001168",
+          "evidence": "contact_email 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026001188",
+          "evidence": "contact_email 不符合格式规范"
+        },
+        {
+          "record_key": "REG2026001192",
+          "evidence": "contact_email 不符合格式规范"
+        }
+      ]
+    },
+    {
+      "id": "DQ-REG-012",
+      "name": "行业代码在标准码表中",
+      "table": "market_register",
+      "field": "industry_code",
+      "dimension": "有效性",
+      "severity": "中",
+      "owner": "市场服务部数据管理岗",
+      "sla_days": 7,
+      "standard_ref": "GOV-REG-006",
+      "remediation": "行业名称按 GB/T 4754-2017 映射为标准代码；无法映射的置空并回源核实。",
+      "checked": 1240,
+      "failed": 32,
+      "rate": 0.025806,
+      "tolerance": 0.005,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "REG2026000002",
+          "evidence": "关联主体或码值不存在：Z999"
+        },
+        {
+          "record_key": "REG2026000007",
+          "evidence": "关联主体或码值不存在：Z999"
+        },
+        {
+          "record_key": "REG2026000083",
+          "evidence": "关联主体或码值不存在：生态保护和环境治理业"
+        },
+        {
+          "record_key": "REG2026000166",
+          "evidence": "关联主体或码值不存在：商务服务业"
+        },
+        {
+          "record_key": "REG2026000168",
+          "evidence": "关联主体或码值不存在：房地产业"
+        },
+        {
+          "record_key": "REG2026000188",
+          "evidence": "关联主体或码值不存在：货币金融服务"
+        },
+        {
+          "record_key": "REG2026000190",
+          "evidence": "关联主体或码值不存在：化学原料和化学制品制造业"
+        },
+        {
+          "record_key": "REG2026000200",
+          "evidence": "关联主体或码值不存在：房地产业"
+        },
+        {
+          "record_key": "REG2026000212",
+          "evidence": "关联主体或码值不存在：商务服务业"
+        },
+        {
+          "record_key": "REG2026000258",
+          "evidence": "关联主体或码值不存在：Z999"
+        },
+        {
+          "record_key": "REG2026000266",
+          "evidence": "关联主体或码值不存在：农业"
+        },
+        {
+          "record_key": "REG2026000401",
+          "evidence": "关联主体或码值不存在：货币金融服务"
+        },
+        {
+          "record_key": "REG2026000435",
+          "evidence": "关联主体或码值不存在：道路运输业"
+        },
+        {
+          "record_key": "REG2026000502",
+          "evidence": "关联主体或码值不存在：互联网和相关服务"
+        },
+        {
+          "record_key": "REG2026000515",
+          "evidence": "关联主体或码值不存在：Z999"
+        },
+        {
+          "record_key": "REG2026000539",
+          "evidence": "关联主体或码值不存在：农副食品加工业"
+        },
+        {
+          "record_key": "REG2026000574",
+          "evidence": "关联主体或码值不存在：Z999"
+        },
+        {
+          "record_key": "REG2026000611",
+          "evidence": "关联主体或码值不存在：专业技术服务业"
+        },
+        {
+          "record_key": "REG2026000635",
+          "evidence": "关联主体或码值不存在：专业技术服务业"
+        },
+        {
+          "record_key": "REG2026000660",
+          "evidence": "关联主体或码值不存在：Z999"
+        },
+        {
+          "record_key": "REG2026000669",
+          "evidence": "关联主体或码值不存在：建筑装饰、装修和其他建筑业"
+        },
+        {
+          "record_key": "REG2026000698",
+          "evidence": "关联主体或码值不存在：Z999"
+        },
+        {
+          "record_key": "REG2026000705",
+          "evidence": "关联主体或码值不存在：Z999"
+        },
+        {
+          "record_key": "REG2026000803",
+          "evidence": "关联主体或码值不存在：Z999"
+        },
+        {
+          "record_key": "REG2026000858",
+          "evidence": "关联主体或码值不存在：研究和试验发展"
+        },
+        {
+          "record_key": "REG2026000865",
+          "evidence": "关联主体或码值不存在：计算机、通信和其他电子设备制造业"
+        },
+        {
+          "record_key": "REG2026000895",
+          "evidence": "关联主体或码值不存在：文化艺术业"
+        },
+        {
+          "record_key": "REG2026000915",
+          "evidence": "关联主体或码值不存在：农业"
+        },
+        {
+          "record_key": "REG2026000987",
+          "evidence": "关联主体或码值不存在：Z999"
+        },
+        {
+          "record_key": "REG2026001044",
+          "evidence": "关联主体或码值不存在：货币金融服务"
+        },
+        {
+          "record_key": "REG2026001125",
+          "evidence": "关联主体或码值不存在：商务服务业"
+        },
+        {
+          "record_key": "REG2026001144",
+          "evidence": "关联主体或码值不存在：Z999"
+        }
+      ]
+    },
+    {
+      "id": "DQ-REG-013",
+      "name": "法定代表人非空",
+      "table": "market_register",
+      "field": "legal_person",
+      "dimension": "完整性",
+      "severity": "中",
+      "owner": "市场服务部登记注册科",
+      "sla_days": 7,
+      "standard_ref": "GOV-REG-009",
+      "remediation": "核对登记档案补录；属个人信息的字段仅限授权人员访问。",
+      "checked": 1240,
+      "failed": 20,
+      "rate": 0.016129,
+      "tolerance": 0.02,
+      "passed": true,
+      "failures": [
+        {
+          "record_key": "REG2026000030",
+          "evidence": "legal_person 为空"
+        },
+        {
+          "record_key": "REG2026000222",
+          "evidence": "legal_person 为空"
+        },
+        {
+          "record_key": "REG2026000246",
+          "evidence": "legal_person 为空"
+        },
+        {
+          "record_key": "REG2026000267",
+          "evidence": "legal_person 为空"
+        },
+        {
+          "record_key": "REG2026000292",
+          "evidence": "legal_person 为空"
+        },
+        {
+          "record_key": "REG2026000471",
+          "evidence": "legal_person 为空"
+        },
+        {
+          "record_key": "REG2026000478",
+          "evidence": "legal_person 为空"
+        },
+        {
+          "record_key": "REG2026000617",
+          "evidence": "legal_person 为空"
+        },
+        {
+          "record_key": "REG2026000706",
+          "evidence": "legal_person 为空"
+        },
+        {
+          "record_key": "REG2026000729",
+          "evidence": "legal_person 为空"
+        },
+        {
+          "record_key": "REG2026000754",
+          "evidence": "legal_person 为空"
+        },
+        {
+          "record_key": "REG2026000817",
+          "evidence": "legal_person 为空"
+        },
+        {
+          "record_key": "REG2026000910",
+          "evidence": "legal_person 为空"
+        },
+        {
+          "record_key": "REG2026000940",
+          "evidence": "legal_person 为空"
+        },
+        {
+          "record_key": "REG2026000942",
+          "evidence": "legal_person 为空"
+        },
+        {
+          "record_key": "REG2026000967",
+          "evidence": "legal_person 为空"
+        },
+        {
+          "record_key": "REG2026000990",
+          "evidence": "legal_person 为空"
+        },
+        {
+          "record_key": "REG2026001021",
+          "evidence": "legal_person 为空"
+        },
+        {
+          "record_key": "REG2026001058",
+          "evidence": "legal_person 为空"
+        },
+        {
+          "record_key": "REG2026001157",
+          "evidence": "legal_person 为空"
+        }
+      ]
+    },
+    {
+      "id": "DQ-REG-014",
+      "name": "登记住所与行政区划代码一致",
+      "table": "market_register",
+      "field": "district_code",
+      "dimension": "一致性",
+      "severity": "高",
+      "owner": "市场服务部数据管理岗",
+      "sla_days": 3,
+      "standard_ref": "GOV-REG-007",
+      "remediation": "以住所中的县级行政区名为准修正 district_code，修正记录写入 dq_flags。",
+      "checked": 1240,
+      "failed": 28,
+      "rate": 0.022581,
+      "tolerance": 0.005,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "REG2026000119",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026000145",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026000154",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026000184",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026000208",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026000276",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026000323",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026000338",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026000386",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026000425",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026000432",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026000443",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026000457",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026000494",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026000512",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026000680",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026000691",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026000745",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026000892",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026000959",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026000977",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026000984",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026001066",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026001104",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026001140",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026001142",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026001191",
+          "evidence": "登记住所与区划代码不一致"
+        },
+        {
+          "record_key": "REG2026001196",
+          "evidence": "登记住所与区划代码不一致"
+        }
+      ]
+    },
+    {
+      "id": "DQ-REG-015",
+      "name": "经营状态在标准码表中",
+      "table": "market_register",
+      "field": "status",
+      "dimension": "有效性",
+      "severity": "高",
+      "owner": "市场服务部登记注册科",
+      "sla_days": 3,
+      "standard_ref": "GOV-REG-012",
+      "remediation": "同义词按映射表归一（正常→存续、在营→在业）；无法映射的转人工。",
+      "checked": 1240,
+      "failed": 40,
+      "rate": 0.032258,
+      "tolerance": 0.01,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "REG2026000025",
+          "evidence": "status 值不在标准码表：开业"
+        },
+        {
+          "record_key": "REG2026000032",
+          "evidence": "status 值不在标准码表：正常"
+        },
+        {
+          "record_key": "REG2026000034",
+          "evidence": "status 值不在标准码表：存续经营"
+        },
+        {
+          "record_key": "REG2026000052",
+          "evidence": "status 值不在标准码表：经营中"
+        },
+        {
+          "record_key": "REG2026000097",
+          "evidence": "status 值不在标准码表：状态待核实"
+        },
+        {
+          "record_key": "REG2026000101",
+          "evidence": "status 值不在标准码表：状态待核实"
+        },
+        {
+          "record_key": "REG2026000104",
+          "evidence": "status 值不在标准码表：正常"
+        },
+        {
+          "record_key": "REG2026000105",
+          "evidence": "status 值不在标准码表：经营中"
+        },
+        {
+          "record_key": "REG2026000141",
+          "evidence": "status 值不在标准码表：存续经营"
+        },
+        {
+          "record_key": "REG2026000174",
+          "evidence": "status 值不在标准码表：开业"
+        },
+        {
+          "record_key": "REG2026000228",
+          "evidence": "status 值不在标准码表：状态待核实"
+        },
+        {
+          "record_key": "REG2026000231",
+          "evidence": "status 值不在标准码表：在营"
+        },
+        {
+          "record_key": "REG2026000277",
+          "evidence": "status 值不在标准码表：存续经营"
+        },
+        {
+          "record_key": "REG2026000282",
+          "evidence": "status 值不在标准码表：在营"
+        },
+        {
+          "record_key": "REG2026000357",
+          "evidence": "status 值不在标准码表：状态待核实"
+        },
+        {
+          "record_key": "REG2026000364",
+          "evidence": "status 值不在标准码表：经营中"
+        },
+        {
+          "record_key": "REG2026000369",
+          "evidence": "status 值不在标准码表：在营"
+        },
+        {
+          "record_key": "REG2026000376",
+          "evidence": "status 值不在标准码表：开业"
+        },
+        {
+          "record_key": "REG2026000393",
+          "evidence": "status 值不在标准码表：经营中"
+        },
+        {
+          "record_key": "REG2026000396",
+          "evidence": "status 值不在标准码表：存续经营"
+        },
+        {
+          "record_key": "REG2026000413",
+          "evidence": "status 值不在标准码表：在营"
+        },
+        {
+          "record_key": "REG2026000455",
+          "evidence": "status 值不在标准码表：状态待核实"
+        },
+        {
+          "record_key": "REG2026000474",
+          "evidence": "status 值不在标准码表：状态待核实"
+        },
+        {
+          "record_key": "REG2026000506",
+          "evidence": "status 值不在标准码表：正常"
+        },
+        {
+          "record_key": "REG2026000510",
+          "evidence": "status 值不在标准码表：在营"
+        },
+        {
+          "record_key": "REG2026000554",
+          "evidence": "status 值不在标准码表：状态待核实"
+        },
+        {
+          "record_key": "REG2026000580",
+          "evidence": "status 值不在标准码表：经营中"
+        },
+        {
+          "record_key": "REG2026000641",
+          "evidence": "status 值不在标准码表：状态待核实"
+        },
+        {
+          "record_key": "REG2026000674",
+          "evidence": "status 值不在标准码表：开业"
+        },
+        {
+          "record_key": "REG2026000699",
+          "evidence": "status 值不在标准码表：正常"
+        },
+        {
+          "record_key": "REG2026000767",
+          "evidence": "status 值不在标准码表：经营中"
+        },
+        {
+          "record_key": "REG2026000802",
+          "evidence": "status 值不在标准码表：正常"
+        },
+        {
+          "record_key": "REG2026000820",
+          "evidence": "status 值不在标准码表：存续经营"
+        },
+        {
+          "record_key": "REG2026000877",
+          "evidence": "status 值不在标准码表：存续经营"
+        },
+        {
+          "record_key": "REG2026000878",
+          "evidence": "status 值不在标准码表：开业"
+        },
+        {
+          "record_key": "REG2026000884",
+          "evidence": "status 值不在标准码表：状态待核实"
+        },
+        {
+          "record_key": "REG2026000898",
+          "evidence": "status 值不在标准码表：开业"
+        },
+        {
+          "record_key": "REG2026000921",
+          "evidence": "status 值不在标准码表：正常"
+        },
+        {
+          "record_key": "REG2026001163",
+          "evidence": "status 值不在标准码表：状态待核实"
+        },
+        {
+          "record_key": "REG2026001176",
+          "evidence": "status 值不在标准码表：在营"
+        }
+      ]
+    },
+    {
+      "id": "DQ-REG-016",
+      "name": "更新时间非空",
+      "table": "market_register",
+      "field": "update_time",
+      "dimension": "完整性",
+      "severity": "中",
+      "owner": "市场服务部数据管理岗",
+      "sla_days": 7,
+      "standard_ref": "GOV-REG-013",
+      "remediation": "由采集任务补写抽取时间；不得以当前时间伪造源系统更新时间。",
+      "checked": 1240,
+      "failed": 8,
+      "rate": 0.006452,
+      "tolerance": 0.005,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "REG2026000361",
+          "evidence": "update_time 为空"
+        },
+        {
+          "record_key": "REG2026000519",
+          "evidence": "update_time 为空"
+        },
+        {
+          "record_key": "REG2026000573",
+          "evidence": "update_time 为空"
+        },
+        {
+          "record_key": "REG2026000591",
+          "evidence": "update_time 为空"
+        },
+        {
+          "record_key": "REG2026000596",
+          "evidence": "update_time 为空"
+        },
+        {
+          "record_key": "REG2026001108",
+          "evidence": "update_time 为空"
+        },
+        {
+          "record_key": "REG2026001130",
+          "evidence": "update_time 为空"
+        },
+        {
+          "record_key": "REG2026001158",
+          "evidence": "update_time 为空"
+        }
+      ]
+    },
+    {
+      "id": "DQ-REG-017",
+      "name": "数据更新不超过 365 天",
+      "table": "market_register",
+      "field": "update_time",
+      "dimension": "及时性",
+      "severity": "中",
+      "owner": "市场服务部数据管理岗",
+      "sla_days": 7,
+      "standard_ref": "GOV-REG-013",
+      "remediation": "核查源系统同步任务；确认主体仍存续的补一次全量同步。",
+      "checked": 1232,
+      "failed": 50,
+      "rate": 0.040584,
+      "tolerance": 0.1,
+      "passed": true,
+      "failures": [
+        {
+          "record_key": "REG2026000015",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000016",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000028",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000077",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000079",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000080",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000159",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000230",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000232",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000236",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000238",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000240",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000373",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000382",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000389",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000394",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000437",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000448",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000449",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000464",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000495",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000498",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000521",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000529",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000538",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000565",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000599",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000627",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000715",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000716",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000724",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000748",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000775",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000811",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000840",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000848",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000872",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000879",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000896",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000912",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000924",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000932",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000973",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026000991",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026001061",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026001077",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026001089",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026001094",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026001121",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "REG2026001167",
+          "evidence": "update_time 超过 365 天未更新"
+        }
+      ]
+    },
+    {
+      "id": "DQ-REG-018",
+      "name": "登记住所非空",
+      "table": "market_register",
+      "field": "address",
+      "dimension": "完整性",
+      "severity": "中",
+      "owner": "市场服务部登记注册科",
+      "sla_days": 7,
+      "standard_ref": "GOV-REG-008",
+      "remediation": "回源核对营业执照住所；空地址不进入对外共享出口。",
+      "checked": 1240,
+      "failed": 12,
+      "rate": 0.009677,
+      "tolerance": 0.01,
+      "passed": true,
+      "failures": [
+        {
+          "record_key": "REG2026000067",
+          "evidence": "address 为空"
+        },
+        {
+          "record_key": "REG2026000169",
+          "evidence": "address 为空"
+        },
+        {
+          "record_key": "REG2026000196",
+          "evidence": "address 为空"
+        },
+        {
+          "record_key": "REG2026000572",
+          "evidence": "address 为空"
+        },
+        {
+          "record_key": "REG2026000595",
+          "evidence": "address 为空"
+        },
+        {
+          "record_key": "REG2026000602",
+          "evidence": "address 为空"
+        },
+        {
+          "record_key": "REG2026000664",
+          "evidence": "address 为空"
+        },
+        {
+          "record_key": "REG2026000697",
+          "evidence": "address 为空"
+        },
+        {
+          "record_key": "REG2026000738",
+          "evidence": "address 为空"
+        },
+        {
+          "record_key": "REG2026001074",
+          "evidence": "address 为空"
+        },
+        {
+          "record_key": "REG2026001081",
+          "evidence": "address 为空"
+        },
+        {
+          "record_key": "REG2026001170",
+          "evidence": "address 为空"
+        }
+      ]
+    },
+    {
+      "id": "DQ-REG-019",
+      "name": "行政区划代码在标准码表中",
+      "table": "market_register",
+      "field": "district_code",
+      "dimension": "有效性",
+      "severity": "高",
+      "owner": "市场服务部数据管理岗",
+      "sla_days": 3,
+      "standard_ref": "GOV-REG-007",
+      "remediation": "按民政部门行政区划代码修正；功能区代码仅限雄安新区使用。",
+      "checked": 1240,
+      "failed": 0,
+      "rate": 0.0,
+      "tolerance": 0.002,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "DQ-REG-020",
+      "name": "更新时间不早于注册日期",
+      "table": "market_register",
+      "field": "update_time",
+      "dimension": "一致性",
+      "severity": "低",
+      "owner": "市场服务部数据管理岗",
+      "sla_days": 15,
+      "standard_ref": "GOV-REG-013",
+      "remediation": "核对源系统时间戳；确认采集链路是否存在时区或回拨问题。",
+      "checked": 1232,
+      "failed": 12,
+      "rate": 0.00974,
+      "tolerance": 0.01,
+      "passed": true,
+      "failures": [
+        {
+          "record_key": "REG2026000033",
+          "evidence": "update_time 早于 reg_date"
+        },
+        {
+          "record_key": "REG2026000194",
+          "evidence": "update_time 早于 reg_date"
+        },
+        {
+          "record_key": "REG2026000272",
+          "evidence": "update_time 早于 reg_date"
+        },
+        {
+          "record_key": "REG2026000345",
+          "evidence": "update_time 早于 reg_date"
+        },
+        {
+          "record_key": "REG2026000482",
+          "evidence": "update_time 早于 reg_date"
+        },
+        {
+          "record_key": "REG2026000629",
+          "evidence": "update_time 早于 reg_date"
+        },
+        {
+          "record_key": "REG2026000639",
+          "evidence": "update_time 早于 reg_date"
+        },
+        {
+          "record_key": "REG2026000785",
+          "evidence": "update_time 早于 reg_date"
+        },
+        {
+          "record_key": "REG2026000821",
+          "evidence": "update_time 早于 reg_date"
+        },
+        {
+          "record_key": "REG2026000919",
+          "evidence": "update_time 早于 reg_date"
+        },
+        {
+          "record_key": "REG2026001042",
+          "evidence": "update_time 早于 reg_date"
+        },
+        {
+          "record_key": "REG2026001079",
+          "evidence": "update_time 早于 reg_date"
+        }
+      ]
+    },
+    {
+      "id": "DQ-REG-021",
+      "name": "注册日期非空",
+      "table": "market_register",
+      "field": "reg_date",
+      "dimension": "完整性",
+      "severity": "高",
+      "owner": "市场服务部登记注册科",
+      "sla_days": 3,
+      "standard_ref": "GOV-REG-004",
+      "remediation": "回源补录营业执照成立日期；无法补录的主体不进入活跃主体统计。",
+      "checked": 1240,
+      "failed": 0,
+      "rate": 0.0,
+      "tolerance": 0.002,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "DQ-CRE-001",
+      "name": "信用记录信用代码非空",
+      "table": "credit_rating",
+      "field": "unified_social_credit_code",
+      "dimension": "完整性",
+      "severity": "高",
+      "owner": "市场服务部信用管理科",
+      "sla_days": 3,
+      "standard_ref": "GOV-CRE-002",
+      "remediation": "回源补录信用代码，空值记录不得进入信用画像。",
+      "checked": 950,
+      "failed": 0,
+      "rate": 0.0,
+      "tolerance": 0.002,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "DQ-CRE-002",
+      "name": "信用记录可关联到市场主体",
+      "table": "credit_rating",
+      "field": "unified_social_credit_code",
+      "dimension": "一致性",
+      "severity": "高",
+      "owner": "市场服务部信用管理科",
+      "sla_days": 3,
+      "standard_ref": "GOV-CRE-002",
+      "remediation": "按信用代码补建主体关联；确认主体已注销的标注为历史评价。",
+      "checked": 950,
+      "failed": 30,
+      "rate": 0.031579,
+      "tolerance": 0.005,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "CR2026000031",
+          "evidence": "关联主体或码值不存在：91133100C97DE6CTJ7"
+        },
+        {
+          "record_key": "CR2026000056",
+          "evidence": "关联主体或码值不存在：91133100K7W1WBM94C"
+        },
+        {
+          "record_key": "CR2026000105",
+          "evidence": "关联主体或码值不存在：91133100QTAE4999F4"
+        },
+        {
+          "record_key": "CR2026000108",
+          "evidence": "关联主体或码值不存在：91133100R47XB5J990"
+        },
+        {
+          "record_key": "CR2026000238",
+          "evidence": "关联主体或码值不存在：9113310013W5PFK8PN"
+        },
+        {
+          "record_key": "CR2026000249",
+          "evidence": "关联主体或码值不存在：91133100J80EYCU8PR"
+        },
+        {
+          "record_key": "CR2026000325",
+          "evidence": "关联主体或码值不存在：91133100A9XUAP3YYY"
+        },
+        {
+          "record_key": "CR2026000333",
+          "evidence": "关联主体或码值不存在：911331001L4EF8RQ6R"
+        },
+        {
+          "record_key": "CR2026000338",
+          "evidence": "关联主体或码值不存在：91133100K5AMUG4DWN"
+        },
+        {
+          "record_key": "CR2026000361",
+          "evidence": "关联主体或码值不存在：911331003QCPGQADR7"
+        },
+        {
+          "record_key": "CR2026000427",
+          "evidence": "关联主体或码值不存在：91133100LBFQXG9LU5"
+        },
+        {
+          "record_key": "CR2026000467",
+          "evidence": "关联主体或码值不存在：91133100WQFB50PQ0U"
+        },
+        {
+          "record_key": "CR2026000492",
+          "evidence": "关联主体或码值不存在：91133100J2J9C9WYL2"
+        },
+        {
+          "record_key": "CR2026000552",
+          "evidence": "关联主体或码值不存在：91133100463P80MG0E"
+        },
+        {
+          "record_key": "CR2026000561",
+          "evidence": "关联主体或码值不存在：91133100213R6EN83Y"
+        },
+        {
+          "record_key": "CR2026000572",
+          "evidence": "关联主体或码值不存在：91133100K619W2PCKK"
+        },
+        {
+          "record_key": "CR2026000573",
+          "evidence": "关联主体或码值不存在：91133100MNUXK13GP2"
+        },
+        {
+          "record_key": "CR2026000616",
+          "evidence": "关联主体或码值不存在：91133100L885BCE62T"
+        },
+        {
+          "record_key": "CR2026000622",
+          "evidence": "关联主体或码值不存在：911331001B5JW83CCM"
+        },
+        {
+          "record_key": "CR2026000653",
+          "evidence": "关联主体或码值不存在：91133100GQF1EFW4F2"
+        },
+        {
+          "record_key": "CR2026000669",
+          "evidence": "关联主体或码值不存在：91133100MC01KL7GG8"
+        },
+        {
+          "record_key": "CR2026000670",
+          "evidence": "关联主体或码值不存在：91133100T2K34HME4M"
+        },
+        {
+          "record_key": "CR2026000685",
+          "evidence": "关联主体或码值不存在：91133100J89WBD3AEP"
+        },
+        {
+          "record_key": "CR2026000701",
+          "evidence": "关联主体或码值不存在：91133100427WUQG642"
+        },
+        {
+          "record_key": "CR2026000722",
+          "evidence": "关联主体或码值不存在：91133100NHLD3XMWEK"
+        },
+        {
+          "record_key": "CR2026000731",
+          "evidence": "关联主体或码值不存在：91133100TQ7WMA5N0B"
+        },
+        {
+          "record_key": "CR2026000745",
+          "evidence": "关联主体或码值不存在：91133100K77QF7C5H5"
+        },
+        {
+          "record_key": "CR2026000794",
+          "evidence": "关联主体或码值不存在：91133100JGYYFTNXNL"
+        },
+        {
+          "record_key": "CR2026000806",
+          "evidence": "关联主体或码值不存在：91133100EJCPQXJ2YB"
+        },
+        {
+          "record_key": "CR2026000814",
+          "evidence": "关联主体或码值不存在：91133100C8L8TT8WKL"
+        }
+      ]
+    },
+    {
+      "id": "DQ-CRE-003",
+      "name": "信用评分在 0-100 之间",
+      "table": "credit_rating",
+      "field": "credit_score",
+      "dimension": "有效性",
+      "severity": "高",
+      "owner": "市场服务部信用管理科",
+      "sla_days": 3,
+      "standard_ref": "GOV-CRE-003",
+      "remediation": "越界分数回退评级机构复核，修复前不参与信用等级计算。",
+      "checked": 950,
+      "failed": 8,
+      "rate": 0.008421,
+      "tolerance": 0.002,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "CR2026000150",
+          "evidence": "credit_score 超出允许范围：105"
+        },
+        {
+          "record_key": "CR2026000207",
+          "evidence": "credit_score 超出允许范围：105"
+        },
+        {
+          "record_key": "CR2026000304",
+          "evidence": "credit_score 超出允许范围：105"
+        },
+        {
+          "record_key": "CR2026000376",
+          "evidence": "credit_score 超出允许范围：-5"
+        },
+        {
+          "record_key": "CR2026000415",
+          "evidence": "credit_score 超出允许范围：105"
+        },
+        {
+          "record_key": "CR2026000702",
+          "evidence": "credit_score 超出允许范围：-5"
+        },
+        {
+          "record_key": "CR2026000798",
+          "evidence": "credit_score 超出允许范围：-5"
+        },
+        {
+          "record_key": "CR2026000923",
+          "evidence": "credit_score 超出允许范围：-5"
+        }
+      ]
+    },
+    {
+      "id": "DQ-CRE-004",
+      "name": "信用等级在标准码表中",
+      "table": "credit_rating",
+      "field": "credit_level",
+      "dimension": "有效性",
+      "severity": "高",
+      "owner": "市场服务部信用管理科",
+      "sla_days": 3,
+      "standard_ref": "GOV-CRE-004",
+      "remediation": "大小写、空格归一后按评分区间重算等级。",
+      "checked": 950,
+      "failed": 22,
+      "rate": 0.023158,
+      "tolerance": 0.005,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "CR2026000010",
+          "evidence": "credit_level 值不在标准码表：A "
+        },
+        {
+          "record_key": "CR2026000062",
+          "evidence": "credit_level 值不在标准码表：优秀"
+        },
+        {
+          "record_key": "CR2026000120",
+          "evidence": "credit_level 值不在标准码表：aa"
+        },
+        {
+          "record_key": "CR2026000163",
+          "evidence": "credit_level 值不在标准码表：AAAA"
+        },
+        {
+          "record_key": "CR2026000219",
+          "evidence": "credit_level 值不在标准码表：优秀"
+        },
+        {
+          "record_key": "CR2026000299",
+          "evidence": "credit_level 值不在标准码表：优秀"
+        },
+        {
+          "record_key": "CR2026000310",
+          "evidence": "credit_level 值不在标准码表：优秀"
+        },
+        {
+          "record_key": "CR2026000345",
+          "evidence": "credit_level 值不在标准码表：A "
+        },
+        {
+          "record_key": "CR2026000423",
+          "evidence": "credit_level 值不在标准码表：aa"
+        },
+        {
+          "record_key": "CR2026000426",
+          "evidence": "credit_level 值不在标准码表：A "
+        },
+        {
+          "record_key": "CR2026000434",
+          "evidence": "credit_level 值不在标准码表：AAAA"
+        },
+        {
+          "record_key": "CR2026000507",
+          "evidence": "credit_level 值不在标准码表：aa"
+        },
+        {
+          "record_key": "CR2026000570",
+          "evidence": "credit_level 值不在标准码表：A "
+        },
+        {
+          "record_key": "CR2026000581",
+          "evidence": "credit_level 值不在标准码表：aa"
+        },
+        {
+          "record_key": "CR2026000617",
+          "evidence": "credit_level 值不在标准码表：aa"
+        },
+        {
+          "record_key": "CR2026000638",
+          "evidence": "credit_level 值不在标准码表：AAAA"
+        },
+        {
+          "record_key": "CR2026000650",
+          "evidence": "credit_level 值不在标准码表：aa"
+        },
+        {
+          "record_key": "CR2026000697",
+          "evidence": "credit_level 值不在标准码表：AAAA"
+        },
+        {
+          "record_key": "CR2026000790",
+          "evidence": "credit_level 值不在标准码表：A "
+        },
+        {
+          "record_key": "CR2026000901",
+          "evidence": "credit_level 值不在标准码表：AAAA"
+        },
+        {
+          "record_key": "CR2026000949",
+          "evidence": "credit_level 值不在标准码表：优秀"
+        },
+        {
+          "record_key": "CR2026000950",
+          "evidence": "credit_level 值不在标准码表：AAAA"
+        }
+      ]
+    },
+    {
+      "id": "DQ-CRE-005",
+      "name": "评级日期不得晚于截止日",
+      "table": "credit_rating",
+      "field": "rating_date",
+      "dimension": "有效性",
+      "severity": "中",
+      "owner": "市场服务部信用管理科",
+      "sla_days": 7,
+      "standard_ref": "GOV-CRE-005",
+      "remediation": "未来日期视为录入错误，回退评级机构核实。",
+      "checked": 950,
+      "failed": 6,
+      "rate": 0.006316,
+      "tolerance": 0.0,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "CR2026000004",
+          "evidence": "rating_date 晚于数据截止日"
+        },
+        {
+          "record_key": "CR2026000080",
+          "evidence": "rating_date 晚于数据截止日"
+        },
+        {
+          "record_key": "CR2026000149",
+          "evidence": "rating_date 晚于数据截止日"
+        },
+        {
+          "record_key": "CR2026000173",
+          "evidence": "rating_date 晚于数据截止日"
+        },
+        {
+          "record_key": "CR2026000591",
+          "evidence": "rating_date 晚于数据截止日"
+        },
+        {
+          "record_key": "CR2026000726",
+          "evidence": "rating_date 晚于数据截止日"
+        }
+      ]
+    },
+    {
+      "id": "DQ-CRE-006",
+      "name": "评级机构非空",
+      "table": "credit_rating",
+      "field": "rating_agency",
+      "dimension": "完整性",
+      "severity": "中",
+      "owner": "市场服务部信用管理科",
+      "sla_days": 7,
+      "standard_ref": "GOV-CRE-006",
+      "remediation": "回源补录评级机构；无法确认的标注为来源不明。",
+      "checked": 950,
+      "failed": 18,
+      "rate": 0.018947,
+      "tolerance": 0.02,
+      "passed": true,
+      "failures": [
+        {
+          "record_key": "CR2026000045",
+          "evidence": "rating_agency 为空"
+        },
+        {
+          "record_key": "CR2026000051",
+          "evidence": "rating_agency 为空"
+        },
+        {
+          "record_key": "CR2026000077",
+          "evidence": "rating_agency 为空"
+        },
+        {
+          "record_key": "CR2026000221",
+          "evidence": "rating_agency 为空"
+        },
+        {
+          "record_key": "CR2026000356",
+          "evidence": "rating_agency 为空"
+        },
+        {
+          "record_key": "CR2026000364",
+          "evidence": "rating_agency 为空"
+        },
+        {
+          "record_key": "CR2026000396",
+          "evidence": "rating_agency 为空"
+        },
+        {
+          "record_key": "CR2026000460",
+          "evidence": "rating_agency 为空"
+        },
+        {
+          "record_key": "CR2026000468",
+          "evidence": "rating_agency 为空"
+        },
+        {
+          "record_key": "CR2026000469",
+          "evidence": "rating_agency 为空"
+        },
+        {
+          "record_key": "CR2026000575",
+          "evidence": "rating_agency 为空"
+        },
+        {
+          "record_key": "CR2026000586",
+          "evidence": "rating_agency 为空"
+        },
+        {
+          "record_key": "CR2026000592",
+          "evidence": "rating_agency 为空"
+        },
+        {
+          "record_key": "CR2026000714",
+          "evidence": "rating_agency 为空"
+        },
+        {
+          "record_key": "CR2026000797",
+          "evidence": "rating_agency 为空"
+        },
+        {
+          "record_key": "CR2026000825",
+          "evidence": "rating_agency 为空"
+        },
+        {
+          "record_key": "CR2026000893",
+          "evidence": "rating_agency 为空"
+        },
+        {
+          "record_key": "CR2026000914",
+          "evidence": "rating_agency 为空"
+        }
+      ]
+    },
+    {
+      "id": "DQ-CRE-007",
+      "name": "信用数据更新不超过 365 天",
+      "table": "credit_rating",
+      "field": "update_time",
+      "dimension": "及时性",
+      "severity": "中",
+      "owner": "市场服务部信用管理岗",
+      "sla_days": 7,
+      "standard_ref": "GOV-CRE-007",
+      "remediation": "核查信用平台推送频率，必要时补拉增量。",
+      "checked": 950,
+      "failed": 25,
+      "rate": 0.026316,
+      "tolerance": 0.1,
+      "passed": true,
+      "failures": [
+        {
+          "record_key": "CR2026000042",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "CR2026000072",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "CR2026000104",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "CR2026000144",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "CR2026000165",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "CR2026000174",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "CR2026000184",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "CR2026000251",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "CR2026000252",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "CR2026000320",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "CR2026000355",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "CR2026000453",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "CR2026000474",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "CR2026000490",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "CR2026000580",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "CR2026000677",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "CR2026000680",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "CR2026000688",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "CR2026000717",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "CR2026000760",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "CR2026000799",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "CR2026000836",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "CR2026000889",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "CR2026000916",
+          "evidence": "update_time 超过 365 天未更新"
+        },
+        {
+          "record_key": "CR2026000931",
+          "evidence": "update_time 超过 365 天未更新"
+        }
+      ]
+    },
+    {
+      "id": "DQ-CRE-008",
+      "name": "信用等级与评分区间一致",
+      "table": "credit_rating",
+      "field": "credit_level",
+      "dimension": "一致性",
+      "severity": "中",
+      "owner": "市场服务部信用管理科",
+      "sla_days": 7,
+      "standard_ref": "GOV-CRE-004",
+      "remediation": "以评分区间为准重算等级，保留原始等级到修复日志。",
+      "checked": 950,
+      "failed": 44,
+      "rate": 0.046316,
+      "tolerance": 0.01,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "CR2026000010",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000062",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000074",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000120",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000147",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000150",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000152",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000163",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000219",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000299",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000304",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000310",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000328",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000345",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000376",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000415",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000423",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000426",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000434",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000451",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000493",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000507",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000538",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000570",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000581",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000617",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000626",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000638",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000650",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000697",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000702",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000790",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000791",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000798",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000803",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000804",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000843",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000869",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000881",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000883",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000901",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000923",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000949",
+          "evidence": "信用等级与评分区间不一致"
+        },
+        {
+          "record_key": "CR2026000950",
+          "evidence": "信用等级与评分区间不一致"
+        }
+      ]
+    },
+    {
+      "id": "DQ-CRE-009",
+      "name": "评价记录号唯一",
+      "table": "credit_rating",
+      "field": "rating_id",
+      "dimension": "唯一性",
+      "severity": "高",
+      "owner": "市场服务部数据管理岗",
+      "sla_days": 3,
+      "standard_ref": "GOV-CRE-001",
+      "remediation": "重复记录按更新时间保留最新一条，其余隔离。",
+      "checked": 950,
+      "failed": 0,
+      "rate": 0.0,
+      "tolerance": 0.0,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "DQ-CRE-010",
+      "name": "评级日期格式合法",
+      "table": "credit_rating",
+      "field": "rating_date",
+      "dimension": "有效性",
+      "severity": "中",
+      "owner": "市场服务部信用管理科",
+      "sla_days": 7,
+      "standard_ref": "GOV-CRE-005",
+      "remediation": "统一解析为 YYYY-MM-DD，无法解析的回源核对。",
+      "checked": 950,
+      "failed": 0,
+      "rate": 0.0,
+      "tolerance": 0.005,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "DQ-CRE-011",
+      "name": "评级日期非空",
+      "table": "credit_rating",
+      "field": "rating_date",
+      "dimension": "完整性",
+      "severity": "中",
+      "owner": "市场服务部信用管理科",
+      "sla_days": 7,
+      "standard_ref": "GOV-CRE-005",
+      "remediation": "回源补录评级日期；日期缺失的评价不参与年度信用分析。",
+      "checked": 950,
+      "failed": 0,
+      "rate": 0.0,
+      "tolerance": 0.005,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "DQ-CASE-001",
+      "name": "诉求内容非空",
+      "table": "complaint_case",
+      "field": "content",
+      "dimension": "完整性",
+      "severity": "高",
+      "owner": "市场服务部企业服务科",
+      "sla_days": 3,
+      "standard_ref": "GOV-CASE-005",
+      "remediation": "从热线工单原文补录；无法补录的标记为无效工单。",
+      "checked": 1500,
+      "failed": 12,
+      "rate": 0.008,
+      "tolerance": 0.005,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "TS2026000165",
+          "evidence": "content 为空"
+        },
+        {
+          "record_key": "TS2026000303",
+          "evidence": "content 为空"
+        },
+        {
+          "record_key": "TS2026000342",
+          "evidence": "content 为空"
+        },
+        {
+          "record_key": "TS2026000627",
+          "evidence": "content 为空"
+        },
+        {
+          "record_key": "TS2026000718",
+          "evidence": "content 为空"
+        },
+        {
+          "record_key": "TS2026000741",
+          "evidence": "content 为空"
+        },
+        {
+          "record_key": "TS2026000758",
+          "evidence": "content 为空"
+        },
+        {
+          "record_key": "TS2026000778",
+          "evidence": "content 为空"
+        },
+        {
+          "record_key": "TS2026000831",
+          "evidence": "content 为空"
+        },
+        {
+          "record_key": "TS2026001068",
+          "evidence": "content 为空"
+        },
+        {
+          "record_key": "TS2026001378",
+          "evidence": "content 为空"
+        },
+        {
+          "record_key": "TS2026001447",
+          "evidence": "content 为空"
+        }
+      ]
+    },
+    {
+      "id": "DQ-CASE-002",
+      "name": "工单可关联到市场主体",
+      "table": "complaint_case",
+      "field": "unified_social_credit_code",
+      "dimension": "一致性",
+      "severity": "高",
+      "owner": "市场服务部企业服务科",
+      "sla_days": 3,
+      "standard_ref": "GOV-CASE-002",
+      "remediation": "按企业名称/信用代码补关联；确实无法关联的保留为匿名工单单独统计。",
+      "checked": 1500,
+      "failed": 35,
+      "rate": 0.023333,
+      "tolerance": 0.005,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "TS2026000097",
+          "evidence": "关联主体或码值不存在：91133100G9YNX84TW0"
+        },
+        {
+          "record_key": "TS2026000136",
+          "evidence": "关联主体或码值不存在：911331001C269GDML0"
+        },
+        {
+          "record_key": "TS2026000221",
+          "evidence": "关联主体或码值不存在：91133100JJQJJ51J50"
+        },
+        {
+          "record_key": "TS2026000227",
+          "evidence": "关联主体或码值不存在：91133100Y39UDH21R0"
+        },
+        {
+          "record_key": "TS2026000295",
+          "evidence": "关联主体或码值不存在：911331001WWR3Y1NQ0"
+        },
+        {
+          "record_key": "TS2026000345",
+          "evidence": "关联主体或码值不存在：91133100D5XJDBA7A0"
+        },
+        {
+          "record_key": "TS2026000371",
+          "evidence": "关联主体或码值不存在：911331008R3ATLKUP0"
+        },
+        {
+          "record_key": "TS2026000384",
+          "evidence": "关联主体或码值不存在：91133100CFPFYKW160"
+        },
+        {
+          "record_key": "TS2026000417",
+          "evidence": "关联主体或码值不存在：91133100677P26FRN0"
+        },
+        {
+          "record_key": "TS2026000440",
+          "evidence": "关联主体或码值不存在：91133100NCP30L88K0"
+        },
+        {
+          "record_key": "TS2026000448",
+          "evidence": "关联主体或码值不存在：911331006GA196MKB0"
+        },
+        {
+          "record_key": "TS2026000494",
+          "evidence": "关联主体或码值不存在：911331005J3CK4J680"
+        },
+        {
+          "record_key": "TS2026000538",
+          "evidence": "关联主体或码值不存在：91133100EMG0D4KC70"
+        },
+        {
+          "record_key": "TS2026000646",
+          "evidence": "关联主体或码值不存在：91133100QR7PNR7YM0"
+        },
+        {
+          "record_key": "TS2026000654",
+          "evidence": "关联主体或码值不存在：91133100YMBPKB23C0"
+        },
+        {
+          "record_key": "TS2026000663",
+          "evidence": "关联主体或码值不存在：91133100QY9KK2F300"
+        },
+        {
+          "record_key": "TS2026000685",
+          "evidence": "关联主体或码值不存在：91133100EY53RLWMD0"
+        },
+        {
+          "record_key": "TS2026000699",
+          "evidence": "关联主体或码值不存在：91133100GU2998PXH0"
+        },
+        {
+          "record_key": "TS2026000704",
+          "evidence": "关联主体或码值不存在：91133100AB88BWX0E0"
+        },
+        {
+          "record_key": "TS2026000728",
+          "evidence": "关联主体或码值不存在：911331003B0JWXJ4C0"
+        },
+        {
+          "record_key": "TS2026000764",
+          "evidence": "关联主体或码值不存在：911331003D610GF630"
+        },
+        {
+          "record_key": "TS2026000816",
+          "evidence": "关联主体或码值不存在：91133100L9Y027T7X0"
+        },
+        {
+          "record_key": "TS2026001012",
+          "evidence": "关联主体或码值不存在：911331008HGHD8KB00"
+        },
+        {
+          "record_key": "TS2026001031",
+          "evidence": "关联主体或码值不存在：91133100XDGDQ3JL50"
+        },
+        {
+          "record_key": "TS2026001081",
+          "evidence": "关联主体或码值不存在：91133100BW45R2BD20"
+        },
+        {
+          "record_key": "TS2026001084",
+          "evidence": "关联主体或码值不存在：91133100W1P06WX6R0"
+        },
+        {
+          "record_key": "TS2026001095",
+          "evidence": "关联主体或码值不存在：91133100BB537RP310"
+        },
+        {
+          "record_key": "TS2026001107",
+          "evidence": "关联主体或码值不存在：911331003PTDQLQTE0"
+        },
+        {
+          "record_key": "TS2026001119",
+          "evidence": "关联主体或码值不存在：911331008EEB2RD6A0"
+        },
+        {
+          "record_key": "TS2026001189",
+          "evidence": "关联主体或码值不存在：91133100J65366NJR0"
+        },
+        {
+          "record_key": "TS2026001219",
+          "evidence": "关联主体或码值不存在：911331000N9684QTF0"
+        },
+        {
+          "record_key": "TS2026001318",
+          "evidence": "关联主体或码值不存在：9113310064LJT0KXR0"
+        },
+        {
+          "record_key": "TS2026001335",
+          "evidence": "关联主体或码值不存在：911331003GAHP9KR60"
+        },
+        {
+          "record_key": "TS2026001371",
+          "evidence": "关联主体或码值不存在：91133100T5XWXHW4Q0"
+        },
+        {
+          "record_key": "TS2026001430",
+          "evidence": "关联主体或码值不存在：91133100RX87PP4B00"
+        }
+      ]
+    },
+    {
+      "id": "DQ-CASE-003",
+      "name": "诉求类型在标准码表中",
+      "table": "complaint_case",
+      "field": "case_type",
+      "dimension": "有效性",
+      "severity": "中",
+      "owner": "市场服务部企业服务科",
+      "sla_days": 7,
+      "standard_ref": "GOV-CASE-003",
+      "remediation": "按业务条线映射表归一；无法映射的归入“其他”并保留原文。",
+      "checked": 1500,
+      "failed": 20,
+      "rate": 0.013333,
+      "tolerance": 0.01,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "TS2026000220",
+          "evidence": "case_type 值不在标准码表：咨询"
+        },
+        {
+          "record_key": "TS2026000226",
+          "evidence": "case_type 值不在标准码表：咨询"
+        },
+        {
+          "record_key": "TS2026000243",
+          "evidence": "case_type 值不在标准码表：投诉建议"
+        },
+        {
+          "record_key": "TS2026000300",
+          "evidence": "case_type 值不在标准码表：其他问题"
+        },
+        {
+          "record_key": "TS2026000355",
+          "evidence": "case_type 值不在标准码表：其他问题"
+        },
+        {
+          "record_key": "TS2026000399",
+          "evidence": "case_type 值不在标准码表：咨询"
+        },
+        {
+          "record_key": "TS2026000400",
+          "evidence": "case_type 值不在标准码表：其他问题"
+        },
+        {
+          "record_key": "TS2026000614",
+          "evidence": "case_type 值不在标准码表：投诉建议"
+        },
+        {
+          "record_key": "TS2026000631",
+          "evidence": "case_type 值不在标准码表：咨询"
+        },
+        {
+          "record_key": "TS2026000633",
+          "evidence": "case_type 值不在标准码表：其他问题"
+        },
+        {
+          "record_key": "TS2026000719",
+          "evidence": "case_type 值不在标准码表：投诉建议"
+        },
+        {
+          "record_key": "TS2026000914",
+          "evidence": "case_type 值不在标准码表：其他问题"
+        },
+        {
+          "record_key": "TS2026000981",
+          "evidence": "case_type 值不在标准码表：投诉建议"
+        },
+        {
+          "record_key": "TS2026001071",
+          "evidence": "case_type 值不在标准码表：投诉建议"
+        },
+        {
+          "record_key": "TS2026001086",
+          "evidence": "case_type 值不在标准码表：咨询"
+        },
+        {
+          "record_key": "TS2026001187",
+          "evidence": "case_type 值不在标准码表：其他问题"
+        },
+        {
+          "record_key": "TS2026001239",
+          "evidence": "case_type 值不在标准码表：咨询"
+        },
+        {
+          "record_key": "TS2026001273",
+          "evidence": "case_type 值不在标准码表：其他问题"
+        },
+        {
+          "record_key": "TS2026001283",
+          "evidence": "case_type 值不在标准码表：咨询"
+        },
+        {
+          "record_key": "TS2026001458",
+          "evidence": "case_type 值不在标准码表：投诉建议"
+        }
+      ]
+    },
+    {
+      "id": "DQ-CASE-004",
+      "name": "工单状态在标准码表中",
+      "table": "complaint_case",
+      "field": "status",
+      "dimension": "有效性",
+      "severity": "中",
+      "owner": "市场服务部企业服务科",
+      "sla_days": 7,
+      "standard_ref": "GOV-CASE-007",
+      "remediation": "同义词归一（处理中→办理中、已完成→已办结）；挂起状态需补充子状态。",
+      "checked": 1500,
+      "failed": 25,
+      "rate": 0.016667,
+      "tolerance": 0.01,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "TS2026000029",
+          "evidence": "status 值不在标准码表：处理中"
+        },
+        {
+          "record_key": "TS2026000033",
+          "evidence": "status 值不在标准码表：待处理"
+        },
+        {
+          "record_key": "TS2026000052",
+          "evidence": "status 值不在标准码表：已回复"
+        },
+        {
+          "record_key": "TS2026000154",
+          "evidence": "status 值不在标准码表：已完成"
+        },
+        {
+          "record_key": "TS2026000177",
+          "evidence": "status 值不在标准码表：挂起"
+        },
+        {
+          "record_key": "TS2026000268",
+          "evidence": "status 值不在标准码表：已回复"
+        },
+        {
+          "record_key": "TS2026000336",
+          "evidence": "status 值不在标准码表：待处理"
+        },
+        {
+          "record_key": "TS2026000382",
+          "evidence": "status 值不在标准码表：处理中"
+        },
+        {
+          "record_key": "TS2026000483",
+          "evidence": "status 值不在标准码表：待处理"
+        },
+        {
+          "record_key": "TS2026000536",
+          "evidence": "status 值不在标准码表：处理中"
+        },
+        {
+          "record_key": "TS2026000608",
+          "evidence": "status 值不在标准码表：挂起"
+        },
+        {
+          "record_key": "TS2026000629",
+          "evidence": "status 值不在标准码表：待处理"
+        },
+        {
+          "record_key": "TS2026000803",
+          "evidence": "status 值不在标准码表：已完成"
+        },
+        {
+          "record_key": "TS2026000827",
+          "evidence": "status 值不在标准码表：处理中"
+        },
+        {
+          "record_key": "TS2026000838",
+          "evidence": "status 值不在标准码表：待处理"
+        },
+        {
+          "record_key": "TS2026000883",
+          "evidence": "status 值不在标准码表：已完成"
+        },
+        {
+          "record_key": "TS2026000972",
+          "evidence": "status 值不在标准码表：已完成"
+        },
+        {
+          "record_key": "TS2026000994",
+          "evidence": "status 值不在标准码表：挂起"
+        },
+        {
+          "record_key": "TS2026001142",
+          "evidence": "status 值不在标准码表：处理中"
+        },
+        {
+          "record_key": "TS2026001199",
+          "evidence": "status 值不在标准码表：已回复"
+        },
+        {
+          "record_key": "TS2026001205",
+          "evidence": "status 值不在标准码表：挂起"
+        },
+        {
+          "record_key": "TS2026001247",
+          "evidence": "status 值不在标准码表：挂起"
+        },
+        {
+          "record_key": "TS2026001332",
+          "evidence": "status 值不在标准码表：已回复"
+        },
+        {
+          "record_key": "TS2026001357",
+          "evidence": "status 值不在标准码表：已回复"
+        },
+        {
+          "record_key": "TS2026001362",
+          "evidence": "status 值不在标准码表：已完成"
+        }
+      ]
+    },
+    {
+      "id": "DQ-CASE-005",
+      "name": "满意度在 1-5 分之间",
+      "table": "complaint_case",
+      "field": "satisfaction",
+      "dimension": "有效性",
+      "severity": "中",
+      "owner": "市场服务部企业服务科",
+      "sla_days": 7,
+      "standard_ref": "GOV-CASE-008",
+      "remediation": "非 1-5 分记录置空并回访补录，不参与满意度均值计算。",
+      "checked": 1131,
+      "failed": 21,
+      "rate": 0.018568,
+      "tolerance": 0.01,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "TS2026000005",
+          "evidence": "satisfaction 超出允许范围：0"
+        },
+        {
+          "record_key": "TS2026000030",
+          "evidence": "satisfaction 超出允许范围：0"
+        },
+        {
+          "record_key": "TS2026000357",
+          "evidence": "satisfaction 超出允许范围：满意"
+        },
+        {
+          "record_key": "TS2026000415",
+          "evidence": "satisfaction 超出允许范围：0"
+        },
+        {
+          "record_key": "TS2026000468",
+          "evidence": "satisfaction 超出允许范围：6"
+        },
+        {
+          "record_key": "TS2026000478",
+          "evidence": "satisfaction 超出允许范围：6"
+        },
+        {
+          "record_key": "TS2026000661",
+          "evidence": "satisfaction 超出允许范围：满意"
+        },
+        {
+          "record_key": "TS2026000761",
+          "evidence": "satisfaction 超出允许范围：满意"
+        },
+        {
+          "record_key": "TS2026000823",
+          "evidence": "satisfaction 超出允许范围：6"
+        },
+        {
+          "record_key": "TS2026000870",
+          "evidence": "satisfaction 超出允许范围：0"
+        },
+        {
+          "record_key": "TS2026000966",
+          "evidence": "satisfaction 超出允许范围：6"
+        },
+        {
+          "record_key": "TS2026001002",
+          "evidence": "satisfaction 超出允许范围：0"
+        },
+        {
+          "record_key": "TS2026001014",
+          "evidence": "satisfaction 超出允许范围：满意"
+        },
+        {
+          "record_key": "TS2026001032",
+          "evidence": "satisfaction 超出允许范围：6"
+        },
+        {
+          "record_key": "TS2026001074",
+          "evidence": "satisfaction 超出允许范围：满意"
+        },
+        {
+          "record_key": "TS2026001089",
+          "evidence": "satisfaction 超出允许范围：6"
+        },
+        {
+          "record_key": "TS2026001210",
+          "evidence": "satisfaction 超出允许范围：满意"
+        },
+        {
+          "record_key": "TS2026001275",
+          "evidence": "satisfaction 超出允许范围：6"
+        },
+        {
+          "record_key": "TS2026001319",
+          "evidence": "satisfaction 超出允许范围：满意"
+        },
+        {
+          "record_key": "TS2026001469",
+          "evidence": "satisfaction 超出允许范围：0"
+        },
+        {
+          "record_key": "TS2026001484",
+          "evidence": "satisfaction 超出允许范围：0"
+        }
+      ]
+    },
+    {
+      "id": "DQ-CASE-006",
+      "name": "办结时间不早于提交时间",
+      "table": "complaint_case",
+      "field": "close_time",
+      "dimension": "一致性",
+      "severity": "高",
+      "owner": "市场服务部企业服务科",
+      "sla_days": 3,
+      "standard_ref": "GOV-CASE-009",
+      "remediation": "核对工单流转日志；时间倒挂的以最后一次操作时间为准。",
+      "checked": 1135,
+      "failed": 19,
+      "rate": 0.01674,
+      "tolerance": 0.0,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "TS2026000421",
+          "evidence": "close_time 早于 submit_time"
+        },
+        {
+          "record_key": "TS2026000533",
+          "evidence": "close_time 早于 submit_time"
+        },
+        {
+          "record_key": "TS2026000564",
+          "evidence": "close_time 早于 submit_time"
+        },
+        {
+          "record_key": "TS2026000680",
+          "evidence": "close_time 早于 submit_time"
+        },
+        {
+          "record_key": "TS2026000708",
+          "evidence": "close_time 早于 submit_time"
+        },
+        {
+          "record_key": "TS2026000924",
+          "evidence": "close_time 早于 submit_time"
+        },
+        {
+          "record_key": "TS2026000962",
+          "evidence": "close_time 早于 submit_time"
+        },
+        {
+          "record_key": "TS2026000985",
+          "evidence": "close_time 早于 submit_time"
+        },
+        {
+          "record_key": "TS2026001022",
+          "evidence": "close_time 早于 submit_time"
+        },
+        {
+          "record_key": "TS2026001029",
+          "evidence": "close_time 早于 submit_time"
+        },
+        {
+          "record_key": "TS2026001055",
+          "evidence": "close_time 早于 submit_time"
+        },
+        {
+          "record_key": "TS2026001077",
+          "evidence": "close_time 早于 submit_time"
+        },
+        {
+          "record_key": "TS2026001293",
+          "evidence": "close_time 早于 submit_time"
+        },
+        {
+          "record_key": "TS2026001297",
+          "evidence": "close_time 早于 submit_time"
+        },
+        {
+          "record_key": "TS2026001321",
+          "evidence": "close_time 早于 submit_time"
+        },
+        {
+          "record_key": "TS2026001418",
+          "evidence": "close_time 早于 submit_time"
+        },
+        {
+          "record_key": "TS2026001440",
+          "evidence": "close_time 早于 submit_time"
+        },
+        {
+          "record_key": "TS2026001461",
+          "evidence": "close_time 早于 submit_time"
+        },
+        {
+          "record_key": "TS2026001488",
+          "evidence": "close_time 早于 submit_time"
+        }
+      ]
+    },
+    {
+      "id": "DQ-CASE-007",
+      "name": "提交时间不得晚于截止日",
+      "table": "complaint_case",
+      "field": "submit_time",
+      "dimension": "有效性",
+      "severity": "中",
+      "owner": "市场服务部企业服务科",
+      "sla_days": 7,
+      "standard_ref": "GOV-CASE-004",
+      "remediation": "未来时间视为录入错误，回退热线系统核实。",
+      "checked": 1500,
+      "failed": 8,
+      "rate": 0.005333,
+      "tolerance": 0.0,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "TS2026000533",
+          "evidence": "submit_time 晚于数据截止日"
+        },
+        {
+          "record_key": "TS2026000564",
+          "evidence": "submit_time 晚于数据截止日"
+        },
+        {
+          "record_key": "TS2026000680",
+          "evidence": "submit_time 晚于数据截止日"
+        },
+        {
+          "record_key": "TS2026000708",
+          "evidence": "submit_time 晚于数据截止日"
+        },
+        {
+          "record_key": "TS2026000732",
+          "evidence": "submit_time 晚于数据截止日"
+        },
+        {
+          "record_key": "TS2026001022",
+          "evidence": "submit_time 晚于数据截止日"
+        },
+        {
+          "record_key": "TS2026001321",
+          "evidence": "submit_time 晚于数据截止日"
+        },
+        {
+          "record_key": "TS2026001418",
+          "evidence": "submit_time 晚于数据截止日"
+        }
+      ]
+    },
+    {
+      "id": "DQ-CASE-008",
+      "name": "已办结工单必须有办结时间",
+      "table": "complaint_case",
+      "field": "close_time",
+      "dimension": "完整性",
+      "severity": "高",
+      "owner": "市场服务部企业服务科",
+      "sla_days": 3,
+      "standard_ref": "GOV-CASE-009",
+      "remediation": "从工单流转日志补写办结时间；状态与时间不一致的流转人工复核。",
+      "checked": 1127,
+      "failed": 10,
+      "rate": 0.008873,
+      "tolerance": 0.005,
+      "passed": false,
+      "failures": [
+        {
+          "record_key": "TS2026000146",
+          "evidence": "close_time 在特定状态下必填"
+        },
+        {
+          "record_key": "TS2026000267",
+          "evidence": "close_time 在特定状态下必填"
+        },
+        {
+          "record_key": "TS2026000476",
+          "evidence": "close_time 在特定状态下必填"
+        },
+        {
+          "record_key": "TS2026000519",
+          "evidence": "close_time 在特定状态下必填"
+        },
+        {
+          "record_key": "TS2026000553",
+          "evidence": "close_time 在特定状态下必填"
+        },
+        {
+          "record_key": "TS2026000973",
+          "evidence": "close_time 在特定状态下必填"
+        },
+        {
+          "record_key": "TS2026001157",
+          "evidence": "close_time 在特定状态下必填"
+        },
+        {
+          "record_key": "TS2026001242",
+          "evidence": "close_time 在特定状态下必填"
+        },
+        {
+          "record_key": "TS2026001420",
+          "evidence": "close_time 在特定状态下必填"
+        },
+        {
+          "record_key": "TS2026001495",
+          "evidence": "close_time 在特定状态下必填"
+        }
+      ]
+    },
+    {
+      "id": "DQ-CASE-009",
+      "name": "工单编号唯一",
+      "table": "complaint_case",
+      "field": "case_id",
+      "dimension": "唯一性",
+      "severity": "高",
+      "owner": "市场服务部数据管理岗",
+      "sla_days": 3,
+      "standard_ref": "GOV-CASE-001",
+      "remediation": "重复工单合并，保留最早提交记录并关联重复编号。",
+      "checked": 1500,
+      "failed": 0,
+      "rate": 0.0,
+      "tolerance": 0.0,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "DQ-CASE-010",
+      "name": "承办部门非空",
+      "table": "complaint_case",
+      "field": "handling_dept",
+      "dimension": "完整性",
+      "severity": "中",
+      "owner": "市场服务部企业服务科",
+      "sla_days": 7,
+      "standard_ref": "GOV-CASE-006",
+      "remediation": "按诉求类型自动分派规则补全；无法分派的转总值班室。",
+      "checked": 1500,
+      "failed": 0,
+      "rate": 0.0,
+      "tolerance": 0.01,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "DQ-CASE-011",
+      "name": "提交时间非空",
+      "table": "complaint_case",
+      "field": "submit_time",
+      "dimension": "完整性",
+      "severity": "高",
+      "owner": "市场服务部企业服务科",
+      "sla_days": 3,
+      "standard_ref": "GOV-CASE-004",
+      "remediation": "从热线平台抽取日志补录。",
+      "checked": 1500,
+      "failed": 0,
+      "rate": 0.0,
+      "tolerance": 0.002,
+      "passed": true,
+      "failures": []
+    },
+    {
+      "id": "DQ-CASE-012",
+      "name": "提交时间格式合法",
+      "table": "complaint_case",
+      "field": "submit_time",
+      "dimension": "有效性",
+      "severity": "中",
+      "owner": "市场服务部企业服务科",
+      "sla_days": 7,
+      "standard_ref": "GOV-CASE-004",
+      "remediation": "统一解析为 YYYY-MM-DD HH:MM:SS。",
+      "checked": 1500,
+      "failed": 0,
+      "rate": 0.0,
+      "tolerance": 0.005,
+      "passed": true,
+      "failures": []
+    }
+  ]
+}

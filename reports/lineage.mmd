@@ -1,29 +1,59 @@
-graph LR
-    ods_order --> dwd_order_detail
-    ods_user --> dwd_user_profile
-    ods_product --> dwd_product_dim
-    ods_channel --> dwd_order_detail
-    dwd_order_detail --> dws_channel_daily
-    dwd_order_detail --> dws_category_daily
-    dwd_product_dim --> dws_category_daily
-    dwd_order_detail --> dws_campaign_daily
-    ods_campaign --> dws_campaign_daily
-```
-
-| 上游 | 下游 | 加工方式 |
-| --- | --- | --- |
-| `ods_order` | `dwd_order_detail` | 清洗作业：去重、码值标准化、时序校验、脱敏 |
-| `ods_user` | `dwd_user_profile` | 清洗作业：手机号标准化、姓名/邮箱脱敏、会员分层 |
-| `ods_product` | `dwd_product_dim` | 清洗作业：价格校验、类目补全 |
-| `ods_channel` | `dwd_order_detail` | 码值映射：渠道编码标准化 |
-| `dwd_order_detail` | `dws_channel_daily` | SQL 聚合：按日期/维度汇总 |
-| `dwd_order_detail` | `dws_category_daily` | SQL 聚合：按日期/维度汇总 |
-| `dwd_product_dim` | `dws_category_daily` | SQL 聚合：按日期/维度汇总 |
-| `dwd_order_detail` | `dws_campaign_daily` | SQL 聚合：按日期/维度汇总 |
-| `ods_campaign` | `dws_campaign_daily` | SQL 聚合：按日期/维度汇总 |
-
-## 影响分析示例
-
-- 修改 `ods_order.order_status` 码值 → 影响 `dwd_order_detail` 状态标准化、`dws_channel_daily` 支付/退款口径；
-- 下线 `ods_channel` → 影响渠道码值映射与渠道日报，需提前通知数据分析组；
-- 调整 `dwd_user_profile.phone` 脱敏规则 → 影响用户触达与合规审计，需走变更审批。
+flowchart LR
+  subgraph source["源系统层"]
+    sys_reg["市场监督管理局登记系统"]
+    sys_credit["公共信用信息平台"]
+    sys_hotline["12345 政务服务便民热线"]
+    sys_code_division["行政区划代码表"]
+    sys_code_industry["行业代码表（GB/T 4754）"]
+  end
+  subgraph ods["贴源层 ODS"]
+    ods_market_register["ods_market_register"]
+    ods_credit_rating["ods_credit_rating"]
+    ods_complaint_case["ods_complaint_case"]
+  end
+  subgraph dwd["明细层 DWD"]
+    dwd_market_register["dwd_market_register"]
+    dwd_credit_rating["dwd_credit_rating"]
+    dwd_complaint_case["dwd_complaint_case"]
+  end
+  subgraph dws["指标层 DWS"]
+    metric_market_total["市场主体总数"]
+    metric_market_active["市场主体活跃率"]
+    metric_credit_a["A 级信用企业占比"]
+    metric_case_close["诉求办结率"]
+    metric_satisfaction["平均满意度"]
+  end
+  subgraph serving["共享与服务层"]
+    share_market_register["市场主体共享接口（脱敏）"]
+    share_complaint_case["企业诉求共享接口（脱敏）"]
+    report_dashboard["治理驾驶舱"]
+    report_quality["数据质量报告"]
+  end
+  subgraph governance["治理与运维"]
+    quarantine["数据隔离区"]
+  end
+  sys_reg -->|"T+1 批量抽取"| ods_market_register
+  sys_credit -->|"每月增量推送"| ods_credit_rating
+  sys_hotline -->|"实时接口同步"| ods_complaint_case
+  sys_code_division -->|"区划码表校验"| ods_market_register
+  sys_code_industry -->|"行业码表校验"| ods_market_register
+  ods_market_register -->|"清洗·标准化·去重"| dwd_market_register
+  ods_credit_rating -->|"校验·等级重算"| dwd_credit_rating
+  ods_complaint_case -->|"清洗·状态归一"| dwd_complaint_case
+  ods_market_register -->|"信用代码失败/重复记录"| quarantine
+  ods_credit_rating -->|"关联主体失败"| quarantine
+  ods_complaint_case -->|"关联主体失败"| quarantine
+  dwd_market_register -->|"按状态统计"| metric_market_total
+  dwd_market_register -->|"存续+在业占比"| metric_market_active
+  dwd_credit_rating -->|"A 级占比"| metric_credit_a
+  dwd_complaint_case -->|"办结/回访占比"| metric_case_close
+  dwd_complaint_case -->|"有效满意度均值"| metric_satisfaction
+  dwd_market_register -->|"字段级脱敏后共享"| share_market_register
+  dwd_complaint_case -->|"正文内容识别与脱敏"| share_complaint_case
+  metric_market_active -->|"指标展示"| report_dashboard
+  metric_case_close -->|"指标展示"| report_dashboard
+  metric_satisfaction -->|"指标展示"| report_dashboard
+  dwd_market_register -->|"规则校验结果"| report_quality
+  dwd_credit_rating -->|"规则校验结果"| report_quality
+  dwd_complaint_case -->|"规则校验结果"| report_quality
+  quarantine -->|"隔离数据统计"| report_quality

@@ -1,0 +1,75 @@
+{
+  "generated_at": "2026-11-02 13:00:46",
+  "metrics": [
+    {
+      "id": "MKT-TOTAL",
+      "name": "市场主体总数",
+      "definition": "截至数据截止日，登记状态为存续或在业的市场主体户数。",
+      "formula": "COUNT(*) WHERE status IN ('存续','在业')",
+      "sql": "SELECT COUNT(*) AS value FROM dwd_market_register WHERE status IN ('存续','在业')",
+      "unit": "户",
+      "owner": "市场服务部",
+      "sources": [
+        "dwd_market_register.status"
+      ],
+      "caveat": "注销、吊销、迁出主体不计入；隔离数据不计入，单独披露。",
+      "value": 977
+    },
+    {
+      "id": "MKT-ACTIVE",
+      "name": "市场主体活跃率",
+      "definition": "存续或在业主体占全部登记主体的比例，反映区域经营活跃程度。",
+      "formula": "存续或在业户数 ÷ 登记主体总数 × 100%",
+      "sql": "SELECT ROUND(100.0 * SUM(CASE WHEN status IN ('存续','在业') THEN 1 ELSE 0 END) / COUNT(*), 2) AS value FROM dwd_market_register",
+      "unit": "%",
+      "owner": "市场服务部",
+      "sources": [
+        "dwd_market_register.status"
+      ],
+      "caveat": "分母为治理后全部主体，不含隔离数据。",
+      "value": 85.78
+    },
+    {
+      "id": "CRE-A",
+      "name": "A 级信用企业占比",
+      "definition": "信用等级为 A 的企业占有效信用评价企业的比例。",
+      "formula": "credit_level='A' 的记录数 ÷ credit_level 非空记录数 × 100%",
+      "sql": "SELECT ROUND(100.0 * SUM(CASE WHEN credit_level = 'A' THEN 1 ELSE 0 END) / NULLIF(COUNT(credit_level), 0), 2) AS value FROM dwd_credit_rating",
+      "unit": "%",
+      "owner": "信用管理科",
+      "sources": [
+        "dwd_credit_rating.credit_level"
+      ],
+      "caveat": "等级缺失的记录不进入分母，缺失率见质量报告。",
+      "value": 24.2
+    },
+    {
+      "id": "CASE-CLOSE",
+      "name": "企业诉求办结率",
+      "definition": "状态为已办结或已回访的工单占全部工单的比例。",
+      "formula": "(已办结 + 已回访) ÷ 工单总数 × 100%",
+      "sql": "SELECT ROUND(100.0 * SUM(CASE WHEN status IN ('已办结','已回访') THEN 1 ELSE 0 END) / COUNT(*), 2) AS value FROM dwd_complaint_case",
+      "unit": "%",
+      "owner": "企业服务科",
+      "sources": [
+        "dwd_complaint_case.status"
+      ],
+      "caveat": "只统计已关联市场主体的工单，匿名工单单独统计。",
+      "value": 74.91
+    },
+    {
+      "id": "CASE-SAT",
+      "name": "平均满意度",
+      "definition": "已回访工单中，企业给出的 1-5 分满意度的算术平均值。",
+      "formula": "AVG(satisfaction) WHERE satisfaction BETWEEN 1 AND 5",
+      "sql": "SELECT ROUND(AVG(satisfaction), 2) AS value FROM dwd_complaint_case WHERE satisfaction BETWEEN 1 AND 5",
+      "unit": "分",
+      "owner": "企业服务科",
+      "sources": [
+        "dwd_complaint_case.satisfaction"
+      ],
+      "caveat": "无效评分（0、6、非数字）不参与均值。",
+      "value": 4.38
+    }
+  ]
+}

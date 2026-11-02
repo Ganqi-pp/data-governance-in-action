@@ -1,18 +1,146 @@
 {
-  "version": "1.0.0",
-  "levels": {
-    "L1": {"name": "公开", "description": "可对外公开或用于对外披露的数据", "control": "无额外管控"},
-    "L2": {"name": "内部", "description": "仅限内部使用的经营与统计数据", "control": "内部账号可访问，禁止外发"},
-    "L3": {"name": "敏感", "description": "涉及用户标识、联系方式等个人一般信息", "control": "按角色授权，展示需脱敏"},
-    "L4": {"name": "核心", "description": "个人敏感信息、重要数据，泄露可能造成严重后果", "control": "最小权限 + 脱敏 + 访问审批 + 审计留痕"}
+  "schema_version": "1.0",
+  "basis": [
+    "《中华人民共和国数据安全法》",
+    "《中华人民共和国个人信息保护法》",
+    "GB/T 43697-2024《数据安全技术 数据分类分级规则》",
+    "GB/T 35273-2020《信息安全技术 个人信息安全规范》"
+  ],
+  "levels": [
+    {
+      "code": "L1",
+      "name": "公开数据",
+      "description": "可依法向社会公开、可无条件共享的数据。",
+      "control": "对外发布前做一致性校验，保留发布记录。"
+    },
+    {
+      "code": "L2",
+      "name": "内部数据",
+      "description": "仅限部门内部使用，泄露后可能影响业务运行但不涉及个人权益。",
+      "control": "按需授权，禁止外传；跨部门共享需审批。"
+    },
+    {
+      "code": "L3",
+      "name": "敏感数据",
+      "description": "包含个人信息或企业敏感经营信息，泄露可能侵害主体权益。",
+      "control": "最小必要、脱敏后共享、访问留痕、定期复核授权。"
+    },
+    {
+      "code": "L4",
+      "name": "核心数据",
+      "description": "一旦泄露可能危害国家安全、公共利益或造成严重后果的数据。",
+      "control": "专库加密存储、双人授权、禁止出域、全量审计。"
+    }
+  ],
+  "categories": [
+    {"code": "C01", "name": "市场主体基础信息", "domain": "市场主体"},
+    {"code": "C02", "name": "联系人信息", "domain": "市场主体"},
+    {"code": "C03", "name": "信用评价信息", "domain": "信用监管"},
+    {"code": "C04", "name": "企业诉求信息", "domain": "企业服务"},
+    {"code": "C05", "name": "数据治理信息", "domain": "内部管理"}
+  ],
+  "table_rules": {
+    "market_register": {
+      "category": "C01",
+      "level": "L3",
+      "sharing": "有条件共享",
+      "reason": "以企业登记信息为主，含法定代表人、联系电话等个人信息，表级按最高字段级别定为 L3。"
+    },
+    "credit_rating": {
+      "category": "C03",
+      "level": "L2",
+      "sharing": "有条件共享",
+      "reason": "信用评分与等级属于企业信用信息，供内部监管与服务场景使用。"
+    },
+    "complaint_case": {
+      "category": "C04",
+      "level": "L3",
+      "sharing": "脱敏后共享",
+      "reason": "诉求正文可能包含身份证号、银行账号等敏感个人信息，须内容级扫描与脱敏。"
+    }
   },
-  "rules": [
-    {"match": "(^|_)phone($|_)", "level": "L4", "category": "个人敏感信息", "mask": "保留前 3 位与后 4 位，如 138****1234"},
-    {"match": "(^|_)id_card($|_)", "level": "L4", "category": "个人敏感信息", "mask": "保留前 6 位与后 4 位"},
-    {"match": "(^|_)address($|_)", "level": "L3", "category": "个人一般信息", "mask": "仅保留省/市，详细地址以 *** 代替"},
-    {"match": "(^|_)email($|_)", "level": "L3", "category": "个人一般信息", "mask": "保留邮箱首字母与域名"},
-    {"match": "(^|_)user_name($|_)", "level": "L3", "category": "个人一般信息", "mask": "保留姓氏，其余以 * 代替"},
-    {"match": "(amount|gmv|budget|price|coupon|roi)", "level": "L2", "category": "经营数据", "mask": "无需脱敏，禁止外发"},
-    {"match": ".*", "level": "L1", "category": "公开数据", "mask": "无需脱敏"}
-  ]
+  "field_rules": [
+    {"table": "market_register", "field": "reg_id", "category": "C01", "level": "L2", "personal_info": false, "masking": null, "reason": "内部登记流水号，用于关联，不对外。"},
+    {"table": "market_register", "field": "unified_social_credit_code", "category": "C01", "level": "L1", "personal_info": false, "masking": null, "reason": "企业信用代码属依法公示信息。"},
+    {"table": "market_register", "field": "company_name", "category": "C01", "level": "L1", "personal_info": false, "masking": null, "reason": "企业名称属依法公示信息。"},
+    {"table": "market_register", "field": "reg_date", "category": "C01", "level": "L1", "personal_info": false, "masking": null, "reason": "登记日期属公示信息。"},
+    {"table": "market_register", "field": "reg_capital_wan", "category": "C01", "level": "L1", "personal_info": false, "masking": null, "reason": "注册资本属公示信息。"},
+    {"table": "market_register", "field": "industry_code", "category": "C01", "level": "L1", "personal_info": false, "masking": null, "reason": "行业代码属公示信息。"},
+    {"table": "market_register", "field": "district_code", "category": "C01", "level": "L1", "personal_info": false, "masking": null, "reason": "行政区划属公示信息。"},
+    {"table": "market_register", "field": "address", "category": "C01", "level": "L2", "personal_info": false, "masking": "address_mask", "reason": "登记住所虽公示，但聚合后可能定位到具体经营场所，按内部数据管理。"},
+    {"table": "market_register", "field": "legal_person", "category": "C02", "level": "L3", "personal_info": true, "sensitive": false, "masking": "name_mask", "reason": "自然人姓名，属于个人信息。"},
+    {"table": "market_register", "field": "contact_phone", "category": "C02", "level": "L3", "personal_info": true, "sensitive": false, "masking": "phone_mask", "reason": "手机号可识别到自然人，属于个人信息。"},
+    {"table": "market_register", "field": "contact_email", "category": "C02", "level": "L3", "personal_info": true, "sensitive": false, "masking": "email_mask", "reason": "邮箱可识别到自然人，属于个人信息。"},
+    {"table": "market_register", "field": "status", "category": "C01", "level": "L1", "personal_info": false, "masking": null, "reason": "经营状态属公示信息。"},
+    {"table": "market_register", "field": "update_time", "category": "C05", "level": "L2", "personal_info": false, "masking": null, "reason": "内部数据更新时间。"},
+
+    {"table": "credit_rating", "field": "rating_id", "category": "C03", "level": "L2", "personal_info": false, "masking": null, "reason": "内部评价记录号。"},
+    {"table": "credit_rating", "field": "unified_social_credit_code", "category": "C03", "level": "L2", "personal_info": false, "masking": null, "reason": "信用评价场景下的企业标识。"},
+    {"table": "credit_rating", "field": "credit_score", "category": "C03", "level": "L2", "personal_info": false, "masking": null, "reason": "企业信用评分，供监管与服务使用。"},
+    {"table": "credit_rating", "field": "credit_level", "category": "C03", "level": "L2", "personal_info": false, "masking": null, "reason": "企业信用等级。"},
+    {"table": "credit_rating", "field": "rating_date", "category": "C03", "level": "L2", "personal_info": false, "masking": null, "reason": "评价日期。"},
+    {"table": "credit_rating", "field": "rating_agency", "category": "C03", "level": "L2", "personal_info": false, "masking": null, "reason": "评级机构信息。"},
+    {"table": "credit_rating", "field": "update_time", "category": "C03", "level": "L2", "personal_info": false, "masking": null, "reason": "评价结果归集时间。"},
+
+    {"table": "complaint_case", "field": "case_id", "category": "C04", "level": "L2", "personal_info": false, "masking": null, "reason": "工单内部编号。"},
+    {"table": "complaint_case", "field": "unified_social_credit_code", "category": "C04", "level": "L2", "personal_info": false, "masking": null, "reason": "诉求关联企业标识。"},
+    {"table": "complaint_case", "field": "case_type", "category": "C04", "level": "L2", "personal_info": false, "masking": null, "reason": "诉求分类。"},
+    {"table": "complaint_case", "field": "submit_time", "category": "C04", "level": "L2", "personal_info": false, "masking": null, "reason": "工单提交时间。"},
+    {"table": "complaint_case", "field": "content", "category": "C04", "level": "L3", "personal_info": true, "sensitive_potential": true, "masking": "content_redact", "reason": "诉求正文可能包含手机号、身份证号、银行账号等个人信息，需内容级识别与脱敏。"},
+    {"table": "complaint_case", "field": "handling_dept", "category": "C04", "level": "L2", "personal_info": false, "masking": null, "reason": "内部承办部门。"},
+    {"table": "complaint_case", "field": "status", "category": "C04", "level": "L2", "personal_info": false, "masking": null, "reason": "工单流转状态。"},
+    {"table": "complaint_case", "field": "satisfaction", "category": "C04", "level": "L2", "personal_info": false, "masking": null, "reason": "企业满意度评分，不含评价人身份。"},
+    {"table": "complaint_case", "field": "close_time", "category": "C04", "level": "L2", "personal_info": false, "masking": null, "reason": "工单办结时间。"}
+  ],
+  "content_detectors": [
+    {
+      "id": "PII-MOBILE",
+      "name": "手机号",
+      "regex": "(?<!\\d)1[3-9]\\d{9}(?!\\d)",
+      "level": "L3",
+      "personal_info": true,
+      "sensitive": false,
+      "masking": "phone_mask",
+      "applies_to": [{"table": "complaint_case", "field": "content"}]
+    },
+    {
+      "id": "PII-IDCARD",
+      "name": "身份证号",
+      "regex": "(?<!\\d)[1-9]\\d{5}(?:19|20)\\d{2}(?:0[1-9]|1[0-2])(?:0[1-9]|[12]\\d|3[01])\\d{3}[\\dXx](?!\\d)",
+      "level": "L4",
+      "personal_info": true,
+      "sensitive": true,
+      "masking": "idcard_mask",
+      "applies_to": [{"table": "complaint_case", "field": "content"}]
+    },
+    {
+      "id": "PII-EMAIL",
+      "name": "电子邮箱",
+      "regex": "[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}",
+      "level": "L3",
+      "personal_info": true,
+      "sensitive": false,
+      "masking": "email_mask",
+      "applies_to": [{"table": "complaint_case", "field": "content"}]
+    },
+    {
+      "id": "PII-BANKCARD",
+      "name": "银行卡号",
+      "regex": "(?<!\\d)(?:62\\d{14,17})(?!\\d)",
+      "level": "L4",
+      "personal_info": true,
+      "sensitive": true,
+      "masking": "bankcard_mask",
+      "applies_to": [{"table": "complaint_case", "field": "content"}]
+    }
+  ],
+  "masking_policies": {
+    "name_mask": {"name": "姓名脱敏", "rule": "保留姓氏，其余用 * 代替", "example": "张*"},
+    "phone_mask": {"name": "手机号脱敏", "rule": "保留前 3 位与后 4 位", "example": "138****5678"},
+    "email_mask": {"name": "邮箱脱敏", "rule": "保留首字符与域名", "example": "z***@example.com"},
+    "idcard_mask": {"name": "身份证号脱敏", "rule": "保留前 3 位与后 4 位", "example": "130***********1234"},
+    "bankcard_mask": {"name": "银行卡号脱敏", "rule": "仅保留后 4 位", "example": "************1234"},
+    "address_mask": {"name": "地址脱敏", "rule": "保留到区县，门牌号用 * 代替", "example": "河北省雄安新区容城县***"},
+    "content_redact": {"name": "正文脱敏", "rule": "按内容识别结果替换手机号、证件号、邮箱、银行卡号", "example": "联系电话138****5678"}
+  }
 }

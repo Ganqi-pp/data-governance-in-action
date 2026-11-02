@@ -1,0 +1,45 @@
+﻿规则编号,规则名称,表,字段,维度,严重度,校验记录,治理前违规,治理前违规率,治理前达标,治理后违规,治理后违规率,治理后达标,Owner
+DQ-REG-001,统一社会信用代码非空,market_register,unified_social_credit_code,完整性,高,1240,6,0.48%,否,0,0.00%,是,市场服务部登记注册科
+DQ-REG-002,统一社会信用代码唯一,market_register,unified_social_credit_code,唯一性,高,1234,80,6.48%,否,0,0.00%,是,市场服务部数据管理岗
+DQ-REG-003,统一社会信用代码校验位正确,market_register,unified_social_credit_code,准确性,高,1234,40,3.24%,否,0,0.00%,是,市场服务部登记注册科
+DQ-REG-004,企业名称不含首尾空白或全角空格,market_register,company_name,有效性,低,1240,45,3.63%,否,0,0.00%,是,市场服务部登记注册科
+DQ-REG-005,企业名称非空,market_register,company_name,完整性,高,1240,0,0.00%,是,0,0.00%,是,市场服务部登记注册科
+DQ-REG-006,注册日期格式合法,market_register,reg_date,有效性,高,1240,6,0.48%,否,0,0.00%,是,市场服务部登记注册科
+DQ-REG-007,注册日期不得晚于数据截止日,market_register,reg_date,有效性,高,1234,12,0.97%,否,0,0.00%,是,市场服务部登记注册科
+DQ-REG-008,注册资本在合理区间,market_register,reg_capital_wan,有效性,中,1240,6,0.48%,是,0,0.00%,是,市场服务部登记注册科
+DQ-REG-009,联系电话非空,market_register,contact_phone,完整性,中,1240,65,5.24%,否,65,5.71%,否,市场服务部企业服务科
+DQ-REG-010,联系电话符合手机号格式,market_register,contact_phone,有效性,高,1175,70,5.96%,否,0,0.00%,是,市场服务部企业服务科
+DQ-REG-011,电子邮箱格式合法,market_register,contact_email,有效性,低,1240,25,2.02%,否,0,0.00%,是,市场服务部企业服务科
+DQ-REG-012,行业代码在标准码表中,market_register,industry_code,有效性,中,1240,32,2.58%,否,0,0.00%,是,市场服务部数据管理岗
+DQ-REG-013,法定代表人非空,market_register,legal_person,完整性,中,1240,20,1.61%,是,20,1.76%,是,市场服务部登记注册科
+DQ-REG-014,登记住所与行政区划代码一致,market_register,district_code,一致性,高,1240,28,2.26%,否,0,0.00%,是,市场服务部数据管理岗
+DQ-REG-015,经营状态在标准码表中,market_register,status,有效性,高,1240,40,3.23%,否,10,0.88%,是,市场服务部登记注册科
+DQ-REG-016,更新时间非空,market_register,update_time,完整性,中,1240,8,0.65%,否,8,0.70%,否,市场服务部数据管理岗
+DQ-REG-017,数据更新不超过 365 天,market_register,update_time,及时性,中,1232,50,4.06%,是,50,4.42%,是,市场服务部数据管理岗
+DQ-REG-018,登记住所非空,market_register,address,完整性,中,1240,12,0.97%,是,12,1.05%,否,市场服务部登记注册科
+DQ-REG-019,行政区划代码在标准码表中,market_register,district_code,有效性,高,1240,0,0.00%,是,0,0.00%,是,市场服务部数据管理岗
+DQ-REG-020,更新时间不早于注册日期,market_register,update_time,一致性,低,1232,12,0.97%,是,0,0.00%,是,市场服务部数据管理岗
+DQ-REG-021,注册日期非空,market_register,reg_date,完整性,高,1240,0,0.00%,是,0,0.00%,是,市场服务部登记注册科
+DQ-CRE-001,信用记录信用代码非空,credit_rating,unified_social_credit_code,完整性,高,950,0,0.00%,是,0,0.00%,是,市场服务部信用管理科
+DQ-CRE-002,信用记录可关联到市场主体,credit_rating,unified_social_credit_code,一致性,高,950,30,3.16%,否,0,0.00%,是,市场服务部信用管理科
+DQ-CRE-003,信用评分在 0-100 之间,credit_rating,credit_score,有效性,高,950,8,0.84%,否,0,0.00%,是,市场服务部信用管理科
+DQ-CRE-004,信用等级在标准码表中,credit_rating,credit_level,有效性,高,950,22,2.32%,否,0,0.00%,是,市场服务部信用管理科
+DQ-CRE-005,评级日期不得晚于截止日,credit_rating,rating_date,有效性,中,950,6,0.63%,否,0,0.00%,是,市场服务部信用管理科
+DQ-CRE-006,评级机构非空,credit_rating,rating_agency,完整性,中,950,18,1.89%,是,18,2.00%,是,市场服务部信用管理科
+DQ-CRE-007,信用数据更新不超过 365 天,credit_rating,update_time,及时性,中,950,25,2.63%,是,25,2.77%,是,市场服务部信用管理岗
+DQ-CRE-008,信用等级与评分区间一致,credit_rating,credit_level,一致性,中,950,44,4.63%,否,0,0.00%,是,市场服务部信用管理科
+DQ-CRE-009,评价记录号唯一,credit_rating,rating_id,唯一性,高,950,0,0.00%,是,0,0.00%,是,市场服务部数据管理岗
+DQ-CRE-010,评级日期格式合法,credit_rating,rating_date,有效性,中,950,0,0.00%,是,0,0.00%,是,市场服务部信用管理科
+DQ-CRE-011,评级日期非空,credit_rating,rating_date,完整性,中,950,0,0.00%,是,0,0.00%,是,市场服务部信用管理科
+DQ-CASE-001,诉求内容非空,complaint_case,content,完整性,高,1500,12,0.80%,否,12,0.83%,否,市场服务部企业服务科
+DQ-CASE-002,工单可关联到市场主体,complaint_case,unified_social_credit_code,一致性,高,1500,35,2.33%,否,0,0.00%,是,市场服务部企业服务科
+DQ-CASE-003,诉求类型在标准码表中,complaint_case,case_type,有效性,中,1500,20,1.33%,否,0,0.00%,是,市场服务部企业服务科
+DQ-CASE-004,工单状态在标准码表中,complaint_case,status,有效性,中,1500,25,1.67%,否,5,0.35%,是,市场服务部企业服务科
+DQ-CASE-005,满意度在 1-5 分之间,complaint_case,satisfaction,有效性,中,1131,21,1.86%,否,0,0.00%,是,市场服务部企业服务科
+DQ-CASE-006,办结时间不早于提交时间,complaint_case,close_time,一致性,高,1135,19,1.67%,否,0,0.00%,是,市场服务部企业服务科
+DQ-CASE-007,提交时间不得晚于截止日,complaint_case,submit_time,有效性,中,1500,8,0.53%,否,0,0.00%,是,市场服务部企业服务科
+DQ-CASE-008,已办结工单必须有办结时间,complaint_case,close_time,完整性,高,1127,10,0.89%,否,13,1.20%,否,市场服务部企业服务科
+DQ-CASE-009,工单编号唯一,complaint_case,case_id,唯一性,高,1500,0,0.00%,是,0,0.00%,是,市场服务部数据管理岗
+DQ-CASE-010,承办部门非空,complaint_case,handling_dept,完整性,中,1500,0,0.00%,是,0,0.00%,是,市场服务部企业服务科
+DQ-CASE-011,提交时间非空,complaint_case,submit_time,完整性,高,1500,0,0.00%,是,0,0.00%,是,市场服务部企业服务科
+DQ-CASE-012,提交时间格式合法,complaint_case,submit_time,有效性,中,1500,0,0.00%,是,0,0.00%,是,市场服务部企业服务科

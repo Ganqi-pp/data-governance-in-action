@@ -1,0 +1,1513 @@
+{
+  "summary": {
+    "tables": 6,
+    "fields": 61,
+    "documented_fields": 58,
+    "pii_fields": 8,
+    "documented_rate": 0.9508,
+    "generated_at": "2026-11-02 13:00:45"
+  },
+  "tables": [
+    {
+      "table": "ods_market_register",
+      "name_zh": "市场主体登记信息（贴源层）",
+      "layer": "ODS",
+      "owner": "市场服务部登记注册科",
+      "steward": "数据管理岗",
+      "description": "雄安新区市场主体设立、变更、注销等登记信息，是市场主体服务的主数据。",
+      "row_count": 1240,
+      "field_count": 13,
+      "level": "L3",
+      "fields": [
+        {
+          "field": "reg_id",
+          "name_zh": "登记流水号",
+          "type": "string",
+          "length": 32,
+          "nullable": false,
+          "standard_no": "GOV-REG-001",
+          "description": "登记系统内唯一流水号，主键。",
+          "level": "L2",
+          "category": "C01",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 1240,
+          "max_length": 14
+        },
+        {
+          "field": "unified_social_credit_code",
+          "name_zh": "统一社会信用代码",
+          "type": "string",
+          "length": 18,
+          "nullable": false,
+          "standard_no": "GOV-REG-002",
+          "description": "按 GB 32100-2015 编制，18 位，含校验位。",
+          "level": "L1",
+          "category": "C01",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 6,
+          "null_rate": 0.0048,
+          "distinct_count": 1195,
+          "max_length": 18
+        },
+        {
+          "field": "company_name",
+          "name_zh": "企业名称",
+          "type": "string",
+          "length": 100,
+          "nullable": false,
+          "standard_no": "GOV-REG-003",
+          "description": "登记机关核准的企业全称，不含首尾空白。",
+          "level": "L1",
+          "category": "C01",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 1200,
+          "max_length": 13
+        },
+        {
+          "field": "reg_date",
+          "name_zh": "注册日期",
+          "type": "date",
+          "length": null,
+          "nullable": false,
+          "standard_no": "GOV-REG-004",
+          "description": "营业执照载明的成立日期，格式 YYYY-MM-DD。",
+          "level": "L1",
+          "category": "C01",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 1118,
+          "max_length": 10
+        },
+        {
+          "field": "reg_capital_wan",
+          "name_zh": "注册资本（万元）",
+          "type": "number",
+          "length": 18,
+          "nullable": true,
+          "standard_no": "GOV-REG-005",
+          "description": "注册资本，单位万元，保留两位小数。",
+          "level": "L1",
+          "category": "C01",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 1162,
+          "max_length": 7
+        },
+        {
+          "field": "industry_code",
+          "name_zh": "行业代码",
+          "type": "string",
+          "length": 4,
+          "nullable": true,
+          "standard_no": "GOV-REG-006",
+          "description": "GB/T 4754-2017 行业代码，门类字母 + 两位大类数字。",
+          "level": "L1",
+          "category": "C01",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 37,
+          "max_length": 16
+        },
+        {
+          "field": "district_code",
+          "name_zh": "行政区划代码",
+          "type": "string",
+          "length": 6,
+          "nullable": false,
+          "standard_no": "GOV-REG-007",
+          "description": "登记机关所在行政区划，6 位数字代码。",
+          "level": "L1",
+          "category": "C01",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 4,
+          "max_length": 6,
+          "top_values": [
+            {
+              "value": "130629",
+              "count": 348
+            },
+            {
+              "value": "130632",
+              "count": 335
+            },
+            {
+              "value": "130638",
+              "count": 334
+            },
+            {
+              "value": "133100",
+              "count": 223
+            }
+          ]
+        },
+        {
+          "field": "address",
+          "name_zh": "住所",
+          "type": "string",
+          "length": 200,
+          "nullable": false,
+          "standard_no": "GOV-REG-008",
+          "description": "营业执照载明的住所，精确到门牌号。",
+          "level": "L2",
+          "category": "C01",
+          "personal_info": false,
+          "masking": "address_mask",
+          "null_count": 12,
+          "null_rate": 0.0097,
+          "distinct_count": 1158,
+          "max_length": 18
+        },
+        {
+          "field": "legal_person",
+          "name_zh": "法定代表人",
+          "type": "string",
+          "length": 50,
+          "nullable": false,
+          "standard_no": "GOV-REG-009",
+          "description": "法定代表人姓名。",
+          "level": "L3",
+          "category": "C02",
+          "personal_info": true,
+          "masking": "name_mask",
+          "null_count": 20,
+          "null_rate": 0.0161,
+          "distinct_count": 984,
+          "max_length": 3
+        },
+        {
+          "field": "contact_phone",
+          "name_zh": "联系电话",
+          "type": "string",
+          "length": 20,
+          "nullable": true,
+          "standard_no": "GOV-REG-010",
+          "description": "11 位手机号，存储时去除分隔符与国家码。",
+          "level": "L3",
+          "category": "C02",
+          "personal_info": true,
+          "masking": "phone_mask",
+          "null_count": 65,
+          "null_rate": 0.0524,
+          "distinct_count": 1136,
+          "max_length": 14
+        },
+        {
+          "field": "contact_email",
+          "name_zh": "电子邮箱",
+          "type": "string",
+          "length": 100,
+          "nullable": true,
+          "standard_no": "GOV-REG-011",
+          "description": "企业联系人邮箱，小写存储。",
+          "level": "L3",
+          "category": "C02",
+          "personal_info": true,
+          "masking": "email_mask",
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 1179,
+          "max_length": 23
+        },
+        {
+          "field": "status",
+          "name_zh": "经营状态",
+          "type": "string",
+          "length": 10,
+          "nullable": false,
+          "standard_no": "GOV-REG-012",
+          "description": "登记状态，统一使用五种标准码值。",
+          "level": "L1",
+          "category": "C01",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 11,
+          "max_length": 5,
+          "top_values": [
+            {
+              "value": "存续",
+              "count": 866
+            },
+            {
+              "value": "在业",
+              "count": 167
+            },
+            {
+              "value": "注销",
+              "count": 86
+            },
+            {
+              "value": "吊销",
+              "count": 48
+            },
+            {
+              "value": "迁出",
+              "count": 33
+            }
+          ]
+        },
+        {
+          "field": "update_time",
+          "name_zh": "更新时间",
+          "type": "datetime",
+          "length": null,
+          "nullable": false,
+          "standard_no": "GOV-REG-013",
+          "description": "源系统最后一次更新时间，用于及时性监控。",
+          "level": "L2",
+          "category": "C05",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 8,
+          "null_rate": 0.0065,
+          "distinct_count": 372,
+          "max_length": 10
+        }
+      ]
+    },
+    {
+      "table": "ods_credit_rating",
+      "name_zh": "市场主体信用评价（贴源层）",
+      "layer": "ODS",
+      "owner": "市场服务部信用管理科",
+      "steward": "数据管理岗",
+      "description": "按年度/批次归集的市场主体信用评分与信用等级。",
+      "row_count": 950,
+      "field_count": 7,
+      "level": "L2",
+      "fields": [
+        {
+          "field": "rating_id",
+          "name_zh": "评价记录号",
+          "type": "string",
+          "length": 32,
+          "nullable": false,
+          "standard_no": "GOV-CRE-001",
+          "description": "信用评价记录唯一标识。",
+          "level": "L2",
+          "category": "C03",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 950,
+          "max_length": 12
+        },
+        {
+          "field": "unified_social_credit_code",
+          "name_zh": "统一社会信用代码",
+          "type": "string",
+          "length": 18,
+          "nullable": false,
+          "standard_no": "GOV-CRE-002",
+          "description": "关联市场主体的统一社会信用代码。",
+          "level": "L2",
+          "category": "C03",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 923,
+          "max_length": 18
+        },
+        {
+          "field": "credit_score",
+          "name_zh": "信用评分",
+          "type": "integer",
+          "length": null,
+          "nullable": true,
+          "standard_no": "GOV-CRE-003",
+          "description": "百分制信用评分。",
+          "level": "L2",
+          "category": "C03",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 49,
+          "max_length": 3
+        },
+        {
+          "field": "credit_level",
+          "name_zh": "信用等级",
+          "type": "string",
+          "length": 1,
+          "nullable": true,
+          "standard_no": "GOV-CRE-004",
+          "description": "A/B/C/D 四级，与评分区间保持一致。",
+          "level": "L2",
+          "category": "C03",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 8,
+          "max_length": 4,
+          "top_values": [
+            {
+              "value": "C",
+              "count": 292
+            },
+            {
+              "value": "B",
+              "count": 289
+            },
+            {
+              "value": "A",
+              "count": 240
+            },
+            {
+              "value": "D",
+              "count": 107
+            },
+            {
+              "value": "AAAA",
+              "count": 6
+            }
+          ]
+        },
+        {
+          "field": "rating_date",
+          "name_zh": "评级日期",
+          "type": "date",
+          "length": null,
+          "nullable": false,
+          "standard_no": "GOV-CRE-005",
+          "description": "本次信用评价出具日期。",
+          "level": "L2",
+          "category": "C03",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 317,
+          "max_length": 10
+        },
+        {
+          "field": "rating_agency",
+          "name_zh": "评级机构",
+          "type": "string",
+          "length": 100,
+          "nullable": true,
+          "standard_no": "GOV-CRE-006",
+          "description": "出具信用评价的机构名称。",
+          "level": "L2",
+          "category": "C03",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 18,
+          "null_rate": 0.0189,
+          "distinct_count": 5,
+          "max_length": 10,
+          "top_values": [
+            {
+              "value": "中诚信河北分公司",
+              "count": 255
+            },
+            {
+              "value": "联合信用河北分公司",
+              "count": 226
+            },
+            {
+              "value": "雄安新区公共信用中心",
+              "count": 226
+            },
+            {
+              "value": "河北征信有限公司",
+              "count": 225
+            }
+          ]
+        },
+        {
+          "field": "update_time",
+          "name_zh": "更新时间",
+          "type": "datetime",
+          "length": null,
+          "nullable": false,
+          "standard_no": "GOV-CRE-007",
+          "description": "评价结果归集时间。",
+          "level": "L2",
+          "category": "C03",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 353,
+          "max_length": 10
+        }
+      ]
+    },
+    {
+      "table": "ods_complaint_case",
+      "name_zh": "企业诉求工单（贴源层）",
+      "layer": "ODS",
+      "owner": "市场服务部企业服务科",
+      "steward": "数据管理岗",
+      "description": "企业通过 12345 热线、线上平台提交的咨询、投诉、建议等诉求工单。",
+      "row_count": 1500,
+      "field_count": 9,
+      "level": "L3",
+      "fields": [
+        {
+          "field": "case_id",
+          "name_zh": "工单编号",
+          "type": "string",
+          "length": 32,
+          "nullable": false,
+          "standard_no": "GOV-CASE-001",
+          "description": "诉求工单唯一编号。",
+          "level": "L2",
+          "category": "C04",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 1500,
+          "max_length": 12
+        },
+        {
+          "field": "unified_social_credit_code",
+          "name_zh": "统一社会信用代码",
+          "type": "string",
+          "length": 18,
+          "nullable": true,
+          "standard_no": "GOV-CASE-002",
+          "description": "诉求关联的市场主体，无法关联时为空。",
+          "level": "L2",
+          "category": "C04",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 863,
+          "max_length": 18
+        },
+        {
+          "field": "case_type",
+          "name_zh": "诉求类型",
+          "type": "string",
+          "length": 20,
+          "nullable": false,
+          "standard_no": "GOV-CASE-003",
+          "description": "按业务条线划分的诉求类型。",
+          "level": "L2",
+          "category": "C04",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 10,
+          "max_length": 4,
+          "top_values": [
+            {
+              "value": "融资服务",
+              "count": 226
+            },
+            {
+              "value": "税务办理",
+              "count": 220
+            },
+            {
+              "value": "登记注册",
+              "count": 219
+            },
+            {
+              "value": "市场监管",
+              "count": 218
+            },
+            {
+              "value": "社保缴纳",
+              "count": 207
+            }
+          ]
+        },
+        {
+          "field": "submit_time",
+          "name_zh": "提交时间",
+          "type": "datetime",
+          "length": null,
+          "nullable": false,
+          "standard_no": "GOV-CASE-004",
+          "description": "企业提交诉求的时间。",
+          "level": "L2",
+          "category": "C04",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 582,
+          "max_length": 10
+        },
+        {
+          "field": "content",
+          "name_zh": "诉求内容",
+          "type": "string",
+          "length": 2000,
+          "nullable": false,
+          "standard_no": "GOV-CASE-005",
+          "description": "诉求正文，可能包含联系人、电话等个人信息，使用前须脱敏。",
+          "level": "L3",
+          "category": "C04",
+          "personal_info": true,
+          "masking": "content_redact",
+          "null_count": 12,
+          "null_rate": 0.008,
+          "distinct_count": 78,
+          "max_length": 63
+        },
+        {
+          "field": "handling_dept",
+          "name_zh": "承办部门",
+          "type": "string",
+          "length": 50,
+          "nullable": false,
+          "standard_no": "GOV-CASE-006",
+          "description": "工单承办部门。",
+          "level": "L2",
+          "category": "C04",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 6,
+          "max_length": 5,
+          "top_values": [
+            {
+              "value": "综合执法局",
+              "count": 267
+            },
+            {
+              "value": "金融办",
+              "count": 260
+            },
+            {
+              "value": "人社局",
+              "count": 257
+            },
+            {
+              "value": "市场服务部",
+              "count": 253
+            },
+            {
+              "value": "税务局",
+              "count": 232
+            }
+          ]
+        },
+        {
+          "field": "status",
+          "name_zh": "工单状态",
+          "type": "string",
+          "length": 10,
+          "nullable": false,
+          "standard_no": "GOV-CASE-007",
+          "description": "工单流转状态。",
+          "level": "L2",
+          "category": "C04",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 9,
+          "max_length": 3,
+          "top_values": [
+            {
+              "value": "已办结",
+              "count": 979
+            },
+            {
+              "value": "办理中",
+              "count": 219
+            },
+            {
+              "value": "已回访",
+              "count": 148
+            },
+            {
+              "value": "待受理",
+              "count": 129
+            },
+            {
+              "value": "处理中",
+              "count": 5
+            }
+          ]
+        },
+        {
+          "field": "satisfaction",
+          "name_zh": "满意度",
+          "type": "integer",
+          "length": null,
+          "nullable": true,
+          "standard_no": "GOV-CASE-008",
+          "description": "1-5 分满意度，未回访时为空。",
+          "level": "L2",
+          "category": "C04",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 369,
+          "null_rate": 0.246,
+          "distinct_count": 9,
+          "max_length": 2,
+          "top_values": [
+            {
+              "value": "5",
+              "count": 624
+            },
+            {
+              "value": "4",
+              "count": 352
+            },
+            {
+              "value": "3",
+              "count": 77
+            },
+            {
+              "value": "2",
+              "count": 34
+            },
+            {
+              "value": "1",
+              "count": 23
+            }
+          ]
+        },
+        {
+          "field": "close_time",
+          "name_zh": "办结时间",
+          "type": "datetime",
+          "length": null,
+          "nullable": true,
+          "standard_no": "GOV-CASE-009",
+          "description": "工单办结或回访完成时间，已办结工单必填。",
+          "level": "L2",
+          "category": "C04",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 365,
+          "null_rate": 0.2433,
+          "distinct_count": 541,
+          "max_length": 10
+        }
+      ]
+    },
+    {
+      "table": "dwd_market_register",
+      "name_zh": "市场主体登记信息（明细层）",
+      "layer": "DWD",
+      "owner": "市场服务部登记注册科",
+      "steward": "数据管理岗",
+      "description": "雄安新区市场主体设立、变更、注销等登记信息，是市场主体服务的主数据。",
+      "row_count": 1139,
+      "field_count": 14,
+      "level": "L3",
+      "fields": [
+        {
+          "field": "reg_id",
+          "name_zh": "登记流水号",
+          "type": "string",
+          "length": 32,
+          "nullable": false,
+          "standard_no": "GOV-REG-001",
+          "description": "登记系统内唯一流水号，主键。",
+          "level": "L2",
+          "category": "C01",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 1139,
+          "max_length": 14
+        },
+        {
+          "field": "unified_social_credit_code",
+          "name_zh": "统一社会信用代码",
+          "type": "string",
+          "length": 18,
+          "nullable": false,
+          "standard_no": "GOV-REG-002",
+          "description": "按 GB 32100-2015 编制，18 位，含校验位。",
+          "level": "L1",
+          "category": "C01",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 1139,
+          "max_length": 18
+        },
+        {
+          "field": "company_name",
+          "name_zh": "企业名称",
+          "type": "string",
+          "length": 100,
+          "nullable": false,
+          "standard_no": "GOV-REG-003",
+          "description": "登记机关核准的企业全称，不含首尾空白。",
+          "level": "L1",
+          "category": "C01",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 1139,
+          "max_length": 12
+        },
+        {
+          "field": "reg_date",
+          "name_zh": "注册日期",
+          "type": "date",
+          "length": null,
+          "nullable": false,
+          "standard_no": "GOV-REG-004",
+          "description": "营业执照载明的成立日期，格式 YYYY-MM-DD。",
+          "level": "L1",
+          "category": "C01",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 1060,
+          "max_length": 10
+        },
+        {
+          "field": "reg_capital_wan",
+          "name_zh": "注册资本（万元）",
+          "type": "number",
+          "length": 18,
+          "nullable": true,
+          "standard_no": "GOV-REG-005",
+          "description": "注册资本，单位万元，保留两位小数。",
+          "level": "L1",
+          "category": "C01",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 6,
+          "null_rate": 0.0053,
+          "distinct_count": 1103,
+          "max_length": 7
+        },
+        {
+          "field": "industry_code",
+          "name_zh": "行业代码",
+          "type": "string",
+          "length": 4,
+          "nullable": true,
+          "standard_no": "GOV-REG-006",
+          "description": "GB/T 4754-2017 行业代码，门类字母 + 两位大类数字。",
+          "level": "L1",
+          "category": "C01",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 11,
+          "null_rate": 0.0097,
+          "distinct_count": 22,
+          "max_length": 3
+        },
+        {
+          "field": "district_code",
+          "name_zh": "行政区划代码",
+          "type": "string",
+          "length": 6,
+          "nullable": false,
+          "standard_no": "GOV-REG-007",
+          "description": "登记机关所在行政区划，6 位数字代码。",
+          "level": "L1",
+          "category": "C01",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 4,
+          "max_length": 6,
+          "top_values": [
+            {
+              "value": "130629",
+              "count": 331
+            },
+            {
+              "value": "130638",
+              "count": 307
+            },
+            {
+              "value": "130632",
+              "count": 301
+            },
+            {
+              "value": "133100",
+              "count": 200
+            }
+          ]
+        },
+        {
+          "field": "address",
+          "name_zh": "住所",
+          "type": "string",
+          "length": 200,
+          "nullable": false,
+          "standard_no": "GOV-REG-008",
+          "description": "营业执照载明的住所，精确到门牌号。",
+          "level": "L2",
+          "category": "C01",
+          "personal_info": false,
+          "masking": "address_mask",
+          "null_count": 12,
+          "null_rate": 0.0105,
+          "distinct_count": 1100,
+          "max_length": 18
+        },
+        {
+          "field": "legal_person",
+          "name_zh": "法定代表人",
+          "type": "string",
+          "length": 50,
+          "nullable": false,
+          "standard_no": "GOV-REG-009",
+          "description": "法定代表人姓名。",
+          "level": "L3",
+          "category": "C02",
+          "personal_info": true,
+          "masking": "name_mask",
+          "null_count": 20,
+          "null_rate": 0.0176,
+          "distinct_count": 942,
+          "max_length": 3
+        },
+        {
+          "field": "contact_phone",
+          "name_zh": "联系电话",
+          "type": "string",
+          "length": 20,
+          "nullable": true,
+          "standard_no": "GOV-REG-010",
+          "description": "11 位手机号，存储时去除分隔符与国家码。",
+          "level": "L3",
+          "category": "C02",
+          "personal_info": true,
+          "masking": "phone_mask",
+          "null_count": 65,
+          "null_rate": 0.0571,
+          "distinct_count": 1074,
+          "max_length": 11
+        },
+        {
+          "field": "contact_email",
+          "name_zh": "电子邮箱",
+          "type": "string",
+          "length": 100,
+          "nullable": true,
+          "standard_no": "GOV-REG-011",
+          "description": "企业联系人邮箱，小写存储。",
+          "level": "L3",
+          "category": "C02",
+          "personal_info": true,
+          "masking": "email_mask",
+          "null_count": 25,
+          "null_rate": 0.0219,
+          "distinct_count": 1114,
+          "max_length": 23
+        },
+        {
+          "field": "status",
+          "name_zh": "经营状态",
+          "type": "string",
+          "length": 10,
+          "nullable": false,
+          "standard_no": "GOV-REG-012",
+          "description": "登记状态，统一使用五种标准码值。",
+          "level": "L1",
+          "category": "C01",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 6,
+          "max_length": 5,
+          "top_values": [
+            {
+              "value": "存续",
+              "count": 812
+            },
+            {
+              "value": "在业",
+              "count": 165
+            },
+            {
+              "value": "注销",
+              "count": 78
+            },
+            {
+              "value": "吊销",
+              "count": 42
+            },
+            {
+              "value": "迁出",
+              "count": 32
+            }
+          ]
+        },
+        {
+          "field": "update_time",
+          "name_zh": "更新时间",
+          "type": "datetime",
+          "length": null,
+          "nullable": false,
+          "standard_no": "GOV-REG-013",
+          "description": "源系统最后一次更新时间，用于及时性监控。",
+          "level": "L2",
+          "category": "C05",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 8,
+          "null_rate": 0.007,
+          "distinct_count": 368,
+          "max_length": 19
+        },
+        {
+          "field": "dq_flags",
+          "name_zh": "数据质量标记",
+          "type": "string",
+          "length": null,
+          "nullable": true,
+          "standard_no": "",
+          "description": "记录本条数据的清洗与修复动作。",
+          "level": "L2",
+          "category": "C05",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 904,
+          "null_rate": 0.7937,
+          "distinct_count": 11,
+          "max_length": 23,
+          "top_values": [
+            {
+              "value": "phone:normalized",
+              "count": 51
+            },
+            {
+              "value": "company_name:cleaned",
+              "count": 45
+            },
+            {
+              "value": "status:mapped",
+              "count": 30
+            },
+            {
+              "value": "district:corrected",
+              "count": 28
+            },
+            {
+              "value": "email:invalid_nulled",
+              "count": 25
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "table": "dwd_credit_rating",
+      "name_zh": "市场主体信用评价（明细层）",
+      "layer": "DWD",
+      "owner": "市场服务部信用管理科",
+      "steward": "数据管理岗",
+      "description": "按年度/批次归集的市场主体信用评分与信用等级。",
+      "row_count": 901,
+      "field_count": 8,
+      "level": "L2",
+      "fields": [
+        {
+          "field": "rating_id",
+          "name_zh": "评价记录号",
+          "type": "string",
+          "length": 32,
+          "nullable": false,
+          "standard_no": "GOV-CRE-001",
+          "description": "信用评价记录唯一标识。",
+          "level": "L2",
+          "category": "C03",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 901,
+          "max_length": 12
+        },
+        {
+          "field": "unified_social_credit_code",
+          "name_zh": "统一社会信用代码",
+          "type": "string",
+          "length": 18,
+          "nullable": false,
+          "standard_no": "GOV-CRE-002",
+          "description": "关联市场主体的统一社会信用代码。",
+          "level": "L2",
+          "category": "C03",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 874,
+          "max_length": 18
+        },
+        {
+          "field": "credit_score",
+          "name_zh": "信用评分",
+          "type": "integer",
+          "length": null,
+          "nullable": true,
+          "standard_no": "GOV-CRE-003",
+          "description": "百分制信用评分。",
+          "level": "L2",
+          "category": "C03",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 8,
+          "null_rate": 0.0089,
+          "distinct_count": 47,
+          "max_length": 3
+        },
+        {
+          "field": "credit_level",
+          "name_zh": "信用等级",
+          "type": "string",
+          "length": 1,
+          "nullable": true,
+          "standard_no": "GOV-CRE-004",
+          "description": "A/B/C/D 四级，与评分区间保持一致。",
+          "level": "L2",
+          "category": "C03",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 4,
+          "max_length": 1,
+          "top_values": [
+            {
+              "value": "C",
+              "count": 290
+            },
+            {
+              "value": "B",
+              "count": 282
+            },
+            {
+              "value": "A",
+              "count": 218
+            },
+            {
+              "value": "D",
+              "count": 111
+            }
+          ]
+        },
+        {
+          "field": "rating_date",
+          "name_zh": "评级日期",
+          "type": "date",
+          "length": null,
+          "nullable": false,
+          "standard_no": "GOV-CRE-005",
+          "description": "本次信用评价出具日期。",
+          "level": "L2",
+          "category": "C03",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 310,
+          "max_length": 10
+        },
+        {
+          "field": "rating_agency",
+          "name_zh": "评级机构",
+          "type": "string",
+          "length": 100,
+          "nullable": true,
+          "standard_no": "GOV-CRE-006",
+          "description": "出具信用评价的机构名称。",
+          "level": "L2",
+          "category": "C03",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 18,
+          "null_rate": 0.02,
+          "distinct_count": 4,
+          "max_length": 10,
+          "top_values": [
+            {
+              "value": "中诚信河北分公司",
+              "count": 245
+            },
+            {
+              "value": "联合信用河北分公司",
+              "count": 217
+            },
+            {
+              "value": "雄安新区公共信用中心",
+              "count": 214
+            },
+            {
+              "value": "河北征信有限公司",
+              "count": 207
+            }
+          ]
+        },
+        {
+          "field": "update_time",
+          "name_zh": "更新时间",
+          "type": "datetime",
+          "length": null,
+          "nullable": false,
+          "standard_no": "GOV-CRE-007",
+          "description": "评价结果归集时间。",
+          "level": "L2",
+          "category": "C03",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 352,
+          "max_length": 19
+        },
+        {
+          "field": "dq_flags",
+          "name_zh": "数据质量标记",
+          "type": "string",
+          "length": null,
+          "nullable": true,
+          "standard_no": "",
+          "description": "记录本条数据的清洗与修复动作。",
+          "level": "L2",
+          "category": "C05",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 857,
+          "null_rate": 0.9512,
+          "distinct_count": 3,
+          "max_length": 25,
+          "top_values": [
+            {
+              "value": "credit_level:recalculated",
+              "count": 36
+            },
+            {
+              "value": "credit_score:range_nulled",
+              "count": 8
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "table": "dwd_complaint_case",
+      "name_zh": "企业诉求工单（明细层）",
+      "layer": "DWD",
+      "owner": "市场服务部企业服务科",
+      "steward": "数据管理岗",
+      "description": "企业通过 12345 热线、线上平台提交的咨询、投诉、建议等诉求工单。",
+      "row_count": 1443,
+      "field_count": 10,
+      "level": "L3",
+      "fields": [
+        {
+          "field": "case_id",
+          "name_zh": "工单编号",
+          "type": "string",
+          "length": 32,
+          "nullable": false,
+          "standard_no": "GOV-CASE-001",
+          "description": "诉求工单唯一编号。",
+          "level": "L2",
+          "category": "C04",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 1443,
+          "max_length": 12
+        },
+        {
+          "field": "unified_social_credit_code",
+          "name_zh": "统一社会信用代码",
+          "type": "string",
+          "length": 18,
+          "nullable": true,
+          "standard_no": "GOV-CASE-002",
+          "description": "诉求关联的市场主体，无法关联时为空。",
+          "level": "L2",
+          "category": "C04",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 817,
+          "max_length": 18
+        },
+        {
+          "field": "case_type",
+          "name_zh": "诉求类型",
+          "type": "string",
+          "length": 20,
+          "nullable": false,
+          "standard_no": "GOV-CASE-003",
+          "description": "按业务条线划分的诉求类型。",
+          "level": "L2",
+          "category": "C04",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 7,
+          "max_length": 4,
+          "top_values": [
+            {
+              "value": "融资服务",
+              "count": 216
+            },
+            {
+              "value": "登记注册",
+              "count": 215
+            },
+            {
+              "value": "市场监管",
+              "count": 214
+            },
+            {
+              "value": "税务办理",
+              "count": 213
+            },
+            {
+              "value": "政策咨询",
+              "count": 196
+            }
+          ]
+        },
+        {
+          "field": "submit_time",
+          "name_zh": "提交时间",
+          "type": "datetime",
+          "length": null,
+          "nullable": false,
+          "standard_no": "GOV-CASE-004",
+          "description": "企业提交诉求的时间。",
+          "level": "L2",
+          "category": "C04",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 579,
+          "max_length": 19
+        },
+        {
+          "field": "content",
+          "name_zh": "诉求内容",
+          "type": "string",
+          "length": 2000,
+          "nullable": false,
+          "standard_no": "GOV-CASE-005",
+          "description": "诉求正文，可能包含联系人、电话等个人信息，使用前须脱敏。",
+          "level": "L3",
+          "category": "C04",
+          "personal_info": true,
+          "masking": "content_redact",
+          "null_count": 12,
+          "null_rate": 0.0083,
+          "distinct_count": 77,
+          "max_length": 63
+        },
+        {
+          "field": "handling_dept",
+          "name_zh": "承办部门",
+          "type": "string",
+          "length": 50,
+          "nullable": false,
+          "standard_no": "GOV-CASE-006",
+          "description": "工单承办部门。",
+          "level": "L2",
+          "category": "C04",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 6,
+          "max_length": 5,
+          "top_values": [
+            {
+              "value": "综合执法局",
+              "count": 263
+            },
+            {
+              "value": "人社局",
+              "count": 246
+            },
+            {
+              "value": "金融办",
+              "count": 246
+            },
+            {
+              "value": "市场服务部",
+              "count": 243
+            },
+            {
+              "value": "税务局",
+              "count": 225
+            }
+          ]
+        },
+        {
+          "field": "status",
+          "name_zh": "工单状态",
+          "type": "string",
+          "length": 10,
+          "nullable": false,
+          "standard_no": "GOV-CASE-007",
+          "description": "工单流转状态。",
+          "level": "L2",
+          "category": "C04",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 0,
+          "null_rate": 0.0,
+          "distinct_count": 5,
+          "max_length": 3,
+          "top_values": [
+            {
+              "value": "已办结",
+              "count": 933
+            },
+            {
+              "value": "办理中",
+              "count": 225
+            },
+            {
+              "value": "已回访",
+              "count": 148
+            },
+            {
+              "value": "待受理",
+              "count": 132
+            },
+            {
+              "value": "挂起",
+              "count": 5
+            }
+          ]
+        },
+        {
+          "field": "satisfaction",
+          "name_zh": "满意度",
+          "type": "integer",
+          "length": null,
+          "nullable": true,
+          "standard_no": "GOV-CASE-008",
+          "description": "1-5 分满意度，未回访时为空。",
+          "level": "L2",
+          "category": "C04",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 376,
+          "null_rate": 0.2606,
+          "distinct_count": 5,
+          "max_length": 1,
+          "top_values": [
+            {
+              "value": "5",
+              "count": 606
+            },
+            {
+              "value": "4",
+              "count": 336
+            },
+            {
+              "value": "3",
+              "count": 73
+            },
+            {
+              "value": "2",
+              "count": 32
+            },
+            {
+              "value": "1",
+              "count": 20
+            }
+          ]
+        },
+        {
+          "field": "close_time",
+          "name_zh": "办结时间",
+          "type": "datetime",
+          "length": null,
+          "nullable": true,
+          "standard_no": "GOV-CASE-009",
+          "description": "工单办结或回访完成时间，已办结工单必填。",
+          "level": "L2",
+          "category": "C04",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 363,
+          "null_rate": 0.2516,
+          "distinct_count": 527,
+          "max_length": 19
+        },
+        {
+          "field": "dq_flags",
+          "name_zh": "数据质量标记",
+          "type": "string",
+          "length": null,
+          "nullable": true,
+          "standard_no": "",
+          "description": "记录本条数据的清洗与修复动作。",
+          "level": "L2",
+          "category": "C05",
+          "personal_info": false,
+          "masking": null,
+          "null_count": 1365,
+          "null_rate": 0.9459,
+          "distinct_count": 7,
+          "max_length": 39,
+          "top_values": [
+            {
+              "value": "case_type:mapped",
+              "count": 20
+            },
+            {
+              "value": "status:mapped",
+              "count": 20
+            },
+            {
+              "value": "satisfaction:range_nulled",
+              "count": 14
+            },
+            {
+              "value": "close_time:order_nulled;status:reopened",
+              "count": 12
+            },
+            {
+              "value": "satisfaction:invalid_nulled",
+              "count": 7
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

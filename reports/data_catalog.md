@@ -1,183 +1,127 @@
-# 数据目录（Data Catalog）
+# 数据目录与元数据报告
 
-> 由 `src/dgov/metadata.py` 自动采集：技术元数据来自 SQLite 系统表，业务元数据来自 `config/business_metadata.json`，分类分级来自 `config/classification_rules.json`。
+> 自动生成于 2026-11-02 13:00:45；共纳管 **6 张表 / 61 个字段**，标准文档覆盖率 **95%**，个人信息字段 **8** 个。
 
-- 表数量：**12**
-- 字段数量：**96**
-- 业务域：**6** 个
-- 敏感字段（L3/L4）：**11** 个
+## 一、目录概览
 
-## 表清单
+| 表 | 中文名 | 分层 | 行数 | 字段数 | 表级 | Owner |
+| --- | --- | --- | ---: | ---: | :---: | --- |
+| `ods_market_register` | 市场主体登记信息（贴源层） | ODS | 1,240 | 13 | L3 | 市场服务部登记注册科 |
+| `ods_credit_rating` | 市场主体信用评价（贴源层） | ODS | 950 | 7 | L2 | 市场服务部信用管理科 |
+| `ods_complaint_case` | 企业诉求工单（贴源层） | ODS | 1,500 | 9 | L3 | 市场服务部企业服务科 |
+| `dwd_market_register` | 市场主体登记信息（明细层） | DWD | 1,139 | 14 | L3 | 市场服务部登记注册科 |
+| `dwd_credit_rating` | 市场主体信用评价（明细层） | DWD | 901 | 8 | L2 | 市场服务部信用管理科 |
+| `dwd_complaint_case` | 企业诉求工单（明细层） | DWD | 1,443 | 10 | L3 | 市场服务部企业服务科 |
 
-| 表名 | 分层 | 业务域 | Owner | 密级 | 行数 | 更新频率 |
-| --- | --- | --- | --- | --- | ---: | --- |
-| `dwd_order_detail` | DWD | 交易 | 订单域数据 Owner | L4 核心 | 59,601 | 每小时 |
-| `dwd_product_dim` | DWD | 商品 | 商品域数据 Owner | L2 内部 | 120 | 每日 |
-| `dwd_user_profile` | DWD | 用户 | 用户域数据 Owner | L4 核心 | 8,000 | 每日 |
-| `dws_campaign_daily` | DWS | 营销 | 营销域数据 Owner | L2 内部 | 720 | 每日 |
-| `dws_category_daily` | DWS | 商品 | 数据分析组 | L2 内部 | 540 | 每日 |
-| `dws_channel_daily` | DWS | 交易 | 数据分析组 | L2 内部 | 625 | 每日 |
-| `ods_campaign` | ODS | 营销 | 营销域数据 Owner | L2 内部 | 8 | 每日 |
-| `ods_channel` | ODS | 渠道 | 渠道域数据 Owner | L1 公开 | 6 | 每周 |
-| `ods_logistics` | ODS | 履约 | 履约域数据 Owner | L1 公开 | 38,764 | 每小时 |
-| `ods_order` | ODS | 交易 | 订单域数据 Owner | L4 核心 | 60,600 | 每小时 |
-| `ods_product` | ODS | 商品 | 商品域数据 Owner | L2 内部 | 120 | 每小时 |
-| `ods_user` | ODS | 用户 | 用户域数据 Owner | L4 核心 | 8,000 | 每日 |
+## 二、字段级数据字典
 
-## 字段级数据字典
+### `ods_market_register` · 市场主体登记信息（贴源层）
 
-### dwd_order_detail（订单明细层，完成去重、标准码值转换、时序校验与敏感字段脱敏）
+雄安新区市场主体设立、变更、注销等登记信息，是市场主体服务的主数据。（1,240 行，ODS 层）
 
-| 字段 | 类型 | 业务含义 | 分类分级 | 脱敏策略 |
-| --- | --- | --- | --- | --- |
-| `order_id` | TEXT | 订单号 | L1 公开 | 无需脱敏 |
-| `user_id` | TEXT | 用户 ID | L1 公开 | 无需脱敏 |
-| `product_id` | TEXT | 商品 ID | L1 公开 | 无需脱敏 |
-| `channel_code` | TEXT | 渠道编码（标准码值） | L1 公开 | 无需脱敏 |
-| `order_amount` | REAL | 订单金额（元） | L2 内部 | 无需脱敏，禁止外发 |
-| `pay_amount` | REAL | 实付金额（元） | L2 内部 | 无需脱敏，禁止外发 |
-| `order_status` | TEXT | 订单状态（标准码值） | L1 公开 | 无需脱敏 |
-| `province` | TEXT | 收货省份 | L1 公开 | 无需脱敏 |
-| `city` | TEXT | 收货城市 | L1 公开 | 无需脱敏 |
-| `phone` | TEXT | 收货手机号（标准化） | L4 核心 | 保留前 3 位与后 4 位，如 138****1234 |
-| `address_masked` | TEXT | 收货地址（脱敏） | L3 敏感 | 仅保留省/市，详细地址以 *** 代替 |
-| `create_time` | TEXT | 下单时间 | L1 公开 | 无需脱敏 |
-| `pay_time` | TEXT | 支付时间 | L1 公开 | 无需脱敏 |
-| `order_date` | TEXT | 下单日期分区 | L1 公开 | 无需脱敏 |
-| `is_valid` | INTEGER | 是否通过治理校验 | L1 公开 | 无需脱敏 |
+| 字段 | 中文名 | 类型 | 可空 | 分级 | 空值率 | 基数 | 标准编号 | 说明 |
+| --- | --- | --- | :---: | :---: | ---: | ---: | --- | --- |
+| `reg_id` | 登记流水号 | string(32) | 否 | L2 | 0.0% | 1,240 | GOV-REG-001 | 登记系统内唯一流水号，主键。 |
+| `unified_social_credit_code` | 统一社会信用代码 | string(18) | 否 | L1 | 0.5% | 1,195 | GOV-REG-002 | 按 GB 32100-2015 编制，18 位，含校验位。 |
+| `company_name` | 企业名称 | string(100) | 否 | L1 | 0.0% | 1,200 | GOV-REG-003 | 登记机关核准的企业全称，不含首尾空白。 |
+| `reg_date` | 注册日期 | date | 否 | L1 | 0.0% | 1,118 | GOV-REG-004 | 营业执照载明的成立日期，格式 YYYY-MM-DD。 |
+| `reg_capital_wan` | 注册资本（万元） | number(18) | 是 | L1 | 0.0% | 1,162 | GOV-REG-005 | 注册资本，单位万元，保留两位小数。 |
+| `industry_code` | 行业代码 | string(4) | 是 | L1 | 0.0% | 37 | GOV-REG-006 | GB/T 4754-2017 行业代码，门类字母 + 两位大类数字。 |
+| `district_code` | 行政区划代码 | string(6) | 否 | L1 | 0.0% | 4 | GOV-REG-007 | 登记机关所在行政区划，6 位数字代码。 |
+| `address` | 住所 | string(200) | 否 | L2 | 1.0% | 1,158 | GOV-REG-008 | 营业执照载明的住所，精确到门牌号。 |
+| `legal_person` | 法定代表人 | string(50) | 否 | L3 | 1.6% | 984 | GOV-REG-009 | 法定代表人姓名。 |
+| `contact_phone` | 联系电话 | string(20) | 是 | L3 | 5.2% | 1,136 | GOV-REG-010 | 11 位手机号，存储时去除分隔符与国家码。 |
+| `contact_email` | 电子邮箱 | string(100) | 是 | L3 | 0.0% | 1,179 | GOV-REG-011 | 企业联系人邮箱，小写存储。 |
+| `status` | 经营状态 | string(10) | 否 | L1 | 0.0% | 11 | GOV-REG-012 | 登记状态，统一使用五种标准码值。 |
+| `update_time` | 更新时间 | datetime | 否 | L2 | 0.7% | 372 | GOV-REG-013 | 源系统最后一次更新时间，用于及时性监控。 |
 
-### dwd_product_dim（商品维度层，补齐类目与价格校验）
+### `ods_credit_rating` · 市场主体信用评价（贴源层）
 
-| 字段 | 类型 | 业务含义 | 分类分级 | 脱敏策略 |
-| --- | --- | --- | --- | --- |
-| `product_id` | TEXT | 商品 ID | L1 公开 | 无需脱敏 |
-| `product_name` | TEXT | 商品名称 | L1 公开 | 无需脱敏 |
-| `category_code` | TEXT | 类目编码 | L1 公开 | 无需脱敏 |
-| `category_name` | TEXT | 类目名称 | L1 公开 | 无需脱敏 |
-| `price` | REAL | 商品价格（元） | L2 内部 | 无需脱敏，禁止外发 |
-| `status` | TEXT | 商品状态 | L1 公开 | 无需脱敏 |
-| `brand` | TEXT | 品牌 | L1 公开 | 无需脱敏 |
+按年度/批次归集的市场主体信用评分与信用等级。（950 行，ODS 层）
 
-### dwd_user_profile（用户画像明细层，手机号/姓名/邮箱按分类分级要求脱敏）
+| 字段 | 中文名 | 类型 | 可空 | 分级 | 空值率 | 基数 | 标准编号 | 说明 |
+| --- | --- | --- | :---: | :---: | ---: | ---: | --- | --- |
+| `rating_id` | 评价记录号 | string(32) | 否 | L2 | 0.0% | 950 | GOV-CRE-001 | 信用评价记录唯一标识。 |
+| `unified_social_credit_code` | 统一社会信用代码 | string(18) | 否 | L2 | 0.0% | 923 | GOV-CRE-002 | 关联市场主体的统一社会信用代码。 |
+| `credit_score` | 信用评分 | integer | 是 | L2 | 0.0% | 49 | GOV-CRE-003 | 百分制信用评分。 |
+| `credit_level` | 信用等级 | string(1) | 是 | L2 | 0.0% | 8 | GOV-CRE-004 | A/B/C/D 四级，与评分区间保持一致。 |
+| `rating_date` | 评级日期 | date | 否 | L2 | 0.0% | 317 | GOV-CRE-005 | 本次信用评价出具日期。 |
+| `rating_agency` | 评级机构 | string(100) | 是 | L2 | 1.9% | 5 | GOV-CRE-006 | 出具信用评价的机构名称。 |
+| `update_time` | 更新时间 | datetime | 否 | L2 | 0.0% | 353 | GOV-CRE-007 | 评价结果归集时间。 |
 
-| 字段 | 类型 | 业务含义 | 分类分级 | 脱敏策略 |
-| --- | --- | --- | --- | --- |
-| `user_id` | TEXT | 用户 ID | L1 公开 | 无需脱敏 |
-| `user_name` | TEXT | 用户姓名（脱敏） | L3 敏感 | 保留姓氏，其余以 * 代替 |
-| `phone` | TEXT | 手机号（标准化） | L4 核心 | 保留前 3 位与后 4 位，如 138****1234 |
-| `email` | TEXT | 邮箱（脱敏） | L3 敏感 | 保留邮箱首字母与域名 |
-| `city` | TEXT | 常住城市 | L1 公开 | 无需脱敏 |
-| `member_level` | TEXT | 会员等级 | L1 公开 | 无需脱敏 |
-| `register_time` | TEXT | 注册时间 | L1 公开 | 无需脱敏 |
-| `user_level` | TEXT | 用户价值分层 | L1 公开 | 无需脱敏 |
+### `ods_complaint_case` · 企业诉求工单（贴源层）
 
-### dws_campaign_daily（活动日汇总，用于投放 ROI 复盘）
+企业通过 12345 热线、线上平台提交的咨询、投诉、建议等诉求工单。（1,500 行，ODS 层）
 
-| 字段 | 类型 | 业务含义 | 分类分级 | 脱敏策略 |
-| --- | --- | --- | --- | --- |
-| `stat_date` | TEXT | 统计日期 | L1 公开 | 无需脱敏 |
-| `campaign_id` | TEXT | 活动 ID | L1 公开 | 无需脱敏 |
-| `order_cnt` | INTEGER | 订单数 | L1 公开 | 无需脱敏 |
-| `gmv` | REAL | 成交金额（元） | L2 内部 | 无需脱敏，禁止外发 |
-| `roi` | REAL | 投入产出比 | L2 内部 | 无需脱敏，禁止外发 |
+| 字段 | 中文名 | 类型 | 可空 | 分级 | 空值率 | 基数 | 标准编号 | 说明 |
+| --- | --- | --- | :---: | :---: | ---: | ---: | --- | --- |
+| `case_id` | 工单编号 | string(32) | 否 | L2 | 0.0% | 1,500 | GOV-CASE-001 | 诉求工单唯一编号。 |
+| `unified_social_credit_code` | 统一社会信用代码 | string(18) | 是 | L2 | 0.0% | 863 | GOV-CASE-002 | 诉求关联的市场主体，无法关联时为空。 |
+| `case_type` | 诉求类型 | string(20) | 否 | L2 | 0.0% | 10 | GOV-CASE-003 | 按业务条线划分的诉求类型。 |
+| `submit_time` | 提交时间 | datetime | 否 | L2 | 0.0% | 582 | GOV-CASE-004 | 企业提交诉求的时间。 |
+| `content` | 诉求内容 | string(2000) | 否 | L3 | 0.8% | 78 | GOV-CASE-005 | 诉求正文，可能包含联系人、电话等个人信息，使用前须脱敏。 |
+| `handling_dept` | 承办部门 | string(50) | 否 | L2 | 0.0% | 6 | GOV-CASE-006 | 工单承办部门。 |
+| `status` | 工单状态 | string(10) | 否 | L2 | 0.0% | 9 | GOV-CASE-007 | 工单流转状态。 |
+| `satisfaction` | 满意度 | integer | 是 | L2 | 24.6% | 9 | GOV-CASE-008 | 1-5 分满意度，未回访时为空。 |
+| `close_time` | 办结时间 | datetime | 是 | L2 | 24.3% | 541 | GOV-CASE-009 | 工单办结或回访完成时间，已办结工单必填。 |
 
-### dws_category_daily（类目日汇总）
+### `dwd_market_register` · 市场主体登记信息（明细层）
 
-| 字段 | 类型 | 业务含义 | 分类分级 | 脱敏策略 |
-| --- | --- | --- | --- | --- |
-| `stat_date` | TEXT | 统计日期 | L1 公开 | 无需脱敏 |
-| `category_code` | TEXT | 类目编码 | L1 公开 | 无需脱敏 |
-| `order_cnt` | INTEGER | 订单数 | L1 公开 | 无需脱敏 |
-| `gmv` | REAL | 成交金额（元） | L2 内部 | 无需脱敏，禁止外发 |
-| `buyer_cnt` | INTEGER | 购买用户数 | L1 公开 | 无需脱敏 |
+雄安新区市场主体设立、变更、注销等登记信息，是市场主体服务的主数据。（1,139 行，DWD 层）
 
-### dws_channel_daily（渠道日汇总，统一 GMV、支付订单数等指标口径）
+| 字段 | 中文名 | 类型 | 可空 | 分级 | 空值率 | 基数 | 标准编号 | 说明 |
+| --- | --- | --- | :---: | :---: | ---: | ---: | --- | --- |
+| `reg_id` | 登记流水号 | string(32) | 否 | L2 | 0.0% | 1,139 | GOV-REG-001 | 登记系统内唯一流水号，主键。 |
+| `unified_social_credit_code` | 统一社会信用代码 | string(18) | 否 | L1 | 0.0% | 1,139 | GOV-REG-002 | 按 GB 32100-2015 编制，18 位，含校验位。 |
+| `company_name` | 企业名称 | string(100) | 否 | L1 | 0.0% | 1,139 | GOV-REG-003 | 登记机关核准的企业全称，不含首尾空白。 |
+| `reg_date` | 注册日期 | date | 否 | L1 | 0.0% | 1,060 | GOV-REG-004 | 营业执照载明的成立日期，格式 YYYY-MM-DD。 |
+| `reg_capital_wan` | 注册资本（万元） | number(18) | 是 | L1 | 0.5% | 1,103 | GOV-REG-005 | 注册资本，单位万元，保留两位小数。 |
+| `industry_code` | 行业代码 | string(4) | 是 | L1 | 1.0% | 22 | GOV-REG-006 | GB/T 4754-2017 行业代码，门类字母 + 两位大类数字。 |
+| `district_code` | 行政区划代码 | string(6) | 否 | L1 | 0.0% | 4 | GOV-REG-007 | 登记机关所在行政区划，6 位数字代码。 |
+| `address` | 住所 | string(200) | 否 | L2 | 1.1% | 1,100 | GOV-REG-008 | 营业执照载明的住所，精确到门牌号。 |
+| `legal_person` | 法定代表人 | string(50) | 否 | L3 | 1.8% | 942 | GOV-REG-009 | 法定代表人姓名。 |
+| `contact_phone` | 联系电话 | string(20) | 是 | L3 | 5.7% | 1,074 | GOV-REG-010 | 11 位手机号，存储时去除分隔符与国家码。 |
+| `contact_email` | 电子邮箱 | string(100) | 是 | L3 | 2.2% | 1,114 | GOV-REG-011 | 企业联系人邮箱，小写存储。 |
+| `status` | 经营状态 | string(10) | 否 | L1 | 0.0% | 6 | GOV-REG-012 | 登记状态，统一使用五种标准码值。 |
+| `update_time` | 更新时间 | datetime | 否 | L2 | 0.7% | 368 | GOV-REG-013 | 源系统最后一次更新时间，用于及时性监控。 |
+| `dq_flags` | 数据质量标记 | string | 是 | L2 | 79.4% | 11 | - | 记录本条数据的清洗与修复动作。 |
 
-| 字段 | 类型 | 业务含义 | 分类分级 | 脱敏策略 |
-| --- | --- | --- | --- | --- |
-| `stat_date` | TEXT | 统计日期 | L1 公开 | 无需脱敏 |
-| `channel_code` | TEXT | 渠道编码 | L1 公开 | 无需脱敏 |
-| `order_cnt` | INTEGER | 订单数 | L1 公开 | 无需脱敏 |
-| `pay_cnt` | INTEGER | 支付订单数 | L1 公开 | 无需脱敏 |
-| `gmv` | REAL | 成交金额（元） | L2 内部 | 无需脱敏，禁止外发 |
-| `refund_cnt` | INTEGER | 退款订单数 | L1 公开 | 无需脱敏 |
-| `avg_order_amount` | REAL | 平均客单价（元） | L2 内部 | 无需脱敏，禁止外发 |
+### `dwd_credit_rating` · 市场主体信用评价（明细层）
 
-### ods_campaign（营销活动贴源表（历史遗留字段命名，作为标准整改样例））
+按年度/批次归集的市场主体信用评分与信用等级。（901 行，DWD 层）
 
-| 字段 | 类型 | 业务含义 | 分类分级 | 脱敏策略 |
-| --- | --- | --- | --- | --- |
-| `campaign_id` | TEXT | 活动 ID | L1 公开 | 无需脱敏 |
-| `campaignName` | TEXT | 活动名称（历史驼峰命名） | L1 公开 | 无需脱敏 |
-| `channel_code` | TEXT | 投放渠道编码 | L1 公开 | 无需脱敏 |
-| `budget` | REAL | 活动预算（元） | L2 内部 | 无需脱敏，禁止外发 |
-| `startTime` | TEXT | 活动开始时间（历史驼峰命名） | L1 公开 | 无需脱敏 |
-| `endTime` | TEXT | 活动结束时间 | L1 公开 | 无需脱敏 |
+| 字段 | 中文名 | 类型 | 可空 | 分级 | 空值率 | 基数 | 标准编号 | 说明 |
+| --- | --- | --- | :---: | :---: | ---: | ---: | --- | --- |
+| `rating_id` | 评价记录号 | string(32) | 否 | L2 | 0.0% | 901 | GOV-CRE-001 | 信用评价记录唯一标识。 |
+| `unified_social_credit_code` | 统一社会信用代码 | string(18) | 否 | L2 | 0.0% | 874 | GOV-CRE-002 | 关联市场主体的统一社会信用代码。 |
+| `credit_score` | 信用评分 | integer | 是 | L2 | 0.9% | 47 | GOV-CRE-003 | 百分制信用评分。 |
+| `credit_level` | 信用等级 | string(1) | 是 | L2 | 0.0% | 4 | GOV-CRE-004 | A/B/C/D 四级，与评分区间保持一致。 |
+| `rating_date` | 评级日期 | date | 否 | L2 | 0.0% | 310 | GOV-CRE-005 | 本次信用评价出具日期。 |
+| `rating_agency` | 评级机构 | string(100) | 是 | L2 | 2.0% | 4 | GOV-CRE-006 | 出具信用评价的机构名称。 |
+| `update_time` | 更新时间 | datetime | 否 | L2 | 0.0% | 352 | GOV-CRE-007 | 评价结果归集时间。 |
+| `dq_flags` | 数据质量标记 | string | 是 | L2 | 95.1% | 3 | - | 记录本条数据的清洗与修复动作。 |
 
-### ods_channel（渠道维表，定义线上/线下渠道标准码值）
+### `dwd_complaint_case` · 企业诉求工单（明细层）
 
-| 字段 | 类型 | 业务含义 | 分类分级 | 脱敏策略 |
-| --- | --- | --- | --- | --- |
-| `channel_code` | TEXT | 渠道编码 | L1 公开 | 无需脱敏 |
-| `channel_name` | TEXT | 渠道名称 | L1 公开 | 无需脱敏 |
-| `channel_type` | TEXT | 渠道类型 | L1 公开 | 无需脱敏 |
-| `online_flag` | INTEGER | 是否线上渠道 | L1 公开 | 无需脱敏 |
+企业通过 12345 热线、线上平台提交的咨询、投诉、建议等诉求工单。（1,443 行，DWD 层）
 
-### ods_logistics（物流贴源表，来自履约系统）
+| 字段 | 中文名 | 类型 | 可空 | 分级 | 空值率 | 基数 | 标准编号 | 说明 |
+| --- | --- | --- | :---: | :---: | ---: | ---: | --- | --- |
+| `case_id` | 工单编号 | string(32) | 否 | L2 | 0.0% | 1,443 | GOV-CASE-001 | 诉求工单唯一编号。 |
+| `unified_social_credit_code` | 统一社会信用代码 | string(18) | 是 | L2 | 0.0% | 817 | GOV-CASE-002 | 诉求关联的市场主体，无法关联时为空。 |
+| `case_type` | 诉求类型 | string(20) | 否 | L2 | 0.0% | 7 | GOV-CASE-003 | 按业务条线划分的诉求类型。 |
+| `submit_time` | 提交时间 | datetime | 否 | L2 | 0.0% | 579 | GOV-CASE-004 | 企业提交诉求的时间。 |
+| `content` | 诉求内容 | string(2000) | 否 | L3 | 0.8% | 77 | GOV-CASE-005 | 诉求正文，可能包含联系人、电话等个人信息，使用前须脱敏。 |
+| `handling_dept` | 承办部门 | string(50) | 否 | L2 | 0.0% | 6 | GOV-CASE-006 | 工单承办部门。 |
+| `status` | 工单状态 | string(10) | 否 | L2 | 0.0% | 5 | GOV-CASE-007 | 工单流转状态。 |
+| `satisfaction` | 满意度 | integer | 是 | L2 | 26.1% | 5 | GOV-CASE-008 | 1-5 分满意度，未回访时为空。 |
+| `close_time` | 办结时间 | datetime | 是 | L2 | 25.2% | 527 | GOV-CASE-009 | 工单办结或回访完成时间，已办结工单必填。 |
+| `dq_flags` | 数据质量标记 | string | 是 | L2 | 94.6% | 7 | - | 记录本条数据的清洗与修复动作。 |
 
-| 字段 | 类型 | 业务含义 | 分类分级 | 脱敏策略 |
-| --- | --- | --- | --- | --- |
-| `logistics_id` | TEXT | 物流单号 | L1 公开 | 无需脱敏 |
-| `order_id` | TEXT | 订单号 | L1 公开 | 无需脱敏 |
-| `carrier` | TEXT | 承运商 | L1 公开 | 无需脱敏 |
-| `status` | TEXT | 物流状态 | L1 公开 | 无需脱敏 |
-| `ship_time` | TEXT | 发货时间 | L1 公开 | 无需脱敏 |
-| `receive_time` | TEXT | 签收时间 | L1 公开 | 无需脱敏 |
+## 三、元数据采集说明
 
-### ods_order（订单贴源表，来自交易系统订单库，保留原始字段与异常值）
-
-| 字段 | 类型 | 业务含义 | 分类分级 | 脱敏策略 |
-| --- | --- | --- | --- | --- |
-| `order_id` | TEXT | 订单号 | L1 公开 | 无需脱敏 |
-| `user_id` | TEXT | 用户 ID | L1 公开 | 无需脱敏 |
-| `product_id` | TEXT | 商品 ID | L1 公开 | 无需脱敏 |
-| `channel_code` | TEXT | 渠道编码 | L1 公开 | 无需脱敏 |
-| `order_amount` | REAL | 订单金额（元） | L2 内部 | 无需脱敏，禁止外发 |
-| `pay_amount` | REAL | 实付金额（元） | L2 内部 | 无需脱敏，禁止外发 |
-| `coupon_amount` | REAL | 优惠金额（元） | L2 内部 | 无需脱敏，禁止外发 |
-| `order_status` | TEXT | 订单状态 | L1 公开 | 无需脱敏 |
-| `province` | TEXT | 收货省份 | L1 公开 | 无需脱敏 |
-| `city` | TEXT | 收货城市 | L1 公开 | 无需脱敏 |
-| `phone` | TEXT | 收货手机号 | L4 核心 | 保留前 3 位与后 4 位，如 138****1234 |
-| `address` | TEXT | 收货详细地址 | L3 敏感 | 仅保留省/市，详细地址以 *** 代替 |
-| `create_time` | TEXT | 下单时间 | L1 公开 | 无需脱敏 |
-| `pay_time` | TEXT | 支付时间 | L1 公开 | 无需脱敏 |
-| `source` | TEXT | 订单来源系统 | L1 公开 | 无需脱敏 |
-
-### ods_product（商品贴源表，来自商品中心）
-
-| 字段 | 类型 | 业务含义 | 分类分级 | 脱敏策略 |
-| --- | --- | --- | --- | --- |
-| `product_id` | TEXT | 商品 ID | L1 公开 | 无需脱敏 |
-| `product_name` | TEXT | 商品名称 | L1 公开 | 无需脱敏 |
-| `category_code` | TEXT | 类目编码 | L1 公开 | 无需脱敏 |
-| `category_name` | TEXT | 类目名称 | L1 公开 | 无需脱敏 |
-| `price` | REAL | 商品价格（元） | L2 内部 | 无需脱敏，禁止外发 |
-| `status` | TEXT | 商品状态 | L1 公开 | 无需脱敏 |
-| `brand` | TEXT | 品牌 | L1 公开 | 无需脱敏 |
-| `supplier` | TEXT | 供应商 | L1 公开 | 无需脱敏 |
-
-### ods_user（用户贴源表，来自会员系统，含个人身份与联系方式字段）
-
-| 字段 | 类型 | 业务含义 | 分类分级 | 脱敏策略 |
-| --- | --- | --- | --- | --- |
-| `user_id` | TEXT | 用户 ID | L1 公开 | 无需脱敏 |
-| `user_name` | TEXT | 用户姓名 | L3 敏感 | 保留姓氏，其余以 * 代替 |
-| `phone` | TEXT | 注册手机号 | L4 核心 | 保留前 3 位与后 4 位，如 138****1234 |
-| `email` | TEXT | 注册邮箱 | L3 敏感 | 保留邮箱首字母与域名 |
-| `id_card` | TEXT | 证件号码 | L4 核心 | 保留前 6 位与后 4 位 |
-| `register_time` | TEXT | 注册时间 | L1 公开 | 无需脱敏 |
-| `city` | TEXT | 常住城市 | L1 公开 | 无需脱敏 |
-| `member_level` | TEXT | 会员等级 | L1 公开 | 无需脱敏 |
-| `age` | INTEGER | 年龄 | L1 公开 | 无需脱敏 |
-| `gender` | TEXT | 性别 | L1 公开 | 无需脱敏 |
+1. 结构元数据：表名、字段名、字段顺序、行数、字段数由脚本直接读取 SQLite 系统表；
+2. 业务元数据：中文名、类型、长度、是否可空、标准编号来自 `config/standards.json`；
+3. 统计元数据：空值率、基数、最长值、高频值由 SQL 聚合实时剖析；
+4. 安全元数据：分级、分类、个人信息标识来自 `config/classification_rules.json`；
+5. 管理元数据：Owner、Steward、更新频率来自数据标准配置。
